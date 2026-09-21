@@ -181,3 +181,11 @@ Para comprender cómo funciona el Sistema de Nombres de Dominio a nivel de red, 
 
 <figure><img src="../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 
+* **Capa de Transporte (UDP)**: Se utiliza el protocolo UDP. DNS emplea UDP por defecto porque las consultas y respuestas son paquetes muy ligeros que no superan el tamaño estándar, evitando el sobrecoste y la latencia del establecimiento de conexión de TCP.
+* **Puertos de origen y destino**: El puerto de origen del cliente es un puerto dinámico o efímero (asignado aleatoriamente por el sistema operativo), mientras que el puerto de destino del servidor es el puerto estándar y conocido 53.
+* **Identificador de Transacción**: Al expandir la sección _Domain Name System_, el paquete muestra un Transaction ID (en este intercambio, el `0x0002`). Este identificador numérico de 16 bits vincula de forma unívoca la petición del cliente con la respuesta devuelta por el servidor.
+* **Flags (Authoritative Answer)**: En la sección de _Flags_ del paquete de respuesta, la opción _Authoritative Answer_ se encuentra a 0. Esto significa que la respuesta no proviene directamente del servidor oficial de Google, sino de la caché de un servidor recursivo o intermediario.
+
+<figure><img src="../.gitbook/assets/Captura de pantalla 2026-09-21 202223 (1).png" alt=""><figcaption></figcaption></figure>
+
+* **Bloque de Respuestas (Answers)**: Al desplegar los registros MX devueltos para `google.com` (como se ve en el paquete 2402 con `smtp.google.com`), el servidor con la prioridad más alta a nivel operativo es el que muestra el número de prioridad más bajo (en este caso, el valor `10`).
