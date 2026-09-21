@@ -159,3 +159,25 @@ Los sistemas operativos almacenan temporalmente las direcciones IP resueltas en 
 * Utilidad práctica para un administrador de sistemas: Esta acción es sumamente útil en el día a día para resolver problemas de conectividad o propagación. Permite forzar al sistema operativo a descartar los registros obsoletos cuando se cambia la dirección IP de un servidor web, se migra un dominio a un nuevo proveedor de hosting o se solucionan anomalías provocadas por entradas corruptas o malintencionadas en la red local.
 
 <figure><img src="../.gitbook/assets/Captura de pantalla 2026-09-21 193201.png" alt=""><figcaption></figcaption></figure>
+
+
+
+
+
+### Análisis de Tráfico de Red: Wireshark y DNS
+
+Para comprender cómo funciona el Sistema de Nombres de Dominio a nivel de red, se puede capturar y analizar el tráfico real mediante herramientas de análisis de paquetes como Wireshark.
+
+#### Configuración de la captura
+
+1. Iniciar la captura: Selecciona la tarjeta de red activa en Wireshark.
+2. Aplicar filtro: Utiliza el filtro de visualización `dns` o `udp.port == 53` para aislar únicamente el tráfico relacionado con la resolución de nombres.
+3.  Generar tráfico: Abre una terminal y lanza una consulta específica de registros de correo (MX), por ejemplo:
+
+    ```shellscript
+    nslookup -type=mx google.com
+    ```
+4. Detener y analizar: Detén la captura en Wireshark y localiza el intercambio compuesto por la Petición (Query) enviada por tu equipo y la Respuesta (Response) devuelta por el servidor DNS.
+
+<figure><img src="../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+
