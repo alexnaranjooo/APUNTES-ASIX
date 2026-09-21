@@ -137,3 +137,25 @@ Para aplicar los servidores más rápidos obtenidos en el Benchmark (por ejemplo
 
 
 <figure><img src="../.gitbook/assets/image (11).png" alt="" width="293"><figcaption></figcaption></figure>
+
+
+
+### Gestión de la caché DNS
+
+Los sistemas operativos almacenan temporalmente las direcciones IP resueltas en una caché local para agilizar las conexiones y reducir el tráfico de consultas hacia el exterior.
+
+#### Visualización de la caché DNS por consola
+
+* En Windows: Mediante el comando `ipconfig /displaydns` en la consola se puede consultar el listado completo de registros guardados, mostrando el nombre del registro, su tipo y el tiempo de vida (_TTL_) restante antes de expirar.
+* En Linux: Dependiendo de la distribución y del servicio de resolución activo (como _systemd-resolved_), se pueden emplear comandos de diagnóstico como `resolvectl statistics` para ver el estado y el volumen de entradas almacenadas.
+
+<figure><img src="../.gitbook/assets/Captura de pantalla 2026-09-21 192706.png" alt=""><figcaption></figcaption></figure>
+
+#### Vaciado de la caché DNS y su utilidad
+
+* Comando de limpieza:
+  * En Windows se ejecuta `ipconfig /flushdns`.
+  * En Linux se emplea `resolvectl flush-caches`.
+* Utilidad práctica para un administrador de sistemas: Esta acción es sumamente útil en el día a día para resolver problemas de conectividad o propagación. Permite forzar al sistema operativo a descartar los registros obsoletos cuando se cambia la dirección IP de un servidor web, se migra un dominio a un nuevo proveedor de hosting o se solucionan anomalías provocadas por entradas corruptas o malintencionadas en la red local.
+
+<figure><img src="../.gitbook/assets/Captura de pantalla 2026-09-21 193201.png" alt=""><figcaption></figcaption></figure>
