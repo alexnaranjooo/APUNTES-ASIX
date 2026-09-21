@@ -81,3 +81,59 @@ El DNS tradicional es vulnerable a la suplantación de identidad o envenenamient
   * Resultado: Entre 0.7 y 1 milisegundo.
 
 <figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+
+
+
+#### Consultar servidores DNS actuales por consola (CLI)
+
+*   En Windows: Abre el Símbolo del sistema (`cmd`) y ejecuta el comando:
+
+    ```bash
+    ipconfig /all
+    ```
+
+    _Busca el campo Servidores DNS dentro del adaptador de red activo._
+*   En Linux: Abre la terminal y ejecuta cualquiera de estos comandos (según la distribución):
+
+    ```bash
+    resolvectl status
+    ```
+
+<figure><img src="../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+
+### Configuración y Caché DNS
+
+Los sistemas operativos almacenan localmente las resoluciones DNS en una caché para acelerar la navegación y evitar saturar la red. Gestionar y cambiar estos servidores resulta clave para optimizar el rendimiento.
+
+#### Consultar los servidores DNS actuales por CLI
+
+*   En Windows: Abre el Símbolo del sistema (`cmd`) y ejecuta:
+
+    ```bash
+    ipconfig /all
+    ```
+
+    _(Busca el campo de Servidores DNS dentro del adaptador de red activo)._
+*   En Linux: Abre la terminal y ejecuta:
+
+    Bash
+
+    ```bash
+    resolvectl status
+    ```
+
+#### Cambio de configuración en el equipo
+
+Para aplicar los servidores más rápidos obtenidos en el Benchmark (por ejemplo, los de Orange DNS: `195.92.195.94` y `195.92.195.95`):
+
+* Windows: Ve a _Configuración de red e internet > Cambiar opciones del adaptador > Propiedades de IPv4_ e introduce las IPs de forma manual.
+
+<figure><img src="../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+
+#### Configuración de DNS en dispositivos móviles (Wi-Fi)
+
+* Android: Entra en _Ajustes > Red e internet > Wi-Fi_, accede a los ajustes de la red activa, cambia la configuración de IP de DHCP a Estático y modifica los campos de DNS primario y secundario.
+
+
+
+<figure><img src="../.gitbook/assets/image (11).png" alt="" width="293"><figcaption></figcaption></figure>
