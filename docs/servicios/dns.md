@@ -63,3 +63,21 @@ El DNS tradicional es vulnerable a la suplantación de identidad o envenenamient
 
 
 <figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+
+
+
+### Rendimiento DNS: DNS Benchmark
+
+**DNS Jumper** es una herramienta gratuita para Windows que permite cambiar los servidores DNS con un solo clic y probar la velocidad de respuesta de diferentes proveedores para optimizar la conexión a internet.
+
+* _**Orange DNS**_ (Reino Unido / Proveedor de telecomunicaciones)
+  * IPs: `195.92.195.94` y `195.92.195.95`
+  * Resultado: 0.7 milisegundos.
+* _**Level 3 - B**_ (EE. UU. / Empresa de telecomunicaciones y redes IP globales)
+  * IPs: `4.2.2.2` y `4.2.2.1`
+  * Resultado: Entre 0.7 y 0.9 milisegundos.
+* **Neustar 2** (EE. UU. / Proveedor de servicios de infraestructura y DNS)
+  * IPs: `156.154.70.5` y `156.154.71.5`
+  * Resultado: Entre 0.7 y 1 milisegundo.
+
+<figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
