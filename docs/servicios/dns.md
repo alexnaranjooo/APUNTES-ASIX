@@ -198,6 +198,10 @@ Para comprender cómo funciona el Sistema de Nombres de Dominio a nivel de red, 
 
 Esta guía detalla el proceso completo para desplegar un servidor DNS maestro utilizando Bind9 sobre una máquina virtual con Debian 13 (Trixie), configurado con doble interfaz de red (NAT para salida a internet y Red Interna para dar servicio a los clientes).
 
+<figure><img src="../.gitbook/assets/DNS ESQUEMA.png" alt=""><figcaption></figcaption></figure>
+
+
+
 ### **1. Características de la Máquina Virtual**
 
 * **Sistema Operativo**: Debian&#x20;
@@ -211,8 +215,6 @@ Esta guía detalla el proceso completo para desplegar un servidor DNS maestro ut
 ### **2. Configuración de Red en Debian 13**
 
 Configuramos las interfaces de red estáticas editando el fichero correspondiente según tu gestor de red (por ejemplo, en `/etc/network/interfaces`):
-
-Plaintext
 
 ```bash
 auto enp0s3
@@ -228,8 +230,6 @@ iface enp0s8 inet static
 
 Actualizamos los repositorios e instalamos Bind9 junto con sus utilidades y herramientas de consulta (`dig`, `nslookup`):
 
-Bash
-
 ```bash
 sudo apt update
 sudo apt install bind9 bind9-utils bind9-dnsutils
@@ -239,16 +239,12 @@ sudo apt install bind9 bind9-utils bind9-dnsutils
 
 Creamos el directorio para almacenar los ficheros de zona y editamos la configuración local:
 
-Bash
-
 ```bash
 sudo mkdir -p /etc/bind/zones
 sudo nano /etc/bind/named.conf.local
 ```
 
 Añadimos las declaraciones para la zona directa y la zona inversa de `honeypot.com`:
-
-Fragmento de código
 
 ```bash
 zone "honeypot.com" {
@@ -264,8 +260,6 @@ zone "6.168.192.in-addr.arpa" {
 
 Verificamos la sintaxis general:
 
-Bash
-
 ```bash
 sudo named-checkconf
 ```
@@ -275,8 +269,6 @@ sudo named-checkconf
 #### A. Zona Directa
 
 Creamos y editamos el fichero de zona directa (`/etc/bind/zones/db.honeypot.com`):
-
-Plaintext
 
 ```bash
 $TTL    86400
@@ -296,8 +288,6 @@ cliente IN  A       192.168.6.20
 
 Creamos y editamos el fichero de zona inversa (`/etc/bind/zones/db.6.168.192`):
 
-Plaintext
-
 ```bash
 $TTL    86400
 @   IN  SOA ns1.honeypot.com. hostmaster.honeypot.com. (
@@ -316,8 +306,6 @@ $TTL    86400
 
 Comprobamos que ambos ficheros sean correctos (deben devolver `OK`):
 
-Bash
-
 ```bash
 sudo named-checkzone honeypot.com /etc/bind/zones/db.honeypot.com
 sudo named-checkzone 6.168.192.in-addr.arpa /etc/bind/zones/db.6.168.192
@@ -326,8 +314,6 @@ sudo named-checkzone 6.168.192.in-addr.arpa /etc/bind/zones/db.6.168.192
 ### **6. Opciones Globales y Forzar IPv4**
 
 Editamos el fichero de opciones globales (`/etc/bind/named.conf.options`):
-
-Fragmento de código
 
 ```bash
 options {
