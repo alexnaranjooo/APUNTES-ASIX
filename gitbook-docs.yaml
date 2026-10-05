@@ -9,3 +9,10 @@ site:
       default: true
       content:
         directory: ./docs
+    - type: space
+      key: space-2
+      title: HONEYNET
+      path: landing-page
+      draft: true
+      content:
+        directory: ./landing-page
