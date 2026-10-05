@@ -2,9 +2,7 @@
 description: Hecho por Álex Naranjo Blázquez y David Álvarez Fernández
 ---
 
-# HoneyNet
-
-
+# 🍯 HoneyNet
 
 Este repositorio de Gitbook, es un repositorio orientado a mi proyecto del segundo grado del ciclo de Administración de Sistemas Informáticos en Red (ASIR) con perfil en ciberseguridad.<br>
 
@@ -16,4 +14,4 @@ En el repositorio se incluirá la memoria del proyecto, junto a todos los aspect
 
 
 
-<figure><img src=".gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>

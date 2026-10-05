@@ -1,15 +1,14 @@
 ---
 description: En este apartado veremos todo lo relacionado con el servicio DNS.
-icon: cloudflare
 ---
 
-# DNS
+# 📡 DNS
 
-### **¿ Qué es un DNS ?**
+## **¿ Qué es un DNS ?**
 
 El sistema DNS es una **estructura jerárquica** a nivel mundial. Para administrar redes, primero debemos entender **quién gestiona** cada parte del pastel.
 
-<figure><img src="../.gitbook/assets/image.png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image.png" alt="" width="563"><figcaption></figcaption></figure>
 
 El organismo internacional que rige la arquitectura global de internet es la **ICANN** (_Internet Corporation for Assigned Names and Numbers_).
 
@@ -29,11 +28,11 @@ La resolución de un dominio se realiza a través de una jerarquía de cuatro ti
 * **Servidores TLD**: Gestionan extensiones específicas y guían hacia los servidores propios del sitio web.
 * **Servidores autoritativos**: Tienen la información final y entregan la dirección IP exacta de la página que buscas.
 
-<figure><img src="../.gitbook/assets/image (1).png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (1).png" alt="" width="563"><figcaption></figcaption></figure>
 
 
 
-### Herramientas OSINT: Whois y DNS Lookup
+## Herramientas OSINT: Whois y DNS Lookup
 
 Las consultas Whois y los sistemas de resolución como DNS Lookup permiten auditar la infraestructura de cualquier dominio web mediante fuentes abiertas.
 
@@ -45,7 +44,7 @@ Una consulta Whois muestra los datos administrativos y técnicos asociados a un 
 * _**Fechas clave:**_ Creación, última actualización y fecha de caducidad.
 * _**Configuración:**_ Los servidores de nombres (Name Servers) asignados y el estado operativo actual.
 
-<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 #### Registry vs. Registrar
 
@@ -62,7 +61,7 @@ El DNS tradicional es vulnerable a la suplantación de identidad o envenenamient
 
 
 
-<figure><img src="../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -80,11 +79,11 @@ El DNS tradicional es vulnerable a la suplantación de identidad o envenenamient
   * IPs: `156.154.70.5` y `156.154.71.5`
   * Resultado: Entre 0.7 y 1 milisegundo.
 
-<figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 
 
-#### Consultar servidores DNS actuales por consola (CLI)
+### Consultar servidores DNS actuales por consola (CLI)
 
 *   En Windows: Abre el Símbolo del sistema (`cmd`) y ejecuta el comando:
 
@@ -99,7 +98,7 @@ El DNS tradicional es vulnerable a la suplantación de identidad o envenenamient
     resolvectl status
     ```
 
-<figure><img src="../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
 
 ### Configuración y Caché DNS
 
@@ -128,7 +127,7 @@ Para aplicar los servidores más rápidos obtenidos en el Benchmark (por ejemplo
 
 * Windows: Ve a _Configuración de red e internet > Cambiar opciones del adaptador > Propiedades de IPv4_ e introduce las IPs de forma manual.
 
-<figure><img src="../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (12).png" alt=""><figcaption></figcaption></figure>
 
 #### Configuración de DNS en dispositivos móviles (Wi-Fi)
 
@@ -136,7 +135,7 @@ Para aplicar los servidores más rápidos obtenidos en el Benchmark (por ejemplo
 
 
 
-<figure><img src="../.gitbook/assets/image (11).png" alt="" width="293"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (11).png" alt="" width="293"><figcaption></figcaption></figure>
 
 
 
@@ -149,7 +148,7 @@ Los sistemas operativos almacenan temporalmente las direcciones IP resueltas en 
 * En Windows: Mediante el comando `ipconfig /displaydns` en la consola se puede consultar el listado completo de registros guardados, mostrando el nombre del registro, su tipo y el tiempo de vida (_TTL_) restante antes de expirar.
 * En Linux: Dependiendo de la distribución y del servicio de resolución activo (como _systemd-resolved_), se pueden emplear comandos de diagnóstico como `resolvectl statistics` para ver el estado y el volumen de entradas almacenadas.
 
-<figure><img src="../.gitbook/assets/Captura de pantalla 2026-09-21 192706.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/Captura de pantalla 2026-09-21 192706.png" alt=""><figcaption></figcaption></figure>
 
 #### Vaciado de la caché DNS y su utilidad
 
@@ -158,13 +157,13 @@ Los sistemas operativos almacenan temporalmente las direcciones IP resueltas en 
   * En Linux se emplea `resolvectl flush-caches`.
 * Utilidad práctica para un administrador de sistemas: Esta acción es sumamente útil en el día a día para resolver problemas de conectividad o propagación. Permite forzar al sistema operativo a descartar los registros obsoletos cuando se cambia la dirección IP de un servidor web, se migra un dominio a un nuevo proveedor de hosting o se solucionan anomalías provocadas por entradas corruptas o malintencionadas en la red local.
 
-<figure><img src="../.gitbook/assets/Captura de pantalla 2026-09-21 193201.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/Captura de pantalla 2026-09-21 193201.png" alt=""><figcaption></figcaption></figure>
 
 
 
 
 
-### Análisis de Tráfico de Red: Wireshark y DNS
+## Análisis de Tráfico de Red: Wireshark y DNS
 
 Para comprender cómo funciona el Sistema de Nombres de Dominio a nivel de red, se puede capturar y analizar el tráfico real mediante herramientas de análisis de paquetes como Wireshark.
 
@@ -179,179 +178,13 @@ Para comprender cómo funciona el Sistema de Nombres de Dominio a nivel de red, 
     ```
 4. Detener y analizar: Detén la captura en Wireshark y localiza el intercambio compuesto por la Petición (Query) enviada por tu equipo y la Respuesta (Response) devuelta por el servidor DNS.
 
-<figure><img src="../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (13).png" alt=""><figcaption></figcaption></figure>
 
 * **Capa de Transporte (UDP)**: Se utiliza el protocolo UDP. DNS emplea UDP por defecto porque las consultas y respuestas son paquetes muy ligeros que no superan el tamaño estándar, evitando el sobrecoste y la latencia del establecimiento de conexión de TCP.
 * **Puertos de origen y destino**: El puerto de origen del cliente es un puerto dinámico o efímero (asignado aleatoriamente por el sistema operativo), mientras que el puerto de destino del servidor es el puerto estándar y conocido 53.
 * **Identificador de Transacción**: Al expandir la sección _Domain Name System_, el paquete muestra un Transaction ID (en este intercambio, el `0x0002`). Este identificador numérico de 16 bits vincula de forma unívoca la petición del cliente con la respuesta devuelta por el servidor.
 * **Flags (Authoritative Answer)**: En la sección de _Flags_ del paquete de respuesta, la opción _Authoritative Answer_ se encuentra a 0. Esto significa que la respuesta no proviene directamente del servidor oficial de Google, sino de la caché de un servidor recursivo o intermediario.
 
-<figure><img src="../.gitbook/assets/Captura de pantalla 2026-09-21 202223 (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/Captura de pantalla 2026-09-21 202223 (1).png" alt=""><figcaption></figcaption></figure>
 
 * **Bloque de Respuestas (Answers)**: Al desplegar los registros MX devueltos para `google.com` (como se ve en el paquete 2402 con `smtp.google.com`), el servidor con la prioridad más alta a nivel operativo es el que muestra el número de prioridad más bajo (en este caso, el valor `10`).
-
-
-
-
-
-## **Servidor DNS con Bind9 en Debian 13 (Trixie)**
-
-Esta guía detalla el proceso completo para desplegar un servidor DNS maestro utilizando Bind9 sobre una máquina virtual con Debian 13 (Trixie), configurado con doble interfaz de red (NAT para salida a internet y Red Interna para dar servicio a los clientes).
-
-<figure><img src="../.gitbook/assets/DNS ESQUEMA.png" alt=""><figcaption></figcaption></figure>
-
-
-
-### **1. Características de la Máquina Virtual**
-
-* **Sistema Operativo**: Debian&#x20;
-* **Red**:
-  * Adaptador 1: NAT (para conexión a internet).
-  * Adaptador 2: Red Interna (para dar servicio a la red local y clientes).
-* **Disco Duro**: 25 GB
-* **Memoria RAM**: 2 GB
-* **IP Estática del Servidor** (Red Interna): `192.168.6.10/24` _(ejemplo)_
-
-### **2. Configuración de Red en Debian 13**
-
-Configuramos las interfaces de red estáticas editando el fichero correspondiente según tu gestor de red (por ejemplo, en `/etc/network/interfaces`):
-
-```bash
-auto enp0s3
-iface enp0s3 inet dhcp
-
-auto enp0s8
-iface enp0s8 inet static
-    address 192.168.6.10
-    netmask 255.255.255.0
-```
-
-### **3. Instalación de Bind9**
-
-Actualizamos los repositorios e instalamos Bind9 junto con sus utilidades y herramientas de consulta (`dig`, `nslookup`):
-
-```bash
-sudo apt update
-sudo apt install bind9 bind9-utils bind9-dnsutils
-```
-
-### **4. Configuración de Zonas (Bind9)**
-
-Creamos el directorio para almacenar los ficheros de zona y editamos la configuración local:
-
-```bash
-sudo mkdir -p /etc/bind/zones
-sudo nano /etc/bind/named.conf.local
-```
-
-Añadimos las declaraciones para la zona directa y la zona inversa de `honeypot.com`:
-
-```bash
-zone "honeypot.com" {
-    type master;
-    file "/etc/bind/zones/db.honeypot.com";
-};
-
-zone "6.168.192.in-addr.arpa" {
-    type master;
-    file "/etc/bind/zones/db.6.168.192";
-};
-```
-
-Verificamos la sintaxis general:
-
-```bash
-sudo named-checkconf
-```
-
-### **5. Creación de los Ficheros de Zona**
-
-#### A. Zona Directa
-
-Creamos y editamos el fichero de zona directa (`/etc/bind/zones/db.honeypot.com`):
-
-```bash
-$TTL    86400
-@   IN  SOA ns1.honeypot.com. hostmaster.honeypot.com. (
-            2026092801  ; Serial (incrementar al modificar)
-            3600        ; Refresh
-            1800        ; Retry
-            604800      ; Expire
-            86400 )     ; Minimum TTL
-
-@       IN  NS      ns1.honeypot.com.
-ns1     IN  A       192.168.6.10
-cliente IN  A       192.168.6.20
-```
-
-#### B. Zona Inversa
-
-Creamos y editamos el fichero de zona inversa (`/etc/bind/zones/db.6.168.192`):
-
-```bash
-$TTL    86400
-@   IN  SOA ns1.honeypot.com. hostmaster.honeypot.com. (
-            2026092801  ; Serial
-            3600
-            1800
-            604800
-            86400 )
-
-@   IN  NS   ns1.honeypot.com.
-10  IN  PTR  ns1.honeypot.com.
-20  IN  PTR  cliente.honeypot.com.
-```
-
-#### Verificación de Zonas
-
-Comprobamos que ambos ficheros sean correctos (deben devolver `OK`):
-
-```bash
-sudo named-checkzone honeypot.com /etc/bind/zones/db.honeypot.com
-sudo named-checkzone 6.168.192.in-addr.arpa /etc/bind/zones/db.6.168.192
-```
-
-### **6. Opciones Globales y Forzar IPv4**
-
-Editamos el fichero de opciones globales (`/etc/bind/named.conf.options`):
-
-```bash
-options {
-    directory "/var/cache/bind";
-
-    listen-on { 127.0.0.1; 192.168.6.10; };
-    listen-on-v6 { none; };
-
-    recursion yes;
-    allow-recursion { 127.0.0.1; 192.168.6.0/24; };
-
-    forwarders { 8.8.8.8; 1.1.1.1; };
-
-    dnssec-validation auto;
-};
-```
-
-Para evitar errores y ruido en entornos sin IPv6, forzamos el uso de IPv4 editando `/etc/default/named`:
-
-```bash
-OPTIONS="-u bind -4"
-```
-
-### **7. Reinicio del Servicio y Pruebas**
-
-Reiniciamos el servicio y comprobamos su estado:
-
-```bash
-sudo systemctl restart bind9
-sudo systemctl status bind9
-```
-
-Ejecuta las comprobaciones:
-
-```bash
-nslookup ns1.honeypot.com
-nslookup 192.168.6.10
-nslookup google.com
-```
-
-<figure><img src="../.gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
