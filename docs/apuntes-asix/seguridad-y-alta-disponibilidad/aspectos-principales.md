@@ -1,6 +1,8 @@
-# ASPECTOS PRINCIPALES
+---
+description: Aquí podremos ver aspectos principales de la seguridad.
+---
 
-## Seguridad Informática
+# Aspectos Principales
 
 ### Introducción
 
@@ -254,7 +256,7 @@ Las **ACL** se utilizan en sistemas y redes para administrar los permisos de acc
 
 El **propietario del recurso** tiene control total sobre quién accede y con qué permisos. Por ejemplo, un usuario puede definir quién puede leer, escribir o ejecutar un archivo de su propiedad.
 
-**Ejemplo de matriz DAC:**
+**Ejemplo de matriz DAC:**[Listas de control de acceso (ACL)](https://app.gitbook.com/o/QNZ7kWO4LQvYzNxlDie4/sites/site_oM9mv/s/4kWIiYmAwL2bY5HlTph8/~/edit/~/changes/20/seguridad/aspectos-principales#listas-de-control-de-acceso-acl)
 
 | Sujeto     | /home/albert         | /home/alicia         | /home/ricard         | /etc/passwd |
 | ---------- | -------------------- | -------------------- | -------------------- | ----------- |
