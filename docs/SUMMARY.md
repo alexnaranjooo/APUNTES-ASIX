@@ -8,6 +8,7 @@
       * [Servidor DNS Esclavo (Slave) con Bind9 en Debian 13 (Trixie)](apuntes-asix/servicios-de-red/dns/servidor-dns-esclavo-slave-con-bind9-en-debian-13-trixie.md)
   * [⚙️ Seguridad y Alta Disponibilidad](apuntes-asix/seguridad-y-alta-disponibilidad/README.md)
     * [Aspectos Principales](apuntes-asix/seguridad-y-alta-disponibilidad/aspectos-principales.md)
+  * [💿 Administración de Sistemas Operativos](apuntes-asix/administracion-de-sistemas-operativos.md)
 * [🍯 HoneyNet](honeynet/README.md)
   * [1️⃣ Introducción al proyecto](honeynet/introduccion-al-proyecto/README.md)
     * [💡 Ideas Principales](honeynet/introduccion-al-proyecto/ideas-principales.md)
