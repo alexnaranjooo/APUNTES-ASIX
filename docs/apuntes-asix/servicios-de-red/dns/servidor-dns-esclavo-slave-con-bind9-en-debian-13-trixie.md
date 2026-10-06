@@ -54,40 +54,45 @@ zone "6.168.192.in-addr.arpa" {
 
 #### B. Actualizar los Ficheros de Zona del Maestro
 
-1.  Zona Directa (`/etc/bind/zones/db.honeypot.com`): Añade el registro del esclavo (`ns2`) y no olvides incrementar el número Serial (por ejemplo, súmele 1):
+1. Zona Directa (`/etc/bind/zones/db.honeypot.com`): Añade el registro del esclavo (`ns2`) y no olvides incrementar el número Serial (por ejemplo, súmele 1):
 
-    ```bash
-    $TTL    86400
-    @   IN  SOA ns1.honeypot.com. hostmaster.honeypot.com. (
-                2026092802  ; Serial (¡Incrementado!)
-                3600        ; Refresh
-                1800        ; Retry
-                604800      ; Expire
-                86400 )     ; Minimum TTL
+<figure><img src="../../../.gitbook/assets/image (24).png" alt=""><figcaption></figcaption></figure>
 
-    @       IN  NS      ns1.honeypot.com.
-    @       IN  NS      ns2.honeypot.com.
-    ns1     IN  A       192.168.6.100
-    ns2     IN  A       192.168.6.101
-    cliente IN  A       192.168.6.20
-    ```
-2.  Zona Inversa (`/etc/bind/zones/db.6.168.192`): Añade el puntero PTR para el esclavo e incrementa también su Serial:
+```bash
+$TTL    86400
+@   IN  SOA ns1.honeypot.com. hostmaster.honeypot.com. (
+            2026092802  ; Serial (¡Incrementado!)
+            3600        ; Refresh
+            1800        ; Retry
+            604800      ; Expire
+            86400 )     ; Minimum TTL
 
-    ```bash
-    $TTL    86400
-    @   IN  SOA ns1.honeypot.com. hostmaster.honeypot.com. (
-                2026092802  ; Serial
-                3600
-                1800
-                604800
-                86400 )
+@       IN  NS      ns1.honeypot.com.
+@       IN  NS      ns2.honeypot.com.
+ns1     IN  A       192.168.6.100
+ns2     IN  A       192.168.6.101
+cliente IN  A       192.168.6.20
+```
 
-    @   IN  NS   ns1.honeypot.com.
-    @   IN  NS   ns2.honeypot.com.
-    100 IN  PTR  ns1.honeypot.com.
-    101 IN  PTR  ns2.honeypot.com.
-    20  IN  PTR  cliente.honeypot.com.
-    ```
+1. Zona Inversa (`/etc/bind/zones/db.6.168.192`): Añade el puntero PTR para el esclavo e incrementa también su Serial:
+
+<figure><img src="../../../.gitbook/assets/image (25).png" alt=""><figcaption></figcaption></figure>
+
+```bash
+$TTL    86400
+@   IN  SOA ns1.honeypot.com. hostmaster.honeypot.com. (
+            2026092802  ; Serial
+            3600
+            1800
+            604800
+            86400 )
+
+@   IN  NS   ns1.honeypot.com.
+@   IN  NS   ns2.honeypot.com.
+100 IN  PTR  ns1.honeypot.com.
+101 IN  PTR  ns2.honeypot.com.
+20  IN  PTR  cliente.honeypot.com.
+```
 
 #### C. Validar y Reiniciar el Maestro
 
@@ -98,6 +103,8 @@ sudo named-checkconf
 sudo named-checkzone honeypot.com /etc/bind/zones/db.honeypot.com
 sudo systemctl restart bind9
 ```
+
+<figure><img src="../../../.gitbook/assets/image (26).png" alt=""><figcaption></figcaption></figure>
 
 ### 3. Configuración del Servidor Esclavo (`192.168.6.101`)
 
@@ -123,6 +130,8 @@ Como has clonado la máquina del maestro, ya tiene instalado Bind9. Ahora debes 
     ```
 
     _(Reinicia la máquina o aplica los cambios de red para que coja la nueva IP `192.168.6.101`)._
+
+<figure><img src="../../../.gitbook/assets/image (27).png" alt=""><figcaption></figcaption></figure>
 
 #### B. Limpiar y Configurar `named.conf.local` en el Esclavo
 
@@ -207,6 +216,9 @@ Realiza una consulta dirigida explícitamente al servidor esclavo (`192.168.6.10
 ```bash
 nslookup ns2.honeypot.com 192.168.6.101
 nslookup cliente.honeypot.com 192.168.6.101
+nslookup 192.168.6.100 192.168.6.101
 ```
 
 * Verificación: Si el esclavo responde con las IPs correctas, la sincronización y la alta disponibilidad están funcionando a la perfección.
+
+<figure><img src="../../../.gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
