@@ -34,6 +34,8 @@ sudo nano /etc/bind/named.conf.local
 
 Añade las directivas `allow-transfer` y `also-notify` apuntando a la IP del esclavo (`192.168.6.101`):
 
+<figure><img src="../../../.gitbook/assets/image (23).png" alt=""><figcaption></figcaption></figure>
+
 ```bash
 zone "honeypot.com" {
     type master;
