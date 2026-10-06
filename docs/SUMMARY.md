@@ -5,6 +5,7 @@
     * [📡 DNS](apuntes-asix/servicios-de-red/dns/README.md)
       * [Servidor DNS con Bind9 en Debian 13 (Trixie)](apuntes-asix/servicios-de-red/dns/servidor-dns-con-bind9-en-debian-13-trixie.md)
       * [DNSpy: Práctica-Seguridad en el DNS](apuntes-asix/servicios-de-red/dns/dnspy-practica-seguridad-en-el-dns.md)
+      * [Servidor DNS Esclavo (Slave) con Bind9 en Debian 13 (Trixie)](apuntes-asix/servicios-de-red/dns/servidor-dns-esclavo-slave-con-bind9-en-debian-13-trixie.md)
   * [⚙️ Seguridad y Alta Disponibilidad](apuntes-asix/seguridad-y-alta-disponibilidad/README.md)
     * [Aspectos Principales](apuntes-asix/seguridad-y-alta-disponibilidad/aspectos-principales.md)
 * [🍯 HoneyNet](honeynet/README.md)

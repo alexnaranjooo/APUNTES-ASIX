@@ -18,7 +18,7 @@ Esta guía detalla el proceso completo para desplegar un servidor DNS maestro ut
   * Adaptador 2: Red Interna (para dar servicio a la red local y clientes).
 * **Disco Duro**: 25 GB
 * **Memoria RAM**: 2 GB
-* **IP Estática del Servidor** (Red Interna): `192.168.6.10/24` _(ejemplo)_
+* **IP Estática del Servidor** (Red Interna): `192.168.6.100/24` _(ejemplo)_
 
 ### **2. Configuración de Red en Debian 13**
 
@@ -30,7 +30,7 @@ iface enp0s3 inet dhcp
 
 auto enp0s8
 iface enp0s8 inet static
-    address 192.168.6.10
+    address 192.168.6.100
     netmask 255.255.255.0
 ```
 
@@ -88,8 +88,8 @@ $TTL    86400
             86400 )     ; Minimum TTL
 
 @       IN  NS      ns1.honeypot.com.
-ns1     IN  A       192.168.6.10
-cliente IN  A       192.168.6.20
+ns1     IN  A       192.168.6.100
+cliente IN  A       192.168.6.200
 ```
 
 #### B. Zona Inversa
@@ -158,7 +158,7 @@ Ejecuta las comprobaciones:
 
 ```bash
 nslookup ns1.honeypot.com
-nslookup 192.168.6.10
+nslookup 192.168.6.100
 nslookup google.com
 ```
 
