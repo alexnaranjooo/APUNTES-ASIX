@@ -16,24 +16,54 @@ Todo el hardware (RAM, CPU, disco) se reparte directamente entre las VMs y se ge
 
 ### Conceptos clave
 
-<details>
+{% tabs %}
+{% tab title="Node" %}
+**Node**: el PC físico.
 
-<summary></summary>
+<figure><img src="../../.gitbook/assets/images.jpg" alt="" width="506"><figcaption></figcaption></figure>
+{% endtab %}
+
+{% tab title="VM" %}
+**VM (máquina virtual)**: un ordenador completo simulado, con su propia CPU asignada, RAM, disco virtual y sistema operativo instalado desde cero, permite instalar Ubuntu, pfSense, Kali, lo que sea.
+
+<figure><img src="../../.gitbook/assets/virtual_machines.png" alt="" width="548"><figcaption></figcaption></figure>
+{% endtab %}
+
+{% tab title="Storage" %}
+**Storage**: dónde se guardan los discos virtuales de las VMs.
+
+<figure><img src="../../.gitbook/assets/shared_storage_XenServer_blog_virtualizacion.png" alt="" width="346"><figcaption></figcaption></figure>
+{% endtab %}
+
+{% tab title="Bridge " %}
+**Bridge:** un bridge es un **switch virtual,** cuando se conecta la tarjeta de red de una VM a un bridge, esa VM queda en la misma red que cualquier otra VM conectada al mismo bridge.
+
+<figure><img src="../../.gitbook/assets/vn-Bridged-Mode-Diagram.png" alt="" width="563"><figcaption></figcaption></figure>
+{% endtab %}
+
+{% tab title="Snapshot" %}
+**Snapshot**: una foto congelada del estado completo de una VM.&#x20;
+
+Si algo se rompe probando, se restaura el snapshot y se vuelve atrás en segundos sin reinstalar nada.
+
+<figure><img src="../../.gitbook/assets/vmware-snapshot-monitoring-banner.svg" alt="" width="531"><figcaption></figcaption></figure>
+{% endtab %}
+
+{% tab title="Template" %}
+**Template**: una VM "maestra" ya configurada que se clona para crear VMs nuevas rápidamente.&#x20;
+
+Por ejemplo: instalar Ubuntu Server una vez, dejarlo limpio y actualizado, convertirlo en template, y clonar desde ahí cada vez que se necesite una VM Ubuntu nueva.
+
+<figure><img src="../../.gitbook/assets/1069465476.svg" alt="" width="513"><figcaption></figcaption></figure>
+{% endtab %}
+{% endtabs %}
 
 
 
-</details>
+### Cómo se ve en la práctica
 
-* **Node**: el PC físico. En un entorno de empresa puede haber un clúster de varios nodes; en este proyecto hay uno solo, y todo se gestiona "dentro" de él.
-* **VM (máquina virtual)**: un ordenador completo simulado, con su propia CPU asignada, RAM, disco virtual y sistema operativo instalado desde cero. Pesada pero total: permite instalar Ubuntu, pfSense, Kali, lo que sea.
-* **LXC Container**: un "mini-sistema" que comparte el kernel de Linux de Proxmox en vez de tener el suyo propio. Mucho más ligero (puede arrancar con 128–256 MB de RAM frente a 1–2 GB de una VM). A cambio, solo sirve para sistemas Linux y está algo menos aislado. Ideal para servicios poco exigentes como **DNS** o **DHCP**.
-* **Storage**: dónde se guardan los discos virtuales de las VMs — en este caso, el SSD del PC. Proxmox permite organizar varios storages si hay varios discos.
-* **Bridge (vmbr)**: concepto clave para todo el proyecto. Un bridge es un **switch virtual**: cuando se conecta la tarjeta de red de una VM a un bridge, esa VM queda en la misma red que cualquier otra VM conectada al mismo bridge. Se creará un bridge por cada VLAN (`vmbr0` para WAN, `vmbr1` para DMZ, etc.) en la Fase 2, pero el concepto nace aquí.
-*   **Snapshot**: una foto congelada del estado completo de una VM (disco + configuración). Si algo se rompe probando pfSense, se restaura el snapshot y se vuelve atrás en segundos sin reinstalar nada.
+Todo se gestiona desde el navegador, accediendo a `https://IP-DEL-PC:8006`.
 
-    > **Buena práctica**: tomar snapshot antes de cualquier cambio importante. Ahorra horas de frustración.
-* **Template**: una VM "maestra" ya configurada que se clona para crear VMs nuevas rápidamente. Por ejemplo: instalar Ubuntu Server una vez, dejarlo limpio y actualizado, convertirlo en template, y clonar desde ahí cada vez que se necesite una VM Ubuntu nueva.
 
-#### Cómo se ve en la práctica
 
-Todo se gestiona desde el navegador, accediendo a `https://IP-DEL-PC:8006`. Ahí aparece un árbol a la izquierda con el node y, dentro de él, todas las VMs y containers creados.
+<figure><img src="../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
