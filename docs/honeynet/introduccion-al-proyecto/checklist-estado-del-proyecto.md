@@ -1,0 +1,2 @@
+# ✔️ Checklist / estado del proyecto
+

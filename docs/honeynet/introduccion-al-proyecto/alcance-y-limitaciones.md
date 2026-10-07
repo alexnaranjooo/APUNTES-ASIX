@@ -1,0 +1,2 @@
+# ✂️ Alcance y limitaciones
+
