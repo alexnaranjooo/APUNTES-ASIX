@@ -13,5 +13,5 @@
   * [Introducción al proyecto](honeynet/introduccion-al-proyecto/README.md)
     * [💡 Ideas Principales](honeynet/introduccion-al-proyecto/ideas-principales.md)
     * [🛡️ Defensa del equipo](honeynet/introduccion-al-proyecto/defensa-del-equipo.md)
-  * [0️⃣ Fase 0 — Profundización completa](honeynet/fase-0-profundizacion-completa/README.md)
+  * [Fase 0 — Profundización completa](honeynet/fase-0-profundizacion-completa/README.md)
     * [Bloque 1 — Proxmox](honeynet/fase-0-profundizacion-completa/bloque-1-proxmox.md)

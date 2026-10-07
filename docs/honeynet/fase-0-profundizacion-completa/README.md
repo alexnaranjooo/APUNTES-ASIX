@@ -27,9 +27,11 @@ layout:
     visible: true
 ---
 
-# 0️⃣ Fase 0 — Profundización completa
+# Fase 0 — Profundización completa
 
-Antes de tocar nada en Proxmox, esta fase sienta las bases teóricas del proyecto **HoneyNet**: qué es cada pieza del stack, para qué sirve y por qué está ahí. No se instala nada todavía — el objetivo es llegar a Fase 1 entendiendo el "por qué" de cada herramienta, no solo el "cómo".
+Antes de tocar nada en Proxmox, esta fase sienta las bases teóricas del proyecto **HoneyNet**: qué es cada pieza del stack, para qué sirve, por qué está ahí y demás.&#x20;
+
+No se instala nada todavía — el objetivo es llegar a Fase 1 entendiendo el "por qué" de cada herramienta, no solo el "cómo".
 
 Se organiza en cuatro bloques:&#x20;
 
