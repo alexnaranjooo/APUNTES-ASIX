@@ -1,5 +1,7 @@
 # Bloque 1 — Proxmox
 
+## **Proxmox**
+
 ### Por qué existe y qué problema resuelve
 
 Con VirtualBox, el sistema operativo base ya consume RAM y CPU de fondo, y VirtualBox reparte entre las VMs lo que sobra. Para un proyecto que necesitamos **10 o más VMs corriendo a la vez**, esto es ineficiente e insuficiente.
@@ -12,9 +14,7 @@ Todo el hardware (RAM, CPU, disco) se reparte directamente entre las VMs y se ge
 
 <figure><img src="../../.gitbook/assets/1200_628_Proxmox-vs.-Vmware@2x.png" alt=""><figcaption></figcaption></figure>
 
-
-
-### Conceptos clave
+### **Conceptos clave**
 
 {% tabs %}
 {% tab title="Node" %}
@@ -58,12 +58,8 @@ Por ejemplo: instalar Ubuntu Server una vez, dejarlo limpio y actualizado, conve
 {% endtab %}
 {% endtabs %}
 
-
-
-### Cómo se ve en la práctica
+### **Cómo se ve en la práctica**
 
 Todo se gestiona desde el navegador, accediendo a `https://IP-DEL-PC:8006`.
 
-
-
-<figure><img src="../../.gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/proxmox-intro.png" alt=""><figcaption></figcaption></figure>
