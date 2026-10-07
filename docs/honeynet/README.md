@@ -1,5 +1,31 @@
 ---
 description: Hecho por Álex Naranjo Blázquez y David Álvarez Fernández
+cover: ../.gitbook/assets/image (16).png
+coverY: 0
+layout:
+  width: default
+  cover:
+    visible: true
+    size: hero
+    mask: none
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+  metadata:
+    visible: true
+  tags:
+    visible: true
+  actions:
+    visible: true
+  anchors:
+    visible: true
 ---
 
 # 🍯 HoneyNet
@@ -12,6 +38,3 @@ Este repositorio de Gitbook, es un repositorio orientado a mi proyecto del segun
 
 En el repositorio se incluirá la memoria del proyecto, junto a todos los aspectos y acciones que he ido tomando durante el transcurso del mismo.
 
-
-
-<figure><img src="../.gitbook/assets/image (16).png" alt=""><figcaption></figcaption></figure>
