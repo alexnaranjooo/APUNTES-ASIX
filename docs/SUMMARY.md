@@ -18,5 +18,5 @@
     * [✂️ Alcance y limitaciones](honeynet/introduccion-al-proyecto/alcance-y-limitaciones.md)
     * [🌐 Diagrama de red](honeynet/introduccion-al-proyecto/diagrama-de-red.md)
     * [✔️ Checklist / estado del proyecto](honeynet/introduccion-al-proyecto/checklist-estado-del-proyecto.md)
-  * [F0 — Profundización completa](honeynet/f0-profundizacion-completa/README.md)
+  * [0️⃣ F0 — Profundización completa](honeynet/f0-profundizacion-completa/README.md)
     * [Bloque 1 — Proxmox](honeynet/f0-profundizacion-completa/bloque-1-proxmox.md)
