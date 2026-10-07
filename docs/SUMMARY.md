@@ -20,3 +20,4 @@
     * [✔️ Checklist / estado del proyecto](honeynet/introduccion-al-proyecto/checklist-estado-del-proyecto.md)
   * [0️⃣ F0 — Profundización completa](honeynet/f0-profundizacion-completa/README.md)
     * [Bloque 1 — Proxmox](honeynet/f0-profundizacion-completa/bloque-1-proxmox.md)
+    * [Bloque 2 — Docker](honeynet/f0-profundizacion-completa/bloque-2-docker.md)
