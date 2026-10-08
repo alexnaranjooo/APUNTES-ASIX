@@ -35,7 +35,7 @@ description: >-
 
 ## Justificación de la formación del equipo
 
-* Yo, **Alex** planteé el proyecto pensando en trabajarlo en solitario, pero la ciberseguridades un ámbito que se trabaja en equipo, por lo tanto me abrí a propuestas.
+* Yo, **Alex** planteé el proyecto pensando en trabajarlo en solitario, pero la ciberseguridad es un ámbito que se trabaja en equipo, por lo tanto me abrí a propuestas.
 * **David** se suma por interés genuino: el tema conecta directamente con lo que está haciendo ahora mismo en sus prácticas de empresa.
 * Hemos estado trabajando juntos durante todo el primer curso: conocemos nuestra forma de trabajar y sabemos que cada uno cumple con su parte.
 * Compartimos una manera de trabajar perfeccionista y un carácter similar: **observadores antes que habladores**.
