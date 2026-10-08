@@ -13,6 +13,7 @@
   * [Introducción al proyecto](honeynet/introduccion-al-proyecto/README.md)
     * [💡 Ideas Principales](honeynet/introduccion-al-proyecto/ideas-principales.md)
     * [🛡️ Defensa del equipo](honeynet/introduccion-al-proyecto/defensa-del-equipo.md)
+    * [🎯 Objetivos del proyecto](honeynet/introduccion-al-proyecto/objetivos-del-proyecto.md)
     * [🏷️ Glosario de términos](honeynet/introduccion-al-proyecto/glosario-de-terminos.md)
     * [🗃️ Stack tecnológico](honeynet/introduccion-al-proyecto/stack-tecnologico.md)
     * [✂️ Alcance y limitaciones](honeynet/introduccion-al-proyecto/alcance-y-limitaciones.md)
