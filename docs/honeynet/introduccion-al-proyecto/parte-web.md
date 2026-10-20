@@ -1,4 +1,4 @@
-# Parte web
+# 📄 Parte Web
 
 ## Introducción
 
@@ -15,11 +15,11 @@ Además de la infraestructura, el proyecto incluye una **parte web**: la página
 
 La actividad **M14UF1A2** incluye:
 
-* [ ] **Mapa del sitio**.
-* [ ] **Mockups / wireframes** con notas.
-* [ ] **Pruebas por perfil de usuario**.
-* [ ] **Datos por pantalla**.
-* [ ] **Webgrafía**.
+* [x] **Mapa del sitio**.
+* [x] **Mockups / wireframes** con notas.
+* [x] **Pruebas por perfil de usuario**.
+* [x] **Datos por pantalla**.
+* [x] **Webgrafía**.
 
 ## Alojamiento
 

@@ -1,4 +1,4 @@
-# Infraestructura física
+# 📡 Infraestructura física
 
 ## Introducción
 
