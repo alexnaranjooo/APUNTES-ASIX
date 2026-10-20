@@ -2,7 +2,7 @@
 
 ### **Introducción**
 
-Esquema general de la arquitectura de **HoneyNet**: un único PC con **Proxmox** como hipervisor, cinco VLANs segmentadas por **pfSense + Suricata**, y el flujo de tráfico permitido entre ellas.
+Esquema general de la arquitectura de **HoneyNet**: un PC con **Proxmox** (todas las VMs), un PC dedicado a **pfSense + Suricata** en hardware real, un switch **HP 1810-24**, cinco VLANs segmentadas y el flujo de tráfico permitido entre ellas. El hardware se detalla en [Infraestructura física](infraestructura-fisica.md).
 
 ***
 
@@ -16,7 +16,7 @@ flowchart TB
         KALI["Kali Linux<br/>(atacante)"]
     end
 
-    PF{{"pfSense + Suricata<br/>Firewall / Router / IDS"}}
+    PF{{"pfSense + Suricata (PC físico)<br/>Firewall / Router / IDS"}}
 
     subgraph DMZ["VLAN 10 — DMZ"]
         COWRIE["Cowrie<br/>SSH / Telnet"]

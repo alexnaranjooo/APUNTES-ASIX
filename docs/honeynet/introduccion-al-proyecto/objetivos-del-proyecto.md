@@ -10,15 +10,15 @@ Esta página define qué se quiere conseguir con **HoneyNet** y cómo se comprob
 
 Diseñar, desplegar y documentar una **red de laboratorio segmentada** capaz de **atraer, registrar y analizar ataques reales** mediante honeypots, con un sistema SIEM que permita estudiar cómo actúan los atacantes.
 
-
-
 ## **Objetivos específicos**
 
 ### Infraestructura
 
-* Montar un **Proxmox** como base de todo el laboratorio.
-* Segmentar la red en **cinco VLANs** (DMZ, Servidores, Gestión, Usuarios y WAN) con **pfSense** como firewall y router.
+* Montar **Proxmox** en un PC dedicado como base de todas las VMs del laboratorio.
+* Segmentar la red en **cinco VLANs** (DMZ, Servidores, Gestión, Usuarios y WAN) con **pfSense + Suricata** como firewall, router e IDS en un segundo PC, conectado al primero mediante un switch **HP 1810-24**.
 * Aplicar **defensa en profundidad**: que comprometer una pieza no dé acceso a las demás.
+
+El hardware se detalla en [Infraestructura física](infraestructura-fisica.md).
 
 ### Captura de ataques
 
@@ -37,6 +37,10 @@ Diseñar, desplegar y documentar una **red de laboratorio segmentada** capaz de 
 * Enviar alertas por **Telegram**.
 * Desarrollar un **script en Python** que lea los logs de Cowrie, consulte AbuseIPDB, guarde los datos en MySQL y bloquee IPs en pfSense vía API.
 
+### Parte web
+
+* Entregar la actividad **M14UF1A2** y alojar la web de la empresa del proyecto en un servidor **nginx** (ver [Parte web](parte-web.md)).
+
 ### Criterios de éxito
 
 El proyecto se considerará logrado si:
@@ -48,4 +52,4 @@ El proyecto se considerará logrado si:
 * [ ] Se ha expuesto la DMZ a internet de forma controlada y **ningún atacante ha alcanzado las VLANs internas**.
 * [ ] Toda la arquitectura está documentada y justificada.
 
-> El script de respuesta automática (bloqueo de IPs vía API) es el objetivo más ambicioso. Su estado y por qué puede quedar fuera de la primera versión se explican en Alcance y limitaciones.
+> El script de respuesta automática (bloqueo de IPs vía API) es el objetivo más ambicioso. Su estado y por qué puede quedar fuera de la primera versión se explican en [Alcance y limitaciones](alcance-y-limitaciones.md).

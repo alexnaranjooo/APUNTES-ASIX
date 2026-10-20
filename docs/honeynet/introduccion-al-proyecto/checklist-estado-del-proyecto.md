@@ -8,7 +8,7 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 
 ## Resumen de estado
 
-<table data-search="false"><thead><tr><th width="76">Fase</th><th width="562">Contenido</th><th>Estado</th></tr></thead><tbody><tr><td><strong>F0</strong></td><td>Profundización: Proxmox, Docker, VLANs de seguridad, stack completo</td><td>🟡 En curso</td></tr><tr><td><strong>F1</strong></td><td>Instalación de Proxmox</td><td>🟡 En curso</td></tr><tr><td><strong>F2</strong></td><td>VLANs y pfSense (+ Suricata)</td><td>⚪ Pendiente</td></tr><tr><td><strong>F3</strong></td><td>Servidores internos: DNS, DHCP, MySQL, Backup</td><td>⚪ Pendiente</td></tr><tr><td><strong>F4</strong></td><td>Honeypots: Cowrie, Dionaea, DVWA</td><td>⚪ Pendiente</td></tr><tr><td><strong>F5</strong></td><td>Wazuh (SIEM)</td><td>⚪ Pendiente</td></tr><tr><td><strong>F6</strong></td><td>Grafana, Telegram y script de respuesta automática</td><td>⚪ Pendiente</td></tr><tr><td><strong>F7</strong></td><td>Exposición controlada a internet</td><td>⚪ Pendiente</td></tr><tr><td><strong>F8</strong></td><td>Memoria y presentación</td><td>⚪ Pendiente</td></tr></tbody></table>
+<table data-search="false"><thead><tr><th width="76">Fase</th><th width="562">Contenido</th><th>Estado</th></tr></thead><tbody><tr><td><strong>F0</strong></td><td>Profundización: Proxmox, Docker, VLANs de seguridad, stack completo</td><td>🟡 En curso</td></tr><tr><td><strong>F1</strong></td><td>Instalación de Proxmox</td><td>🟡 En curso</td></tr><tr><td><strong>F2</strong></td><td>VLANs, switch y pfSense (+ Suricata)</td><td>⚪ Pendiente</td></tr><tr><td><strong>F3</strong></td><td>Servidores internos: DNS, DHCP, MySQL, Backup</td><td>⚪ Pendiente</td></tr><tr><td><strong>F4</strong></td><td>Honeypots: Cowrie, Dionaea, DVWA</td><td>⚪ Pendiente</td></tr><tr><td><strong>F5</strong></td><td>Wazuh (SIEM)</td><td>⚪ Pendiente</td></tr><tr><td><strong>F6</strong></td><td>Grafana, Telegram y script de respuesta automática</td><td>⚪ Pendiente</td></tr><tr><td><strong>F7</strong></td><td>Exposición controlada a internet</td><td>⚪ Pendiente</td></tr><tr><td><strong>F8</strong></td><td>Memoria y presentación</td><td>⚪ Pendiente</td></tr></tbody></table>
 
 ### Fase 0 — Profundización
 
@@ -21,16 +21,18 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 ### Fase 1 — Instalación de Proxmox
 
 * [x] Preparar el PC y el medio de instalación
-* [ ] Instalar Proxmox VE como sistema base
+* [x] Instalar Proxmox VE como sistema base
 * [ ] Acceder a la interfaz web (`https://IP-DEL-PC:8006`)
 * [ ] Revisar el storage y subir las ISOs necesarias
 * [ ] Crear y probar una VM de prueba con snapshot
+* [ ] Configurar NetBird para trabajar en remoto
 
-### Fase 2 — VLANs y pfSense
+### Fase 2 — VLANs, switch y pfSense
 
 * [ ] Crear un bridge (`vmbr`) por cada VLAN
-* [ ] Instalar pfSense en una VM
-* [ ] Definir las interfaces y VLANs 10, 20, 30, 40 y 99
+* [ ] Configurar en el switch HP 1810-24 las VLANs 10, 20, 30, 40 y 99 y los puertos en trunk
+* [ ] Instalar pfSense en el PC físico dedicado (1 NIC)
+* [ ] Definir las VLANs sobre la única NIC de pfSense (VLAN 99 como WAN, resto en trunk)
 * [ ] Escribir las reglas de firewall según la tabla de tráfico
 * [ ] Instalar y activar Suricata con reglas ET Open
 * [ ] Probar el aislamiento entre VLANs
@@ -78,3 +80,15 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 * [ ] Recopilar capturas, datos y estadísticas de ataques reales
 * [ ] Preparar la presentación
 * [ ] Ensayar la defensa
+
+### Parte web
+
+Detalle en [Parte web](parte-web.md).
+
+* [ ] Mapa del sitio
+* [ ] Mockups / wireframes con notas (a partir del mockup de Figma)
+* [ ] Pruebas por perfil de usuario
+* [ ] Datos por pantalla
+* [ ] Webgrafía
+* [ ] Servidor nginx para alojar la web
+* [ ] Entregar la actividad M14UF1A2

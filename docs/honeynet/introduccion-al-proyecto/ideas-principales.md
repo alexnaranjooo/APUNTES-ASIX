@@ -14,7 +14,7 @@ description: >-
 ### **Concepto central**
 
 * Red de empresa simulada + señuelos (honeypots) que atraen ataques reales de internet
-* No es solo tener honeypots sino cerrar el círculo completo:&#x20;
+* No es solo tener honeypots sino cerrar el círculo completo:
 
 ```
 detectar → analizar → responder → visualizar
@@ -24,9 +24,11 @@ detectar → analizar → responder → visualizar
 {% step %}
 ### **Infraestructura base**
 
-* Proxmox como servidor de virtualización
-* pfSense + Suricata como cerebro de red: firewall, router y IDS a la vez
+* **Proxmox** como servidor de virtualización, en un PC dedicado que aloja todas las VMs
+* **pfSense + Suricata** como cerebro de red: firewall, router y IDS a la vez, en hardware real (otro PC dedicado, con una sola tarjeta de red)
+* **Switch HP 1810-24** que conecta los dos PCs y transporta las VLANs
 * Segmentación en VLANs
+* Acceso remoto al laboratorio con NetBird (VPN)
 {% endstep %}
 
 {% step %}
@@ -54,6 +56,7 @@ detectar → analizar → responder → visualizar
 
 * DNS, DHCP, MySQL, Backup → dan credibilidad de infraestructura real
 * VM de usuarios → contexto de empleados
+* Web de la empresa (honeypots como servicio) alojada en nginx
 {% endstep %}
 
 {% step %}
@@ -65,8 +68,8 @@ detectar → analizar → responder → visualizar
 {% step %}
 ### Riesgos a vigilar
 
-* Alcance grande para el tiempo disponible, sobre todo trabajando solo
-* Hardware
+* Alcance grande para el tiempo disponible, con un equipo de solo dos personas
+* Hardware limitado y prestado por el centro (el PC de pfSense solo tiene una tarjeta de red)
 {% endstep %}
 {% endstepper %}
 

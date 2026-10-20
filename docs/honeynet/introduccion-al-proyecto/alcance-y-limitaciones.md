@@ -8,13 +8,15 @@ Delimita con claridad **qué incluye** HoneyNet, **qué queda fuera a propósito
 
 ## Dentro del alcance
 
-* Infraestructura sobre un único PC con **Proxmox**.
+* Infraestructura sobre dos PCs del centro —uno con **Proxmox** (todas las VMs) y otro dedicado a **pfSense + Suricata**— conectados con un switch **HP 1810-24**.
 * Segmentación en cinco VLANs con **pfSense + Suricata**.
 * Servicios internos: DNS, DHCP, MySQL y copias de seguridad.
 * Tres honeypots en Docker: **Cowrie**, **Dionaea** y **DVWA**.
 * SIEM con **Wazuh** y visualización con **Grafana**.
 * Alertas por **Telegram**.
 * Exposición **controlada** de la DMZ a internet.
+* Acceso remoto al laboratorio con **NetBird** (VPN).
+* Parte web del proyecto, alojada en un servidor **nginx**.
 * Documentación completa en este GitBook, memoria y defensa.
 
 ## Fuera del alcance
@@ -22,6 +24,7 @@ Delimita con claridad **qué incluye** HoneyNet, **qué queda fuera a propósito
 * Alta disponibilidad real o clúster de varios nodes Proxmox (el proyecto usa un único node).
 * Entornos de producción: es un laboratorio de estudio, no una red para proteger una empresa real.
 * Análisis forense profundo del malware capturado (se guardan las muestras, pero no se hace ingeniería inversa).
+* El firewall físico **Juniper NetScreen-25**, prestado por el centro, queda aparcado.
 * Atribución de los atacantes: se registran IPs y comportamiento, no se investiga quién hay detrás.
 
 ***
@@ -30,7 +33,10 @@ Delimita con claridad **qué incluye** HoneyNet, **qué queda fuera a propósito
 
 ### Técnicas
 
-* **Un solo equipo físico**: todas las VMs comparten los mismos recursos (RAM, CPU, disco), lo que limita cuántas pueden correr a la vez y con qué carga.
+* **Un solo node Proxmox**: todas las VMs comparten los recursos de ese PC (RAM, CPU, disco), lo que limita cuántas pueden correr a la vez y con qué carga.
+* **Una sola tarjeta de red en el PC de pfSense**: WAN y redes internas viajan por el mismo cable en trunk, con la VLAN 99 como WAN. Todo el tráfico entre VLANs pasa por un único enlace.
+* **Hardware prestado**: los PCs, el switch y el firewall son del centro.
+* **Sin portátil de administración fijo**.
 * **Herramientas nuevas**: Proxmox, Docker, pfSense, Wazuh y Grafana se aprenden durante el proyecto, por lo que cada fase incluye curva de aprendizaje.
 
 ### De equipo y tiempo

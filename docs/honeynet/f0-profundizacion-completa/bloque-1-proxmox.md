@@ -6,11 +6,9 @@
 
 Con VirtualBox, el sistema operativo base ya consume RAM y CPU de fondo, y VirtualBox reparte entre las VMs lo que sobra. Para un proyecto que necesitamos **10 o más VMs corriendo a la vez**, esto es ineficiente e insuficiente.
 
-**Proxmox** elimina esa capa intermedia, se instala como si fuera el propio sistema operativo del PC. No hay "Windows + programa de virtualización" — hay un servidor dedicado exclusivamente a crear y gestionar máquinas virtuales.&#x20;
+**Proxmox** elimina esa capa intermedia, se instala como si fuera el propio sistema operativo del PC. No hay "Windows + programa de virtualización" — hay un servidor dedicado exclusivamente a crear y gestionar máquinas virtuales.
 
 Todo el hardware (RAM, CPU, disco) se reparte directamente entre las VMs y se gestiona automáticamente.
-
-
 
 <figure><img src="../../.gitbook/assets/1200_628_Proxmox-vs.-Vmware@2x.png" alt=""><figcaption></figcaption></figure>
 
@@ -18,13 +16,13 @@ Todo el hardware (RAM, CPU, disco) se reparte directamente entre las VMs y se ge
 
 {% tabs %}
 {% tab title="Node" %}
-**Node**: el PC físico.
+**Node**: el PC físico que ejecuta Proxmox. En este proyecto es el PC dedicado a Proxmox, que aloja todas las VMs; pfSense va en otro PC aparte.
 
 <figure><img src="../../.gitbook/assets/images.jpg" alt="" width="506"><figcaption></figcaption></figure>
 {% endtab %}
 
 {% tab title="VM" %}
-**VM (máquina virtual)**: un ordenador completo simulado, con su propia CPU asignada, RAM, disco virtual y sistema operativo instalado desde cero, permite instalar Ubuntu, pfSense, Kali, lo que sea.
+**VM (máquina virtual)**: un ordenador completo simulado, con su propia CPU asignada, RAM, disco virtual y sistema operativo instalado desde cero, permite instalar Ubuntu, Debian, Kali, lo que sea.
 
 <figure><img src="../../.gitbook/assets/virtual_machines.png" alt="" width="548"><figcaption></figcaption></figure>
 {% endtab %}
@@ -38,11 +36,13 @@ Todo el hardware (RAM, CPU, disco) se reparte directamente entre las VMs y se ge
 {% tab title="Bridge " %}
 **Bridge:** un bridge es un **switch virtual,** cuando se conecta la tarjeta de red de una VM a un bridge, esa VM queda en la misma red que cualquier otra VM conectada al mismo bridge.
 
+En este proyecto, las VLANs llegan al PC de Proxmox desde el switch físico. Cómo se organizan los bridges (uno por VLAN o un único bridge con VLANs) se decide en la Fase 2.
+
 <figure><img src="../../.gitbook/assets/vn-Bridged-Mode-Diagram.png" alt="" width="563"><figcaption></figcaption></figure>
 {% endtab %}
 
 {% tab title="Snapshot" %}
-**Snapshot**: una foto congelada del estado completo de una VM.&#x20;
+**Snapshot**: una foto congelada del estado completo de una VM.
 
 Si algo se rompe probando, se restaura el snapshot y se vuelve atrás en segundos sin reinstalar nada.
 
@@ -50,7 +50,7 @@ Si algo se rompe probando, se restaura el snapshot y se vuelve atrás en segundo
 {% endtab %}
 
 {% tab title="Template" %}
-**Template**: una VM "maestra" ya configurada que se clona para crear VMs nuevas rápidamente.&#x20;
+**Template**: una VM "maestra" ya configurada que se clona para crear VMs nuevas rápidamente.
 
 Por ejemplo: instalar Ubuntu Server una vez, dejarlo limpio y actualizado, convertirlo en template, y clonar desde ahí cada vez que se necesite una VM Ubuntu nueva.
 
