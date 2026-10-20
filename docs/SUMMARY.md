@@ -24,3 +24,4 @@
   * [0️⃣ F0 — Profundización completa](honeynet/f0-profundizacion-completa/README.md)
     * [Bloque 1 — Proxmox](honeynet/f0-profundizacion-completa/bloque-1-proxmox.md)
     * [Bloque 2 — Docker](honeynet/f0-profundizacion-completa/bloque-2-docker.md)
+  * [0️⃣ Fase 0 — Profundización completa](honeynet/fase-0-profundizacion-completa.md)
