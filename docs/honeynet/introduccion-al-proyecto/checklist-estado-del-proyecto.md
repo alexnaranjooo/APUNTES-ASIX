@@ -14,15 +14,15 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 
 * [x] Bloque 1 — Proxmox (node, VM, LXC, storage, bridge, snapshot, template)
 * [x] Bloque 2 — Docker (imagen, contenedor, volumen, Compose, red Docker)
-* [ ] Bloque 3 — VLANs aplicadas a seguridad (razonamiento de cada VLAN y defensa en profundidad)
-* [ ] Bloque 4 — Cada servicio del stack (qué hace y por qué está ahí)
-* [ ] Páginas de la Fase 0 y diagrama de red publicados en el GitBook
+* [x] Bloque 3 — VLANs aplicadas a seguridad (razonamiento de cada VLAN y defensa en profundidad)
+* [x] Bloque 4 — Cada servicio del stack (qué hace y por qué está ahí)
+* [x] Páginas de la Fase 0 y diagrama de red publicados en el GitBook
 
 ### Fase 1 — Instalación de Proxmox
 
 * [x] Preparar el PC y el medio de instalación
 * [x] Instalar Proxmox VE como sistema base
-* [ ] Acceder a la interfaz web (`https://IP-DEL-PC:8006`)
+* [x] Acceder a la interfaz web (`https://IP-DEL-PC:8006`)
 * [ ] Revisar el storage y subir las ISOs necesarias
 * [ ] Crear y probar una VM de prueba con snapshot
 * [ ] Configurar NetBird para trabajar en remoto
@@ -85,10 +85,9 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 
 Detalle en [Parte web](parte-web/).
 
-* [ ] Mapa del sitio
-* [ ] Mockups / wireframes con notas (a partir del mockup de Figma)
-* [ ] Pruebas por perfil de usuario
-* [ ] Datos por pantalla
-* [ ] Webgrafía
+* [x] Mapa del sitio
+* [x] Mockups / wireframes con notas (a partir del mockup de Figma)
+* [x] Pruebas por perfil de usuario
+* [x] Datos por pantalla
+* [x] Webgrafía
 * [ ] Servidor nginx para alojar la web
-* [ ] Entregar la actividad M14UF1A2

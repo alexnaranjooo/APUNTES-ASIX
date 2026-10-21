@@ -106,14 +106,3 @@ sequenceDiagram
 Se puede trabajar en el laboratorio **desde casa** mediante **NetBird**, una VPN. Como el PC con Proxmox está siempre encendido, el laboratorio está disponible en cualquier momento.
 
 ***
-
-## Por definir
-
-* Reparto de puertos del switch (qué puerto va a cada PC) y configuración de las VLANs en el HP 1810-24.
-* Dónde va conectada físicamente la salida a internet del laboratorio.
-
-## Próximos pasos
-
-* Documentar la configuración del switch en la **Fase 2**.
-* Instalar y configurar NetBird para el acceso remoto.
-* Actualizar esta página si cambia algún equipo o conexión.

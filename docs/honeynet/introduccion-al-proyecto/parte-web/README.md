@@ -26,9 +26,3 @@ La actividad **M14UF1A2** incluye:
 La web se alojará en un servidor **nginx**. Falta decidir en qué VM y en qué VLAN se despliega.
 
 > nginx es un servidor web ligero y muy usado. Documentación oficial: [nginx.org/en/docs](https://nginx.org/en/docs/).
-
-## Próximos pasos
-
-* Completar los puntos de M14UF1A2 a partir del mockup de Figma.
-* Decidir el alojamiento del servidor nginx.
-* Enlazar esta página desde la [Introducción al proyecto](../).

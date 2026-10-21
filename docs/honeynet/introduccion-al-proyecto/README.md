@@ -91,28 +91,3 @@ flowchart LR
 El estado de cada fase se sigue en la [Checklist / estado del proyecto](checklist-estado-del-proyecto.md).
 
 ***
-
-## Parte web
-
-Además de la infraestructura, el proyecto incluye la web de la empresa del proyecto, una empresa de ciberseguridad que ofrece honeypots como servicio. Más información en [Parte web](parte-web/).
-
-***
-
-## Equipo
-
-* **Alex** — responsable del proyecto (recae sobre su nota); perfil técnico en redes y administración de sistemas; perfeccionista y autónomo.
-* **David** — colaborador; conocimientos de redes y seguridad reforzados con sus prácticas actuales de empresa; perfeccionista y observador.
-
-El razonamiento detrás de cómo se formó el equipo está en [Defensa del equipo](defensa-del-equipo.md).
-
-***
-
-## Punto de partida
-
-Conocimientos ya consolidados antes de empezar: VLANs, OSPF, NAT/PAT, scripting en Bash, PHP/MySQL, Python básico.
-
-Por aprender durante el proyecto: Proxmox, Docker, pfSense, Wazuh, Grafana — de ahí que exista una Fase 0 dedicada únicamente a profundizar en estos conceptos antes de instalar nada.
-
-## Próximos pasos
-
-* Seguir con [F0 — Profundización completa](../f0-profundizacion-completa/).
