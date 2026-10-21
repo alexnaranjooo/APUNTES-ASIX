@@ -39,7 +39,7 @@ El hardware se detalla en [Infraestructura física](infraestructura-fisica.md).
 
 ### Parte web
 
-* Entregar la actividad **M14UF1A2** y alojar la web de la empresa del proyecto en un servidor **nginx** (ver [Parte web](parte-web.md)).
+* Entregar la actividad **M14UF1A2** y alojar la web de la empresa del proyecto en un servidor **nginx** (ver [Parte web](parte-web/)).
 
 ### Criterios de éxito
 

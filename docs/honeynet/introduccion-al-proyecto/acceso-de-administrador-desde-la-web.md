@@ -9,7 +9,7 @@ description: >-
 
 ## Idea
 
-La web de la empresa (ver [Parte Web](parte-web.md)) tendrá un **login de administrador**. Al iniciar sesión, el administrador podrá ver los **paneles de Grafana** (gráficos y logs de ataques) sin salir de la web.
+La web de la empresa (ver [Parte Web](parte-web/)) tendrá un **login de administrador**. Al iniciar sesión, el administrador podrá ver los **paneles de Grafana** (gráficos y logs de ataques) sin salir de la web.
 
 Estado: **propuesta**, se implementa en la Fase 6, cuando Grafana ya funcione. Se asume que el servidor web va en una VLAN propia (VLAN 60), separada de los honeypots.
 

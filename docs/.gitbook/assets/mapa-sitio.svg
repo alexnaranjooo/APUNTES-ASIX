@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="460" viewBox="0 0 900 460" font-family="'Segoe UI', Arial, sans-serif">
+<defs><marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+<rect width="900" height="460" fill="#ffffff"/>
+<text x="450" y="28" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2937">Mapa del sitio de la web</text>
+<rect x="340" y="45" width="220" height="62" rx="10" fill="#e5e7eb" stroke="#374151" stroke-width="1.8"/>
+<text x="450" y="72" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2937">Vídeo principal</text>
+<text x="450" y="93" text-anchor="middle" font-size="12" fill="#4b5563">/videoprincipal</text>
+<line x1="450" y1="107" x2="450" y2="143" stroke="#6b7280" stroke-width="2" marker-end="url(#a)"/>
+<rect x="340" y="145" width="220" height="62" rx="10" fill="#dbeafe" stroke="#2e5aac" stroke-width="1.8"/>
+<text x="450" y="172" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2937">Inicio</text>
+<text x="450" y="193" text-anchor="middle" font-size="12" fill="#4b5563">/inicio</text>
+<line x1="450" y1="207" x2="135" y2="257" stroke="#6b7280" stroke-width="2" marker-end="url(#a)"/>
+<line x1="450" y1="207" x2="345" y2="257" stroke="#6b7280" stroke-width="2" marker-end="url(#a)"/>
+<line x1="450" y1="207" x2="555" y2="257" stroke="#6b7280" stroke-width="2" marker-end="url(#a)"/>
+<line x1="450" y1="207" x2="765" y2="257" stroke="#6b7280" stroke-width="2" marker-end="url(#a)"/>
+<rect x="40" y="260" width="190" height="62" rx="10" fill="#eaf1fc" stroke="#2e5aac" stroke-width="1.8"/>
+<text x="135" y="287" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2937">Sobre nosotros</text>
+<text x="135" y="308" text-anchor="middle" font-size="12" fill="#4b5563">/about-us</text>
+<rect x="250" y="260" width="190" height="62" rx="10" fill="#eaf1fc" stroke="#2e5aac" stroke-width="1.8"/>
+<text x="345" y="287" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2937">Sectores</text>
+<text x="345" y="308" text-anchor="middle" font-size="12" fill="#4b5563">/sectores</text>
+<rect x="460" y="260" width="190" height="62" rx="10" fill="#eaf1fc" stroke="#2e5aac" stroke-width="1.8"/>
+<text x="555" y="287" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2937">Planes</text>
+<text x="555" y="308" text-anchor="middle" font-size="12" fill="#4b5563">/planes</text>
+<rect x="670" y="260" width="190" height="62" rx="10" fill="#eaf1fc" stroke="#2e5aac" stroke-width="1.8"/>
+<text x="765" y="287" text-anchor="middle" font-size="15" font-weight="700" fill="#1f2937">Contacto</text>
+<text x="765" y="308" text-anchor="middle" font-size="12" fill="#4b5563">/contacto</text>
+<text x="450" y="347" text-anchor="middle" font-size="12" fill="#6b7280">La barra de navegación de Inicio se repite en todas las páginas: desde cualquiera se puede ir a las demás</text>
+<rect x="40" y="365" width="820" height="46" rx="10" fill="#f9fafb" stroke="#9ca3af" stroke-width="1.5" stroke-dasharray="7 5"/>
+<text x="450" y="386" text-anchor="middle" font-size="13" font-weight="700" fill="#6b7280">Zona de administración con login (ampliación futura)</text>
+<text x="450" y="403" text-anchor="middle" font-size="11" fill="#9ca3af">No forma parte de este mockup</text>
+<text x="860" y="445" text-anchor="end" font-size="11" fill="#6b7280">Alex Naranjo y David Álvarez</text>
+</svg>

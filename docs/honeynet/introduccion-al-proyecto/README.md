@@ -94,7 +94,7 @@ El estado de cada fase se sigue en la [Checklist / estado del proyecto](checklis
 
 ## Parte web
 
-Además de la infraestructura, el proyecto incluye la web de la empresa del proyecto, una empresa de ciberseguridad que ofrece honeypots como servicio. Más información en [Parte web](parte-web.md).
+Además de la infraestructura, el proyecto incluye la web de la empresa del proyecto, una empresa de ciberseguridad que ofrece honeypots como servicio. Más información en [Parte web](parte-web/).
 
 ***
 

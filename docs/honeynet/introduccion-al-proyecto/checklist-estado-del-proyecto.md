@@ -83,7 +83,7 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 
 ### Parte web
 
-Detalle en [Parte web](parte-web.md).
+Detalle en [Parte web](parte-web/).
 
 * [ ] Mapa del sitio
 * [ ] Mockups / wireframes con notas (a partir del mockup de Figma)

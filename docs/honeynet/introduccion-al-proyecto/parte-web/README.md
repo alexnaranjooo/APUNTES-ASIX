@@ -31,4 +31,4 @@ La web se alojará en un servidor **nginx**. Falta decidir en qué VM y en qué 
 
 * Completar los puntos de M14UF1A2 a partir del mockup de Figma.
 * Decidir el alojamiento del servidor nginx.
-* Enlazar esta página desde la [Introducción al proyecto](./).
+* Enlazar esta página desde la [Introducción al proyecto](../).
