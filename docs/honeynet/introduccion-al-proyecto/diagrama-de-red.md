@@ -2,7 +2,7 @@
 
 ### **Introducción**
 
-Esquema general de la arquitectura de **HoneyNet**: un PC con **Proxmox** (todas las VMs), un PC dedicado a **pfSense + Suricata** en hardware real, un switch **HP 1810-24**, cinco VLANs segmentadas y el flujo de tráfico permitido entre ellas. El hardware se detalla en [Infraestructura física](infraestructura-fisica.md).
+Esquema general de la arquitectura de **HoneyNet**: dos PCs con **Proxmox** (el PC 1 con pfSense + Suricata en una VM, honeypots, servidores, web y usuario; el PC 2 con el SIEM y Kali), un switch **HP 1810-24**, seis VLANs internas más la WAN y el flujo de tráfico permitido entre ellas. El hardware se detalla en [Infraestructura física](infraestructura-fisica.md).
 
 ***
 
@@ -10,55 +10,75 @@ Esquema general de la arquitectura de **HoneyNet**: un PC con **Proxmox** (todas
 
 ```mermaid
 flowchart TB
-    INTERNET(("Internet"))
+    INTERNET(("Red del centro<br/>VLAN 99 · WAN"))
 
-    subgraph WAN["VLAN 99 — WAN"]
-        KALI["Kali Linux<br/>(atacante)"]
+    PF{{"pfSense + Suricata (VM en PC 1)<br/>Firewall / Router / IDS"}}
+
+    subgraph ATK["VLAN 50 — Atacante (PC 2)"]
+        KALI["Kali Linux<br/>(solo en pruebas)"]
     end
 
-    PF{{"pfSense + Suricata (PC físico)<br/>Firewall / Router / IDS"}}
-
-    subgraph DMZ["VLAN 10 — DMZ"]
+    subgraph DMZ["VLAN 10 — DMZ (PC 1)"]
         COWRIE["Cowrie<br/>SSH / Telnet"]
         DIONAEA["Dionaea<br/>SMB / FTP / MySQL"]
         DVWA["DVWA<br/>Web vulnerable"]
     end
 
-    subgraph SRV["VLAN 20 — Servidores internos"]
+    subgraph SRV["VLAN 20 — Servidores (PC 1)"]
         DNS["Bind9 (DNS)"]
-        DHCP["isc-dhcp-server"]
-        MYSQL[("MySQL<br/>logs de ataques")]
+        DHCP["DHCP"]
+        MYSQL[("MariaDB<br/>logs de ataques")]
         BACKUP["rsync + cron<br/>(Backup)"]
     end
 
-    subgraph MGMT["VLAN 30 — Gestión"]
-        WAZUH["Wazuh (SIEM)"]
+    subgraph MGMT["VLAN 30 — Gestión (PC 2)"]
+        WAZUH["Wazuh completo (SIEM)"]
         GRAFANA["Grafana"]
     end
 
-    subgraph USERS["VLAN 40 — Usuarios"]
-        CLIENT["VM Windows/Linux<br/>(empleado simulado)"]
+    subgraph USERS["VLAN 40 — Usuarios (PC 1)"]
+        CLIENT["VM empleado simulado"]
+    end
+
+    subgraph WEB["VLAN 60 — Web (PC 1)"]
+        NGINX["nginx<br/>web de la empresa"]
     end
 
     ADMIN(("Administrador"))
 
-    INTERNET --> KALI
+    INTERNET --- PF
     KALI -- "ataques" --> PF
     PF -- "tráfico permitido" --> DMZ
     PF <--> SRV
     PF <--> MGMT
     PF <--> USERS
+    PF <--> WEB
 
     USERS -- "DNS / DHCP" --> SRV
+    USERS -- "80 / 443" --> WEB
     ADMIN -- "único acceso directo" --> MGMT
 
-    DMZ -. "logs (solo salida)" .-> MGMT
+    DMZ -. "logs 1514/1515" .-> MGMT
+    DMZ -. "MariaDB 3306" .-> SRV
     SRV -. "logs" .-> MGMT
-    USERS -. "logs" .-> MGMT
+    WEB -. "logs" .-> MGMT
 ```
 
 ***
 
 ### **Reglas de tráfico**
 
-<table data-search="false"><thead><tr><th>Origen</th><th>Destino</th><th>¿Permitido?</th><th>Motivo</th></tr></thead><tbody><tr><td>WAN (Kali)</td><td>DMZ, vía pfSense</td><td>✅ Sí</td><td>Es el tráfico que el proyecto busca atraer y capturar</td></tr><tr><td>WAN (Kali)</td><td>Servidores / Gestión / Usuarios</td><td>❌ No</td><td>pfSense nunca expone directamente las VLANs internas a la WAN</td></tr><tr><td>DMZ</td><td>Cualquier otra VLAN</td><td>❌ No (salvo logs)</td><td>Si un honeypot se compromete, debe quedar aislado</td></tr><tr><td>DMZ</td><td>Gestión</td><td>✅ Solo logs (un sentido)</td><td>Monitorización, no es tráfico de ataque</td></tr><tr><td>Servidores</td><td>Gestión</td><td>✅ Solo logs</td><td>Igual que el caso anterior</td></tr><tr><td>Usuarios</td><td>Servidores</td><td>✅ Sí</td><td>Consumo normal de DNS/DHCP</td></tr><tr><td>Usuarios</td><td>DMZ / Gestión</td><td>❌ No</td><td>Los empleados simulados no tienen motivo para tocar esas VLANs</td></tr><tr><td>Administrador</td><td>Gestión</td><td>✅ Único acceso directo</td><td>Es la VLAN más protegida de todas</td></tr></tbody></table>
+| Origen                   | Destino                         | ¿Permitido?                         | Motivo                                                             |
+| ------------------------ | ------------------------------- | ----------------------------------- | ------------------------------------------------------------------ |
+| Atacante (Kali, VLAN 50) | DMZ, vía pfSense                | ✅ Sí                                | Es el tráfico que el proyecto busca atraer y capturar              |
+| Atacante                 | Web                             | ✅ Solo 80 y 443                     | Probar el sitio de la empresa                                      |
+| Atacante                 | Servidores / Gestión / Usuarios | ❌ No                                | pfSense nunca expone directamente las VLANs internas               |
+| DMZ                      | Gestión                         | ✅ Solo logs (1514/1515, un sentido) | Monitorización, no es tráfico de ataque                            |
+| DMZ                      | Servidores                      | ✅ Solo MariaDB (3306)               | Excepción documentada, solo si se usa el plugin de MySQL de Cowrie |
+| DMZ                      | Resto de VLANs                  | ❌ No                                | Si un honeypot se compromete, debe quedar aislado                  |
+| Servidores               | Gestión                         | ✅ Solo logs                         | Igual que el caso anterior                                         |
+| Web                      | Gestión                         | ✅ Solo logs                         | Igual que el caso anterior                                         |
+| Usuarios                 | Servidores                      | ✅ DNS y DHCP                        | Consumo normal de los servicios internos                           |
+| Usuarios                 | Web                             | ✅ Solo 80 y 443                     | Visitar la web de la empresa                                       |
+| Usuarios                 | DMZ / Gestión                   | ❌ No                                | Los empleados simulados no tienen motivo para tocar esas VLANs     |
+| Administrador            | Gestión                         | ✅ Único acceso directo              | Es la VLAN más protegida de todas                                  |

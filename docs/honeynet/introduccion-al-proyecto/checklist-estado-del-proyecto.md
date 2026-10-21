@@ -8,7 +8,17 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 
 ## Resumen de estado
 
-<table data-search="false"><thead><tr><th width="76">Fase</th><th width="562">Contenido</th><th>Estado</th></tr></thead><tbody><tr><td><strong>F0</strong></td><td>Profundización: Proxmox, Docker, VLANs de seguridad, stack completo</td><td>🟡 En curso</td></tr><tr><td><strong>F1</strong></td><td>Instalación de Proxmox</td><td>🟡 En curso</td></tr><tr><td><strong>F2</strong></td><td>VLANs, switch y pfSense (+ Suricata)</td><td>⚪ Pendiente</td></tr><tr><td><strong>F3</strong></td><td>Servidores internos: DNS, DHCP, MySQL, Backup</td><td>⚪ Pendiente</td></tr><tr><td><strong>F4</strong></td><td>Honeypots: Cowrie, Dionaea, DVWA</td><td>⚪ Pendiente</td></tr><tr><td><strong>F5</strong></td><td>Wazuh (SIEM)</td><td>⚪ Pendiente</td></tr><tr><td><strong>F6</strong></td><td>Grafana, Telegram y script de respuesta automática</td><td>⚪ Pendiente</td></tr><tr><td><strong>F7</strong></td><td>Exposición controlada a internet</td><td>⚪ Pendiente</td></tr><tr><td><strong>F8</strong></td><td>Memoria y presentación</td><td>⚪ Pendiente</td></tr></tbody></table>
+| Fase   | Contenido                                                           | Estado      |
+| ------ | ------------------------------------------------------------------- | ----------- |
+| **F0** | Profundización: Proxmox, Docker, VLANs de seguridad, stack completo | ✅ Hecha     |
+| **F1** | Inventario y Proxmox en los dos PCs                                 | 🟡 En curso |
+| **F2** | VLANs, switch y pfSense (en VM) + Suricata                          | ⚪ Pendiente |
+| **F3** | Servidores internos (DNS, DHCP, MariaDB, Backup) y web              | ⚪ Pendiente |
+| **F4** | Honeypots: Cowrie, Dionaea, DVWA                                    | ⚪ Pendiente |
+| **F5** | Wazuh completo (SIEM)                                               | ⚪ Pendiente |
+| **F6** | Grafana y alertas por Telegram                                      | ⚪ Pendiente |
+| **F7** | Exposición controlada a internet (VPS)                              | ⚪ Pendiente |
+| **F8** | Memoria y presentación                                              | ⚪ Pendiente |
 
 ### Fase 0 — Profundización
 
@@ -18,32 +28,38 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 * [x] Bloque 4 — Cada servicio del stack (qué hace y por qué está ahí)
 * [x] Páginas de la Fase 0 y diagrama de red publicados en el GitBook
 
-### Fase 1 — Instalación de Proxmox
+### Fase 1 — Inventario y Proxmox en los dos PCs
 
-* [x] Preparar el PC y el medio de instalación
-* [x] Instalar Proxmox VE como sistema base
-* [x] Acceder a la interfaz web (`https://IP-DEL-PC:8006`)
-* [ ] Revisar el storage y subir las ISOs necesarias
-* [ ] Crear y probar una VM de prueba con snapshot
+* [x] Instalar Proxmox VE en el PC 1 y acceder a la interfaz web (`https://IP-DEL-PC:8006`)
+* [x] Inventario del PC 1 (i5-8500, 8 GB de RAM, SSD de 128 GB, una NIC)
+* [ ] Inventario del PC 2 (RAM, CPU, disco y tarjetas de red)
+* [ ] Preguntar al centro por escrito: salida a internet, permiso para Kali, NetBird e instalar Proxmox en el PC 2
+* [ ] Instalar Proxmox en el PC 2
+* [ ] Repositorios gratuitos y actualizar los dos nodos
+* [ ] Subir las ISOs (Debian 13, pfSense, Kali) y la plantilla de contenedor Debian 13
+* [ ] Usuario administrador propio y contraseñas fuertes
+* [ ] Plantilla de VM Debian 13 y prueba de clonado
+* [ ] Snapshots y copia programada (con una copia fuera de los PCs)
 * [ ] Configurar NetBird para trabajar en remoto
 
 ### Fase 2 — VLANs, switch y pfSense
 
-* [ ] Crear un bridge (`vmbr`) por cada VLAN
-* [ ] Configurar en el switch HP 1810-24 las VLANs 10, 20, 30, 40 y 99 y los puertos en trunk
-* [ ] Instalar pfSense en el PC físico dedicado (1 NIC)
-* [ ] Definir las VLANs sobre la única NIC de pfSense (VLAN 99 como WAN, resto en trunk)
+* [ ] Configurar en el switch HP 1810-24 las VLANs 99, 10, 20, 30, 40, 50 y 60 y los puertos en trunk
+* [ ] Pasar `vmbr0` a VLAN-aware en los dos nodos y mover la gestión a la VLAN 30
+* [ ] Crear la VM de pfSense en el PC 1 (una tarjeta con todas las VLANs, arranque automático)
+* [ ] Definir las VLANs sobre la tarjeta de pfSense (VLAN 99 como WAN) y desactivar el checksum offload
 * [ ] Escribir las reglas de firewall según la tabla de tráfico
 * [ ] Instalar y activar Suricata con reglas ET Open
 * [ ] Probar el aislamiento entre VLANs
 
-### Fase 3 — Servidores internos
+### Fase 3 — Servidores internos y web
 
-* [ ] DNS con Bind9
-* [ ] DHCP con isc-dhcp-server (VLAN de Usuarios)
-* [ ] MySQL para guardar los ataques capturados
+* [ ] LXC de servidores: DNS con Bind9
+* [ ] DHCP para la VLAN de Usuarios (con relay en pfSense)
+* [ ] MariaDB para guardar los ataques capturados
 * [ ] Backup automático con rsync + cron
 * [ ] Comprobar que la VLAN de Usuarios obtiene IP y resuelve nombres
+* [ ] LXC de web con nginx, HTTPS y endurecimiento básico
 
 ### Fase 4 — Honeypots
 
@@ -52,25 +68,25 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 * [ ] Configurar volúmenes para logs y muestras de malware
 * [ ] Atacar los honeypots desde Kali para comprobar que registran
 
-### Fase 5 — Wazuh (SIEM)
+### Fase 5 — Wazuh completo (SIEM)
 
-* [ ] Desplegar Wazuh en la VLAN de Gestión
-* [ ] Conectar los logs de Cowrie, Dionaea y Suricata
+* [ ] Desplegar Wazuh completo en la VLAN de Gestión (PC 2), con las contraseñas por defecto cambiadas
+* [ ] Conectar los logs de Cowrie, Dionaea, Suricata y la web
 * [ ] Crear reglas de correlación (por ejemplo, fuerza bruta)
+* [ ] Fijar una retención corta de datos
 * [ ] Verificar que las alertas aparecen al atacar desde Kali
 
-### Fase 6 — Grafana, Telegram y script de respuesta
+### Fase 6 — Grafana y alertas
 
-* [ ] Desplegar Grafana y conectarlo a MySQL/Wazuh
+* [ ] Desplegar Grafana y conectarlo a Wazuh y MariaDB
 * [ ] Crear dashboards y mapa de atacantes
-* [ ] Configurar alertas por Telegram
-* [ ] Script en Python: leer logs de Cowrie, consultar AbuseIPDB y guardar en MySQL
-* [ ] Bloqueo automático de IPs en pfSense vía API _(parte más ambiciosa; puede no llegar en la primera versión)_
+* [ ] Configurar alertas por Telegram desde Grafana
+* [ ] _Extra opcional:_ bloqueo automático de IPs en pfSense _(puede no llegar en la primera versión)_
 
 ### Fase 7 — Exposición a internet
 
 * [ ] Revisar y endurecer las reglas antes de exponer nada
-* [ ] Abrir la DMZ a internet de forma controlada
+* [ ] Desplegar los honeypots en la VPS y abrir el túnel VPN desde pfSense
 * [ ] Monitorizar los primeros ataques reales
 * [ ] Verificar que ningún atacante alcanza las VLANs internas
 
@@ -90,4 +106,4 @@ Detalle en [Parte web](parte-web/).
 * [x] Pruebas por perfil de usuario
 * [x] Datos por pantalla
 * [x] Webgrafía
-* [ ] Servidor nginx para alojar la web
+* [ ] Servidor nginx para alojar la web (en la Fase 3)
