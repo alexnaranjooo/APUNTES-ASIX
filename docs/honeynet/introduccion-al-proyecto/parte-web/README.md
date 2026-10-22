@@ -21,8 +21,10 @@ La actividad **M14UF1A2** incluye:
 * [x] **Datos por pantalla**.
 * [x] **Webgrafía**.
 
+El documento completo está en [Diseño y plan de producción](diseno-y-plan-de-produccion.md).
+
 ## Alojamiento
 
-La web se alojará en un servidor **nginx**. Falta decidir en qué VM y en qué VLAN se despliega.
+La web se aloja en un servidor **nginx** dentro del contenedor `ct-web`, en la **VLAN 60**. El detalle de la arquitectura, el direccionamiento y el reenvío de puertos está en el informe [A3 — Arquitectura del software](../../a3-arquitectura-del-software/).
 
 > nginx es un servidor web ligero y muy usado. Documentación oficial: [nginx.org/en/docs](https://nginx.org/en/docs/).
