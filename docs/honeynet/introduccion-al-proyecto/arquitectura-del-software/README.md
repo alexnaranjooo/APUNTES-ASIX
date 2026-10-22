@@ -41,17 +41,6 @@ flowchart LR
 
 ***
 
-## Prueba de funcionamiento «Hello world»
-
-Para comprobar que toda la infraestructura encaja, se prepara una prueba sencilla con una página «Hello world» servida por nginx:
-
-1. El cliente arranca y recibe su IP, máscara, puerta de enlace y DNS por **DHCP**.
-2. El cliente resuelve el dominio propio con el **DNS** del proyecto.
-3. Desde el **navegador del cliente** se abre la web de prueba con el dominio personalizado.
-4. Desde una máquina de la red real del centro se abre la misma web gracias al reenvío de puertos de pfSense.
-
-***
-
 ## Índice
 
 1. [Planificación y funcionalidades](1.-planificacion-y-funcionalidades.md)
