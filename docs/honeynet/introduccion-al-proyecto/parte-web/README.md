@@ -11,20 +11,20 @@ Además de la infraestructura, el proyecto incluye una **parte web**: la página
 * **Web de referencia**: `tworockets.consulting`.
 * **Mockup de baja fidelidad**: ya realizado en **Figma**.
 
-## Entregable: actividad M14UF1A2
+## Documentación del diseño
 
-La actividad **M14UF1A2** incluye:
+El diseño de la web incluye:
 
-* [x] **Mapa del sitio**.
-* [x] **Mockups / wireframes** con notas.
-* [x] **Pruebas por perfil de usuario**.
-* [x] **Datos por pantalla**.
-* [x] **Webgrafía**.
+* **Mapa del sitio**.
+* **Mockups / wireframes** con notas.
+* **Pruebas por perfil de usuario**.
+* **Datos por pantalla**.
+* **Webgrafía**.
 
-El documento completo está en [Diseño y plan de producción](diseno-y-plan-de-produccion.md).
+Todo ello está recogido en [Diseño y plan de producción](diseno-y-plan-de-produccion.md).
 
 ## Alojamiento
 
-La web se aloja en un servidor **nginx** dentro del contenedor `ct-web`, en la **VLAN 60**. El detalle de la arquitectura, el direccionamiento y el reenvío de puertos está en el informe [A3 — Arquitectura del software](../../a3-arquitectura-del-software/).
+La web se aloja en un servidor **nginx** dentro del contenedor `ct-web`, en la **VLAN 60**. El detalle de la arquitectura, el direccionamiento y el reenvío de puertos está en [Arquitectura del software](../arquitectura-del-software/).
 
 > nginx es un servidor web ligero y muy usado. Documentación oficial: [nginx.org/en/docs](https://nginx.org/en/docs/).

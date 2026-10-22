@@ -1,27 +1,8 @@
-# A3 — Arquitectura del software
+# Arquitectura del software
 
-{% hint style="info" %}
-**Formato de entrega**: URL a este informe documentado en GitBook.
-{% endhint %}
+## Objetivo de esta sección
 
-## Datos de la práctica
-
-|                     |                                                                                                    |
-| ------------------- | -------------------------------------------------------------------------------------------------- |
-| **Módulo**          | M0379 / Proyecto                                                                                   |
-| **Ciclo formativo** | ASIX 2º                                                                                            |
-| **Alumnos**         | Alex Naranjo Blázquez y David Álvarez Fernández                                                    |
-| **Proyecto**        | HoneyNet: red de laboratorio con honeypots y web de una empresa que ofrece honeypots como servicio |
-
-***
-
-## Objetivos
-
-Planificar el proyecto definiendo una calendarización detallada con:
-
-* **Objetivos** del proyecto y de cada funcionalidad.
-* **Resultados a alcanzar** y su fecha aproximada de entrega.
-* **Requisitos técnicos**, tanto de hardware como de software.
+Recoge la planificación y el diseño de la arquitectura de HoneyNet: una calendarización detallada con los objetivos, los resultados a alcanzar y los requisitos técnicos, tanto de hardware como de software.
 
 ***
 
@@ -60,29 +41,18 @@ flowchart LR
 
 ***
 
-## Demostración «Hello world»
+## Prueba de funcionamiento «Hello world»
 
-La evaluación consiste en una demostración funcional de un «Hello world» sobre la infraestructura diseñada.
-
-### Qué se va a demostrar
+Para comprobar que toda la infraestructura encaja, se prepara una prueba sencilla con una página «Hello world» servida por nginx:
 
 1. El cliente arranca y recibe su IP, máscara, puerta de enlace y DNS por **DHCP**.
 2. El cliente resuelve el dominio propio con el **DNS** del proyecto.
-3. Desde el **navegador del cliente** se abre la web de prueba servida por nginx con el dominio personalizado.
+3. Desde el **navegador del cliente** se abre la web de prueba con el dominio personalizado.
 4. Desde una máquina de la red real del centro se abre la misma web gracias al reenvío de puertos de pfSense.
-
-### Niveles de la rúbrica
-
-| Nota  | Nivel           | Qué se conseguirá                                                                          |
-| ----- | --------------- | ------------------------------------------------------------------------------------------ |
-| 2 p   | Satisfactorio   | Acceso a la web de prueba mediante dominio personalizado desde una máquina de la red real. |
-| 1,5 p | Bien            | Acceso mediante dominio personalizado desde el navegador de una máquina virtual.           |
-| 1 p   | Necesita mejora | Acceso a la web de prueba mediante `localhost` desde la máquina virtual.                   |
-| 0 p   | Insatisfactorio | No se cumple ninguno de los requisitos o no se ha realizado a tiempo.                      |
 
 ***
 
-## Índice del informe
+## Índice
 
 1. [Planificación y funcionalidades](1.-planificacion-y-funcionalidades.md)
 2. [Arquitectura del sistema](2.-arquitectura-del-sistema.md)
