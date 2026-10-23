@@ -10,13 +10,13 @@ Delimita con claridad **qué incluye** HoneyNet, **qué queda fuera a propósito
 
 * Infraestructura sobre dos PCs del centro, cada uno con **Proxmox**: el **PC 1** con pfSense + Suricata (en una VM), honeypots, servidores, web y usuario, y el **PC 2** con el SIEM y Kali. Conectados con un switch **HP 1810-24**.
 * Segmentación en seis VLANs internas (más la WAN) con **pfSense + Suricata**.
-* Servicios internos: DNS, DHCP, MariaDB y copias de seguridad.
+* Servicios internos, cada uno en su contenedor: DNS y DHCP, MariaDB y copias de seguridad.
 * Tres honeypots en Docker: **Cowrie**, **Dionaea** y **DVWA**.
 * SIEM con **Wazuh completo** y visualización con **Grafana**.
 * Alertas por **Telegram** desde Grafana.
 * Exposición **controlada** de honeypots a internet mediante una VPS.
 * Acceso remoto al laboratorio con **NetBird** (VPN).
-* Parte web del proyecto, alojada en un servidor **nginx**.
+* Parte web del proyecto, alojada en un servidor **nginx** con PHP y MariaDB, con login de administrador y paneles de Grafana incrustados.
 * Documentación completa en este GitBook, memoria y defensa.
 
 ## Fuera del alcance
@@ -26,6 +26,7 @@ Delimita con claridad **qué incluye** HoneyNet, **qué queda fuera a propósito
 * Análisis forense profundo del malware capturado (se guardan las muestras, pero no se hace ingeniería inversa).
 * El firewall físico **Juniper NetScreen-25**, prestado por el centro, queda aparcado.
 * **Bloqueo automático de IPs** en pfSense: es un extra opcional si sobra tiempo.
+* Guardar los ataques capturados en la base de datos de la web: los registra Wazuh y los muestra Grafana.
 * Atribución de los atacantes: se registran IPs y comportamiento, no se investiga quién hay detrás.
 
 ***
@@ -55,8 +56,8 @@ Delimita con claridad **qué incluye** HoneyNet, **qué queda fuera a propósito
 ## Consideraciones de seguridad
 
 * La exposición a internet se hace **solo al final** (Fase 7), desde una VPS y tras revisar y endurecer las reglas.
-* La DMZ **nunca puede iniciar conexiones** hacia otras VLANs, salvo dos flujos documentados: logs a Wazuh y MariaDB.
+* La DMZ **nunca puede iniciar conexiones** hacia otras VLANs, salvo el envío de logs a Wazuh, que está documentado.
 * Los datos capturados (IPs, sesiones, malware) se tratan como material de estudio dentro del laboratorio.
 * Las muestras de malware **no deben ejecutarse** fuera de un entorno aislado.
 
-> El razonamiento detrás de estas reglas está en Diagrama de red y en la Fase 0.
+> El razonamiento detrás de estas reglas está en Diagrama de red, en [Seguridad](arquitectura-del-software/6.-seguridad.md) y en la Fase 0.

@@ -24,8 +24,8 @@ detectar → analizar → responder → visualizar
 {% step %}
 ### **Infraestructura base**
 
-* **Proxmox** como servidor de virtualización, en un PC dedicado que aloja todas las VMs
-* **pfSense + Suricata** como cerebro de red: firewall, router y IDS a la vez, en hardware real (otro PC dedicado, con una sola tarjeta de red)
+* **Proxmox** como servidor de virtualización, en **dos PCs** del centro (dos nodos independientes, sin clúster)
+* **pfSense + Suricata** como cerebro de red: firewall, router e IDS a la vez, en una **máquina virtual** del PC 1 con una sola tarjeta de red
 * **Switch HP 1810-24** que conecta los dos PCs y transporta las VLANs
 * Segmentación en VLANs
 * Acceso remoto al laboratorio con NetBird (VPN)
@@ -54,22 +54,24 @@ detectar → analizar → responder → visualizar
 {% step %}
 ### **Empresa simulada**
 
-* DNS, DHCP, MySQL, Backup → dan credibilidad de infraestructura real
+* DNS, DHCP, MariaDB, Backup → dan credibilidad de infraestructura real, cada uno en su contenedor
 * VM de usuarios → contexto de empleados
-* Web de la empresa (honeypots como servicio) alojada en nginx
+* Web de la empresa (honeypots como servicio) alojada en nginx, con PHP y MariaDB
 {% endstep %}
 
 {% step %}
 ### Inteligencia y respuesta
 
-* Wazuh centraliza todos los logs (SIEM)
+* **Wazuh** completo centraliza todos los logs (SIEM)
+* **Grafana** los visualiza y envía las alertas por Telegram
+* El administrador de la web ve los logs y los gráficos en su panel, con login
 {% endstep %}
 
 {% step %}
 ### Riesgos a vigilar
 
 * Alcance grande para el tiempo disponible, con un equipo de solo dos personas
-* Hardware limitado y prestado por el centro (el PC de pfSense solo tiene una tarjeta de red)
+* Hardware limitado y prestado por el centro (8 GB de RAM y un SSD de 128 GB por PC, sin posibilidad de ampliar)
 {% endstep %}
 {% endstepper %}
 

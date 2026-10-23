@@ -16,7 +16,7 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 | **F3** | Servidores internos (DNS, DHCP, MariaDB, Backup) y web              | ⚪ Pendiente |
 | **F4** | Honeypots: Cowrie, Dionaea, DVWA                                    | ⚪ Pendiente |
 | **F5** | Wazuh completo (SIEM)                                               | ⚪ Pendiente |
-| **F6** | Grafana y alertas por Telegram                                      | ⚪ Pendiente |
+| **F6** | Grafana, alertas por Telegram y paneles en la web                   | ⚪ Pendiente |
 | **F7** | Exposición controlada a internet (VPS)                              | ⚪ Pendiente |
 | **F8** | Memoria y presentación                                              | ⚪ Pendiente |
 
@@ -48,18 +48,17 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 * [ ] Pasar `vmbr0` a VLAN-aware en los dos nodos y mover la gestión a la VLAN 30
 * [ ] Crear la VM de pfSense en el PC 1 (una tarjeta con todas las VLANs, arranque automático)
 * [ ] Definir las VLANs sobre la tarjeta de pfSense (VLAN 99 como WAN) y desactivar el checksum offload
-* [ ] Escribir las reglas de firewall según la tabla de tráfico
+* [ ] Escribir las reglas de firewall según la tabla de tráfico de [Seguridad](arquitectura-del-software/6.-seguridad.md)
 * [ ] Instalar y activar Suricata con reglas ET Open
 * [ ] Probar el aislamiento entre VLANs
 
 ### Fase 3 — Servidores internos y web
 
-* [ ] LXC de servidores: DNS con Bind9
-* [ ] DHCP para la VLAN de Usuarios (con relay en pfSense)
-* [ ] MariaDB para guardar los ataques capturados
-* [ ] Backup automático con rsync + cron
-* [ ] Comprobar que la VLAN de Usuarios obtiene IP y resuelve nombres
-* [ ] LXC de web con nginx, HTTPS y endurecimiento básico
+* [ ] `ct-dns-dhcp`: Bind9 (zona `honeypot.lan`) y DHCP para la VLAN de Usuarios, con relay en pfSense
+* [ ] `ct-db`: MariaDB con el esquema `honeypot_web` y el usuario `web_app` con permisos mínimos
+* [ ] `ct-backup`: copias automáticas con rsync + cron
+* [ ] `ct-web`: nginx + PHP-FPM, HTTPS, UFW y SSH con claves
+* [ ] Comprobar que la VLAN de Usuarios obtiene IP, resuelve nombres y abre la web (prueba «Hello world»)
 
 ### Fase 4 — Honeypots
 
@@ -76,11 +75,13 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 * [ ] Fijar una retención corta de datos
 * [ ] Verificar que las alertas aparecen al atacar desde Kali
 
-### Fase 6 — Grafana y alertas
+### Fase 6 — Grafana, alertas y paneles en la web
 
-* [ ] Desplegar Grafana y conectarlo a Wazuh y MariaDB
-* [ ] Crear dashboards y mapa de atacantes
+* [ ] Desplegar Grafana y conectarlo a Wazuh
+* [ ] Crear dashboards, tabla de logs y mapa de atacantes
 * [ ] Configurar alertas por Telegram desde Grafana
+* [ ] Incrustar los paneles en `/admin` mediante el proxy de nginx, con la excepción Web → Grafana en pfSense
+* [ ] Probar el login de administrador y que `/admin` solo responde desde la red interna
 * [ ] _Extra opcional:_ bloqueo automático de IPs en pfSense _(puede no llegar en la primera versión)_
 
 ### Fase 7 — Exposición a internet
@@ -99,11 +100,13 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 
 ### Parte web
 
-Detalle en [Parte web](parte-web/).
+Detalle en [Parte web](parte-web/) y en [Arquitectura del software](arquitectura-del-software/).
 
 * [x] Mapa del sitio
 * [x] Mockups / wireframes con notas (a partir del mockup de Figma)
 * [x] Pruebas por perfil de usuario
 * [x] Datos por pantalla
 * [x] Webgrafía
+* [x] Arquitectura del software documentada (requisitos, sistema, base de datos, UI/UX, infraestructura y seguridad)
 * [ ] Servidor nginx para alojar la web (en la Fase 3)
+* [ ] Login de administrador y panel `/admin` (en la Fase 6)

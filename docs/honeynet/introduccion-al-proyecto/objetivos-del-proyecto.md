@@ -14,8 +14,8 @@ Diseñar, desplegar y documentar una **red de laboratorio segmentada** capaz de 
 
 ### Infraestructura
 
-* Montar **Proxmox** en un PC dedicado como base de todas las VMs del laboratorio.
-* Segmentar la red en **cinco VLANs** (DMZ, Servidores, Gestión, Usuarios y WAN) con **pfSense + Suricata** como firewall, router e IDS en un segundo PC, conectado al primero mediante un switch **HP 1810-24**.
+* Montar **Proxmox** en dos PCs del centro, como base de todas las VMs y contenedores del laboratorio.
+* Segmentar la red en **seis VLANs internas** (DMZ, Servidores, Gestión, Usuarios, Atacante y Web) más la WAN, con **pfSense + Suricata** (en una VM) como firewall, router e IDS, conectado todo mediante un switch **HP 1810-24**.
 * Aplicar **defensa en profundidad**: que comprometer una pieza no dé acceso a las demás.
 
 El hardware se detalla en [Infraestructura física](infraestructura-fisica.md).
@@ -28,28 +28,29 @@ El hardware se detalla en [Infraestructura física](infraestructura-fisica.md).
 
 ### Análisis y visualización
 
-* Centralizar y correlacionar eventos con **Wazuh**.
-* Guardar cada ataque en **MySQL** para poder consultarlos de forma estructurada.
-* Visualizar los datos con **Grafana** (dashboards y mapa de atacantes).
+* Centralizar y correlacionar eventos con **Wazuh** (completo, con su panel).
+* Visualizar los datos con **Grafana** (dashboards, tabla de logs y mapa de atacantes) a partir de Wazuh.
 
-### Automatización
+### Alertas y automatización
 
-* Enviar alertas por **Telegram**.
-* Desarrollar un **script en Python** que lea los logs de Cowrie, consulte AbuseIPDB, guarde los datos en MySQL y bloquee IPs en pfSense vía API.
+* Enviar alertas por **Telegram** desde Grafana.
+* _Extra opcional:_ un **script en Python** que consulte AbuseIPDB y bloquee IPs en pfSense vía API.
 
 ### Parte web
 
-* Entregar la actividad **M14UF1A2** y alojar la web de la empresa del proyecto en un servidor **nginx** (ver [Parte web](parte-web/)).
+* Entregar la actividad **M14UF1A2** y alojar la web de la empresa del proyecto en un servidor **nginx** con PHP y **MariaDB** (ver [Parte web](parte-web/) y [Arquitectura del software](arquitectura-del-software/)).
+* Ofrecer un **login de administrador** desde el que ver los logs y los gráficos de Grafana de forma segura.
 
 ### Criterios de éxito
 
 El proyecto se considerará logrado si:
 
-* [ ] Las cinco VLANs están operativas y el aislamiento entre ellas se ha **probado** (por ejemplo, desde Kali).
+* [ ] Las seis VLANs internas y la WAN están operativas y el aislamiento entre ellas se ha **probado** (por ejemplo, desde Kali).
 * [ ] Los tres honeypots registran ataques y los logs llegan a Wazuh.
 * [ ] Wazuh genera alertas de correlación (como fuerza bruta) ante ataques de prueba.
 * [ ] Grafana muestra datos reales de los ataques capturados.
-* [ ] Se ha expuesto la DMZ a internet de forma controlada y **ningún atacante ha alcanzado las VLANs internas**.
+* [ ] La web funciona y el administrador ve los logs y gráficos solo tras iniciar sesión y desde la red interna.
+* [ ] Se han capturado ataques reales de forma controlada (desde una VPS) y **ningún atacante ha alcanzado las VLANs internas**.
 * [ ] Toda la arquitectura está documentada y justificada.
 
-> El script de respuesta automática (bloqueo de IPs vía API) es el objetivo más ambicioso. Su estado y por qué puede quedar fuera de la primera versión se explican en [Alcance y limitaciones](alcance-y-limitaciones.md).
+> El bloqueo automático de IPs vía API es un extra opcional y el objetivo más ambicioso. Su estado y por qué puede quedar fuera de la primera versión se explican en [Alcance y limitaciones](alcance-y-limitaciones.md).

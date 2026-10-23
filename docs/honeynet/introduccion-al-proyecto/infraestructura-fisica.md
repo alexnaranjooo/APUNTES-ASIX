@@ -99,15 +99,15 @@ sequenceDiagram
 
 **PC 1** (unos 7,6 GB de RAM y 54 GB para máquinas)
 
-| Máquina                                 | Tipo    | RAM           | Disco       |
-| --------------------------------------- | ------- | ------------- | ----------- |
-| Proxmox                                 | Sistema | 1,4 GB        | —           |
-| pfSense con Suricata                    | VM      | 2 GB          | 10 GB       |
-| Honeypots (Docker)                      | VM      | 1 GB          | 10 GB       |
-| Servidores (DNS, DHCP, MariaDB, backup) | LXC     | 0,5 GB        | 6 GB        |
-| Web (nginx)                             | LXC     | 0,15 GB       | 2 GB        |
-| Usuario                                 | VM      | 1 GB          | 10 GB       |
-| **Total**                               |         | **≈ 6,05 GB** | **≈ 38 GB** |
+| Máquina                                          | Tipo    | RAM           | Disco       |
+| ------------------------------------------------ | ------- | ------------- | ----------- |
+| Proxmox                                          | Sistema | 1,4 GB        | —           |
+| pfSense con Suricata                             | VM      | 2 GB          | 10 GB       |
+| Honeypots (Docker)                               | VM      | 1 GB          | 10 GB       |
+| Servidores: `ct-dns-dhcp`, `ct-db` y `ct-backup` | 3 LXC   | 0,5 GB        | 6 GB        |
+| Web (`ct-web`: nginx + PHP-FPM)                  | LXC     | 0,25 GB       | 2 GB        |
+| Cliente                                          | VM      | 1 GB          | 10 GB       |
+| **Total**                                        |         | **≈ 6,15 GB** | **≈ 38 GB** |
 
 **PC 2** (suponiendo el mismo hardware que el PC 1)
 
@@ -124,9 +124,9 @@ sequenceDiagram
 
 * **Dos Proxmox independientes**, uno por PC, sin clúster. Cada uno gestiona sus máquinas.
 * **pfSense + Suricata va en una VM** del PC 1. Antes iba en hardware real, pero el PC dedicado casi no usaba su memoria y la RAM total era insuficiente.
-* **Wazuh completo** (manager, indexador y panel) con **Grafana**, en el PC 2, con retención corta de datos.
-* **Kali en el PC 2** y encendida solo durante las pruebas. La **VM de usuario** va en el PC 1.
-* Servicios internos en **un solo contenedor LXC** para ahorrar memoria.
+* **Wazuh completo** (manager, indexador y panel) con **Grafana**, en el PC 2, con retención corta de datos. Los ataques se guardan en Wazuh y se ven en Grafana, no en la base de datos de la web.
+* **Kali en el PC 2** y encendida solo durante las pruebas. El **cliente** va en el PC 1.
+* Servicios internos en **tres contenedores LXC** (DNS y DHCP, base de datos y copias), más uno para la web, para ahorrar memoria y separar privilegios.
 * **WAN como VLAN 99**, **VLAN 50** para el atacante y **VLAN 60** para la web.
 * El **NetScreen-25 queda aparcado**: no forma parte de la arquitectura.
 * **No hay portátil de administración fijo**: se administra desde un puerto del switch en la VLAN 30.
