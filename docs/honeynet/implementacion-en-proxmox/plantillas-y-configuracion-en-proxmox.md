@@ -70,9 +70,7 @@ pveversion
 
 `apt update` no debe mostrar errores `401` y `pveversion` debe indicar una versión 9.x.
 
-{% hint style="info" %}
-CAPTURA PENDIENTE: pantalla de _Repositories_ con el repositorio gratuito activo y los de pago desactivados.
-{% endhint %}
+<figure><img src="../../.gitbook/assets/image (39).png" alt=""><figcaption></figcaption></figure>
 
 ### 2.3 Usuario administrador propio
 
@@ -99,9 +97,7 @@ CAPTURA PENDIENTE: pantalla de _Repositories_ con el repositorio gratuito activo
 
 Se descarga en el portátil desde pfsense.org en formato **ISO (DVD)**, se descomprime, se comprueba el hash con `certutil -hashfile fichero.iso SHA256` y se sube con **Upload**. No se usa en la práctica, pero se deja preparada para la Fase 2.
 
-{% hint style="info" %}
-CAPTURA PENDIENTE: listas de _ISO Images_ y de _CT Templates_ con lo descargado.
-{% endhint %}
+
 
 ***
 

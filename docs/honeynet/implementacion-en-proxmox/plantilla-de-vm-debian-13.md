@@ -12,6 +12,8 @@ Continuación de [Plantillas y configuración en Proxmox](plantillas-y-configura
 
 ***
 
+<figure><img src="../../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
+
 ## 1. Crear la VM
 
 Se pulsa **Create VM** y se rellenan las pestañas:
