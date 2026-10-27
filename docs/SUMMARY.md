@@ -32,3 +32,8 @@
   * [0️⃣ F0 — Profundización completa](honeynet/f0-profundizacion-completa/README.md)
     * [Bloque 1 — Proxmox](honeynet/f0-profundizacion-completa/bloque-1-proxmox.md)
     * [Bloque 2 — Docker](honeynet/f0-profundizacion-completa/bloque-2-docker.md)
+  * [Implementación en Proxmox](honeynet/implementacion-en-proxmox/README.md)
+    * [Plantillas y configuración en Proxmox](honeynet/implementacion-en-proxmox/plantillas-y-configuracion-en-proxmox.md)
+    * [Plantilla de VM Debian 13](honeynet/implementacion-en-proxmox/plantilla-de-vm-debian-13.md)
+    * [Clones y contenedor LXC](honeynet/implementacion-en-proxmox/clones-y-contenedor-lxc.md)
+    * [Práctica: VM con nginx y contenedor LXC](honeynet/implementacion-en-proxmox/practica-vm-con-nginx-y-contenedor-lxc.md)
