@@ -30,9 +30,7 @@ Se pulsa **Create VM** y se rellenan las pestañas:
 
 Se desmarca _Start after created_ antes de terminar.
 
-{% hint style="info" %}
-CAPTURA PENDIENTE: resumen del asistente de creación de la VM.
-{% endhint %}
+<figure><img src="../../.gitbook/assets/image (42).png" alt=""><figcaption></figcaption></figure>
 
 ## 2. Instalar Debian
 

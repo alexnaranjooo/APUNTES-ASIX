@@ -35,9 +35,7 @@ hostnamectl set-hostname NOMBRE-NUEVO
 
 Además, en el fichero `hosts` (dentro de la carpeta `etc`) se sustituye el nombre antiguo, `debian13-base`, por el nuevo. Y en **Hardware → Memory** se ajusta la RAM a lo que necesite cada clon.
 
-{% hint style="info" %}
-CAPTURA PENDIENTE: la plantilla `debian13-base` en el árbol de Proxmox, con su icono de plantilla.
-{% endhint %}
+<figure><img src="../../.gitbook/assets/image (45).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -63,23 +61,6 @@ El campo **Name** de la red debe ser `eth0`, que es el nombre habitual de la int
 
 Al crearlo puede aparecer el aviso **«Systemd 257 detected. You may need to enable nesting»**. No es un error: el contenedor se crea igualmente. Si algún servicio fallara al arrancar, se activa en **Options → Features → Nesting**.
 
-***
-
-## 4. Recursos que gasta cada máquina
-
-| Máquina         | Tipo                      | RAM                | Disco |
-| --------------- | ------------------------- | ------------------ | ----- |
-| `debian13-base` | Plantilla de VM (apagada) | 0 al estar apagada | 8 GiB |
-| Clon con nginx  | VM                        | 512 MiB            | 8 GiB |
-| `ct-prueba`     | Contenedor LXC            | 256 MiB            | 2 GiB |
+<figure><img src="../../.gitbook/assets/image (44).png" alt=""><figcaption></figcaption></figure>
 
 ***
-
-## 5. Problemas frecuentes
-
-| Síntoma                                                              | Causa                                                                    | Solución                                                      |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------- |
-| `apt update` da error `401`                                          | Queda un repositorio _enterprise_ sin desactivar (a menudo el de `ceph`) | Revisar la pantalla de _Repositories_                         |
-| El clon no tiene red o repite IP                                     | Falta vaciar `/etc/machine-id` en la plantilla                           | Repetir la limpieza de la plantilla y volver a clonar         |
-| El contenedor no tiene IP y `apt` dice «Temporary failure resolving» | Se cambió el nombre de la interfaz de red con el contenedor encendido    | Apagarlo del todo con **Shutdown** y volver a arrancarlo      |
-| El contenedor no resuelve nombres                                    | No tiene DNS                                                             | Rellenar **DNS** en las opciones del contenedor y reiniciarlo |
