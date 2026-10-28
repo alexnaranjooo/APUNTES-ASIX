@@ -12,11 +12,12 @@ Esta sección recoge **lo que se hace de verdad en Proxmox**, paso a paso, con l
 
 Se organiza en dos partes:
 
-**Plantillas y configuración en Proxmox:** qué es una plantilla, cómo se prepara cada tipo y qué significa cada ajuste de una máquina virtual y de un contenedor.
+**Plantillas y configuración en Proxmox:** qué es una plantilla, cómo se prepara cada tipo y qué significa cada ajuste de una máquina virtual y de un contenedor, y cómo se protegen las máquinas con copias.
 
 * [Plantillas y configuración en Proxmox](plantillas-y-configuracion-en-proxmox.md): conceptos, preparación de Proxmox y descargas.
 * [Plantilla de VM Debian 13](plantilla-de-vm-debian-13.md): creación, instalación y limpieza de la VM.
 * [Clones y contenedor LXC](clones-y-contenedor-lxc.md): plantilla, clonado y contenedor.
+* [Copias de seguridad y snapshots](copias-de-seguridad-y-snapshots.md): snapshots, copia programada, restauración de prueba y copia fuera del PC.
 
 **Práctica:** una práctica pequeña que usa esas plantillas para demostrar cómo funcionan y cómo se conectan una VM y un contenedor.
 

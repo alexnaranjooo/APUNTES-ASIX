@@ -30,16 +30,21 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 
 ### Fase 1 — Inventario y Proxmox en los dos PCs
 
+Lo que se va haciendo se documenta en [Implementación en Proxmox](../implementacion-en-proxmox/).
+
 * [x] Instalar Proxmox VE en el PC 1 y acceder a la interfaz web (`https://IP-DEL-PC:8006`)
 * [x] Inventario del PC 1 (i5-8500, 8 GB de RAM, SSD de 128 GB, una NIC)
 * [ ] Inventario del PC 2 (RAM, CPU, disco y tarjetas de red)
-* [ ] Preguntar al centro por escrito: salida a internet, permiso para Kali, NetBird e instalar Proxmox en el PC 2
+* [x] El centro permite instalar Proxmox en el PC 2
+* [ ] Preguntar al centro por escrito: salida a internet, permiso para Kali y NetBird, y quién reinicia los equipos
 * [ ] Instalar Proxmox en el PC 2
 * [ ] Repositorios gratuitos y actualizar los dos nodos
-* [ ] Subir las ISOs (Debian 13, pfSense, Kali) y la plantilla de contenedor Debian 13
+* [x] Subir las ISOs de Debian 13 y pfSense y la plantilla de contenedor Debian 13
+* [ ] Subir la ISO de Kali (en el PC 2)
 * [ ] Usuario administrador propio y contraseñas fuertes
-* [ ] Plantilla de VM Debian 13 y prueba de clonado
-* [ ] Snapshots y copia programada (con una copia fuera de los PCs)
+* [x] Plantilla de VM Debian 13 y prueba de clonado
+* [x] Práctica: VM con nginx y contenedor LXC conectados ([Práctica](../implementacion-en-proxmox/practica-vm-con-nginx-y-contenedor-lxc.md))
+* [ ] Snapshots y copia programada, con una copia fuera de los PCs ([Copias de seguridad y snapshots](../implementacion-en-proxmox/copias-de-seguridad-y-snapshots.md))
 * [ ] Configurar NetBird para trabajar en remoto
 
 ### Fase 2 — VLANs, switch y pfSense

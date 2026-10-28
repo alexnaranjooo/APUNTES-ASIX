@@ -38,4 +38,5 @@
     * [Plantillas y configuración en Proxmox](honeynet/implementacion-en-proxmox/plantillas-y-configuracion-en-proxmox.md)
     * [Plantilla de VM Debian 13](honeynet/implementacion-en-proxmox/plantilla-de-vm-debian-13.md)
     * [Clones y contenedor LXC](honeynet/implementacion-en-proxmox/clones-y-contenedor-lxc.md)
+    * [Copias de seguridad y snapshots](honeynet/implementacion-en-proxmox/copias-de-seguridad-y-snapshots.md)
     * [Práctica: VM con nginx y contenedor LXC](honeynet/implementacion-en-proxmox/practica-vm-con-nginx-y-contenedor-lxc.md)
