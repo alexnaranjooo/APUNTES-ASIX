@@ -8,17 +8,17 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 
 ## Resumen de estado
 
-| Fase   | Contenido                                                           | Estado      |
-| ------ | ------------------------------------------------------------------- | ----------- |
-| **F0** | Profundización: Proxmox, Docker, VLANs de seguridad, stack completo | ✅ Hecha     |
-| **F1** | Inventario y Proxmox en los dos PCs                                 | 🟡 En curso |
-| **F2** | VLANs, switch y pfSense (en VM) + Suricata                          | ⚪ Pendiente |
-| **F3** | Servidores internos (DNS, DHCP, MariaDB, Backup) y web              | ⚪ Pendiente |
-| **F4** | Honeypots: Cowrie, Dionaea, DVWA                                    | ⚪ Pendiente |
-| **F5** | Wazuh completo (SIEM)                                               | ⚪ Pendiente |
-| **F6** | Grafana, alertas por Telegram y paneles en la web                   | ⚪ Pendiente |
-| **F7** | Exposición controlada a internet (VPS)                              | ⚪ Pendiente |
-| **F8** | Memoria y presentación                                              | ⚪ Pendiente |
+| Fase   | Contenido                                                           | Estado                      |
+| ------ | ------------------------------------------------------------------- | --------------------------- |
+| **F0** | Profundización: Proxmox, Docker, VLANs de seguridad, stack completo | ✅ Hecha                     |
+| **F1** | Inventario y Proxmox en los dos PCs                                 | 🟡 En curso (falta el PC 2) |
+| **F2** | VLANs, switch y pfSense (en VM) + Suricata                          | ⚪ Pendiente                 |
+| **F3** | Servidores internos (DNS, DHCP, MariaDB, Backup) y web              | ⚪ Pendiente                 |
+| **F4** | Honeypots: Cowrie, Dionaea, DVWA                                    | ⚪ Pendiente                 |
+| **F5** | Wazuh completo (SIEM)                                               | ⚪ Pendiente                 |
+| **F6** | Grafana, alertas por Telegram y paneles en la web                   | ⚪ Pendiente                 |
+| **F7** | Exposición controlada a internet (VPS)                              | ⚪ Pendiente                 |
+| **F8** | Memoria y presentación                                              | ⚪ Pendiente                 |
 
 ### Fase 0 — Profundización
 
@@ -32,20 +32,28 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 
 Lo que se va haciendo se documenta en [Implementación en Proxmox](../implementacion-en-proxmox/).
 
+**PC 1**
+
 * [x] Instalar Proxmox VE en el PC 1 y acceder a la interfaz web (`https://IP-DEL-PC:8006`)
 * [x] Inventario del PC 1 (i5-8500, 8 GB de RAM, SSD de 128 GB, una NIC)
-* [ ] Inventario del PC 2 (RAM, CPU, disco y tarjetas de red)
-* [x] El centro permite instalar Proxmox en el PC 2
-* [x] Preguntar al centro: salida a internet, permiso para Kali y NetBird, y quién reinicia los equipos
-* [ ] Instalar Proxmox en el PC 2
-* [ ] Repositorios gratuitos y actualizar los dos nodos
-* [x] Subir las ISOs de Debian 13 y pfSense y la plantilla de contenedor Debian 13
-* [x] Subir la ISO de Kali
-* [ ] Usuario administrador propio y contraseñas fuertes
+* [x] Repositorios gratuitos y actualización del PC 1
+* [x] Usuario administrador propio y contraseñas fuertes
+* [x] Subir las ISOs de Debian 13, pfSense y Kali y la plantilla de contenedor Debian 13
 * [x] Plantilla de VM Debian 13 y prueba de clonado
 * [x] Práctica: VM con nginx y contenedor LXC conectados ([Práctica](../implementacion-en-proxmox/practica-vm-con-nginx-y-contenedor-lxc.md))
-* [ ] Snapshots y copia programada, con una copia fuera de los PCs ([Copias de seguridad y snapshots](../implementacion-en-proxmox/copias-de-seguridad-y-snapshots.md))
+* [x] Snapshots y copia programada, con una copia fuera de los PCs ([Copias de seguridad y snapshots](../implementacion-en-proxmox/copias-de-seguridad-y-snapshots.md))
+
+**Acceso y permisos**
+
+* [x] El centro permite instalar Proxmox en el PC 2
+* [x] Preguntas al centro resueltas (salida a internet, Kali, NetBird y reinicios)
 * [x] Configurar NetBird para trabajar en remoto
+
+**PC 2**
+
+* [ ] Inventario del PC 2 (RAM, CPU, disco y tarjetas de red)
+* [ ] Instalar Proxmox en el PC 2
+* [ ] Repositorios gratuitos, actualización y usuario administrador del PC 2
 
 ### Fase 2 — VLANs, switch y pfSense
 
