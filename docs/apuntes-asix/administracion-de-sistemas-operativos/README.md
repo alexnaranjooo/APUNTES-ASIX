@@ -45,9 +45,9 @@ Después, en la configuración de la VM, **Red → Adaptador 1** se conecta a es
 
 > **Por qué una red NAT y no la NAT normal**: la red NAT de VirtualBox permite elegir el rango de direcciones y que varias VMs se vean entre sí, además de salir a internet.
 
-<figure><img src="../.gitbook/assets/image (35).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (35).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (33).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (33).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
