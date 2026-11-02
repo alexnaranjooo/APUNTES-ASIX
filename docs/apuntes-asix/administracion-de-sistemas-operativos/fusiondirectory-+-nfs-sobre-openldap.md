@@ -4,7 +4,7 @@ Playbook de instalación y configuración de FusionDirectory (panel web de admin
 
 **Datos usados en esta guía:**
 
-* VM Debian 12 (Bookworm) o 13 (Trixie): `IP_VM` — comprueba la IP real con `ip a` antes de empezar
+* VM Debian 12 (Bookworm) o 13 (Trixie): `192.168.111.55`
 * Base DN: `dc=honeynet,dc=asix,dc=com`
 * OUs: `ou=usuarios`, `ou=grupos`
 * Grupo SOC: `soc` (gidNumber 5000)
@@ -12,7 +12,7 @@ Playbook de instalación y configuración de FusionDirectory (panel web de admin
 * Recurso NFS: `/srv/nfs/soc`, permisos `770`, grupo `soc`
 
 {% hint style="warning" %}
-Confirma la IP real de la VM con `ip a` **antes** de escribir ningún LDIF o configuración. Si usas Adaptador puente con DHCP, la IP puede no ser la que esperas.
+Si vuelves a clonar o recrear la VM, confirma la IP real con `ip a` antes de seguir, por si ha cambiado respecto a `192.168.111.55`.
 {% endhint %}
 
 ***
@@ -43,13 +43,13 @@ Respuestas del asistente:
 sudo systemctl status slapd
 ```
 
-### 0.2 Confirmar la IP real de la VM
+### 0.2 Confirmar la IP de la VM
 
 ```bash
 ip a
 ```
 
-Anota la IP de la interfaz activa. Esa es tu `IP_VM` para el resto de la guía.
+Debe coincidir con `192.168.111.55`. Si no coincide, usa la IP real que te devuelva este comando en el resto de la guía.
 
 ### 0.3 Crear estructura (OUs, grupo, usuarios)
 
@@ -150,7 +150,7 @@ domains = honeynet.asix.com
 [domain/honeynet.asix.com]
 id_provider = ldap
 auth_provider = ldap
-ldap_uri = ldap://IP_VM
+ldap_uri = ldap://192.168.111.55
 ldap_search_base = dc=honeynet,dc=asix,dc=com
 ldap_default_bind_dn = cn=admin,dc=honeynet,dc=asix,dc=com
 ldap_default_authtok_type = password
@@ -249,7 +249,7 @@ sudo fusiondirectory-schema-manager -l
 Desde el navegador del host:
 
 ```
-http://IP_VM/fusiondirectory/setup
+http://192.168.111.55/fusiondirectory/setup
 ```
 
 **Etapa 1 — Welcome/Checks.** Comprueba PHP, extensiones y permisos automáticamente. Resuelve cualquier aviso en rojo antes de continuar.
@@ -262,7 +262,7 @@ http://IP_VM/fusiondirectory/setup
 
 | Campo           | Valor                                 |
 | --------------- | ------------------------------------- |
-| LDAP URI        | `ldap://IP_VM`                        |
+| LDAP URI        | `ldap://192.168.111.55`               |
 | Base DN         | `dc=honeynet,dc=asix,dc=com`          |
 | Bind DN (admin) | `cn=admin,dc=honeynet,dc=asix,dc=com` |
 | Contraseña      | la del administrador LDAP (paso 0.1)  |
@@ -299,7 +299,7 @@ sudo mv /var/www/fusiondirectory/html/setup/setup.php /var/www/fusiondirectory/h
 ### A.5 Primer login y administración visual
 
 ```
-http://IP_VM/fusiondirectory
+http://192.168.111.55/fusiondirectory
 ```
 
 El propio asistente, en una de sus últimas etapas, permite crear o designar el primer usuario administrador con ACL completa automáticamente.
@@ -369,14 +369,14 @@ En la VM cliente:
 ```bash
 sudo apt install nfs-common -y
 sudo mkdir -p /mnt/soc
-sudo mount IP_VM:/srv/nfs/soc /mnt/soc
+sudo mount 192.168.111.55:/srv/nfs/soc /mnt/soc
 df -h | grep soc
 ```
 
 Persistente en `/etc/fstab` del cliente:
 
 ```
-IP_VM:/srv/nfs/soc  /mnt/soc  nfs  defaults  0  0
+192.168.111.55:/srv/nfs/soc  /mnt/soc  nfs  defaults  0  0
 ```
 
 ***
@@ -388,8 +388,8 @@ IP_VM:/srv/nfs/soc  /mnt/soc  nfs  defaults  0  0
 ```bash
 sudo systemctl status nfs-kernel-server
 sudo exportfs -v
-sudo showmount -e IP_VM
-rpcinfo -p IP_VM
+sudo showmount -e 192.168.111.55
+rpcinfo -p 192.168.111.55
 ```
 
 ### C.2 Prueba de segregación de acceso
