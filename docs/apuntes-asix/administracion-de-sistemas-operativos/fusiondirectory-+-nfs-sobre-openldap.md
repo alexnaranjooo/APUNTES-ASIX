@@ -155,10 +155,15 @@ ldap_search_base = dc=honeynet,dc=asix,dc=com
 ldap_default_bind_dn = cn=admin,dc=honeynet,dc=asix,dc=com
 ldap_default_authtok_type = password
 ldap_default_authtok = TU_CONTRASEÑA_ADMIN
+ldap_id_use_start_tls = False
 
 cache_credentials = true
 enumerate = true
 ```
+
+{% hint style="warning" %}
+Sin `ldap_id_use_start_tls = False`, SSSD intenta negociar TLS al conectar y falla con `Could not start TLS encryption. unsupported extension` seguido de `Backend is offline`, porque este `slapd` no tiene TLS configurado. Para este laboratorio se desactiva la exigencia de TLS; en producción se configuraría un certificado en su lugar.
+{% endhint %}
 
 ```bash
 sudo chmod 600 /etc/sssd/sssd.conf
@@ -183,6 +188,14 @@ Verificación:
 ```bash
 getent passwd analista1
 getent group soc
+```
+
+Si `getent` no devuelve nada (sin error), confirma con `sudo systemctl status sssd` si el backend aparece como `offline`, y revisa el log con `sudo tail -40 /var/log/sssd/sssd_honeynet.asix.com.log`. Si corriges `sssd.conf`, limpia la caché antes de reintentar:
+
+```bash
+sudo systemctl stop sssd
+sudo rm -rf /var/lib/sss/db/*
+sudo systemctl start sssd
 ```
 
 ***
@@ -421,10 +434,10 @@ Captura obligatoria: las dos pruebas, una debajo de otra.
 
 ### C.3 Tabla de problemas comunes
 
-| Síntoma                                           | Causa probable                                                                             | Solución                                                                                                   |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
-| `apt update` falla con el repo de FusionDirectory | Codename de Debian no coincide                                                             | Comprueba `VERSION_CODENAME` en `/etc/os-release` y corrige `/etc/apt/sources.list.d/fusiondirectory.list` |
-| No llegas a la IP de la VM desde tu navegador     | Adaptador tipo Red Interna (no alcanzable desde el host), o IP real distinta a la esperada | Verifica con `ip a` antes de escribir cualquier LDIF; usa Adaptador Puente o Solo-anfitrión                |
-| `LDAP error: No such object` en el asistente      | El Base DN o Bind DN no coincide con lo creado en `dpkg-reconfigure slapd`                 | Verifica con `ldapsearch -x -b "dc=honeynet,dc=asix,dc=com" "(objectClass=*)" -LLL`                        |
-| Pantalla de FusionDirectory en blanco tras login  | Usuario sin ACL de FusionDirectory asignada                                                | No te saltes la Etapa 5-6 del asistente web                                                                |
-| `getent group soc` vacío en el cliente            | SSSD no configurado o no reiniciado                                                        | Repetir Parte 0.4 en el cliente; `sudo systemctl restart sssd`                                             |
+| Síntoma                                           | Causa probable                                                                             | Solución                                                                                                                                                                                      |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `apt update` falla con el repo de FusionDirectory | Codename de Debian no coincide                                                             | Comprueba `VERSION_CODENAME` en `/etc/os-release` y corrige `/etc/apt/sources.list.d/fusiondirectory.list`                                                                                    |
+| No llegas a la IP de la VM desde tu navegador     | Adaptador tipo Red Interna (no alcanzable desde el host), o IP real distinta a la esperada | Verifica con `ip a` antes de escribir cualquier LDIF; usa Adaptador Puente o Solo-anfitrión                                                                                                   |
+| `LDAP error: No such object` en el asistente      | El Base DN o Bind DN no coincide con lo creado en `dpkg-reconfigure slapd`                 | Verifica con `ldapsearch -x -b "dc=honeynet,dc=asix,dc=com" "(objectClass=*)" -LLL`                                                                                                           |
+| Pantalla de FusionDirectory en blanco tras login  | Usuario sin ACL de FusionDirectory asignada                                                | No te saltes la Etapa 5-6 del asistente web                                                                                                                                                   |
+| `getent passwd`/`getent group` vacío, sin error   | Backend de SSSD offline por fallo de conexión al LDAP (IP incorrecta o TLS no soportado)   | Revisa `ldap_uri` en `sssd.conf`; si el log muestra `Could not start TLS encryption`, añade `ldap_id_use_start_tls = False`; limpia la caché con `rm -rf /var/lib/sss/db/*` y reinicia `sssd` |
