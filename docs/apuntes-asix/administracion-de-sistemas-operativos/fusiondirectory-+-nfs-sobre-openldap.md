@@ -428,17 +428,3 @@ Captura obligatoria: las dos pruebas, una debajo de otra.
 | `LDAP error: No such object` en el asistente      | El Base DN o Bind DN no coincide con lo creado en `dpkg-reconfigure slapd`                 | Verifica con `ldapsearch -x -b "dc=honeynet,dc=asix,dc=com" "(objectClass=*)" -LLL`                        |
 | Pantalla de FusionDirectory en blanco tras login  | Usuario sin ACL de FusionDirectory asignada                                                | No te saltes la Etapa 5-6 del asistente web                                                                |
 | `getent group soc` vacío en el cliente            | SSSD no configurado o no reiniciado                                                        | Repetir Parte 0.4 en el cliente; `sudo systemctl restart sssd`                                             |
-
-***
-
-## Resumen de evidencias para la entrega
-
-1. `sudo systemctl status slapd` → activo
-2. `ldapsearch -x -b "dc=honeynet,dc=asix,dc=com" "(objectClass=*)" -LLL` → estructura completa
-3. `getent passwd analista1` y `getent group soc` → NSS/SSSD funcionando
-4. `php -m | grep -i ldap` → extensión activa
-5. Las 6 etapas del asistente web de FusionDirectory, una captura por etapa
-6. Panel de FusionDirectory con usuarios y grupo `soc` visibles
-7. `ls -ld /srv/nfs/soc` → permisos `770`
-8. `exportfs -v` y `showmount -e IP_VM`
-9. Las dos pruebas de segregación de acceso (Caso 1 y Caso 2)
