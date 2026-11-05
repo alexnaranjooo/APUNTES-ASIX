@@ -1,10 +1,10 @@
 # Análisis y Seguridad del Servicio DHCP
 
-### 1. Fundamentos y Funcionamiento del Protocolo DHCP <a href="#id-1-fundamentos-y-funcionamiento-del-protocolo-dhcp" id="id-1-fundamentos-y-funcionamiento-del-protocolo-dhcp"></a>
+### _<mark style="color:$danger;">**1. Fundamentos y Funcionamiento del Protocolo DHCP**</mark>_ <a href="#id-1-fundamentos-y-funcionamiento-del-protocolo-dhcp" id="id-1-fundamentos-y-funcionamiento-del-protocolo-dhcp"></a>
 
 #### El Proceso DORA (¿Cómo pedimos una IP?) <a href="#el-proceso-dora-como-pedimos-una-ip" id="el-proceso-dora-como-pedimos-una-ip"></a>
 
-El protocolo DHCP sirve para asignar direcciones IP de forma automática a los equipos que se conectan a una red. Para conseguir una IP, el ordenador cliente y el servidor hablan mediante 4 pasos sencillos conocidos como **DORA**:
+El protocolo DHCP sirve para asignar direcciones IP de forma automática a los equipos que se conectan a una red. Para conseguir una IP, el ordenador cliente y el servidor hablan mediante          4 pasos sencillos conocidos como **DORA**:
 
 1. **Discover (Descubrimiento):** El ordenador acaba de conectarse y no sabe en qué red está ni quién es el servidor. Envía un mensaje "a grito pelado" (Broadcast) a toda la red diciendo: _"¡Hola! ¿Hay algún servidor DHCP por aquí? Necesito una IP"_.
 2. **Offer (Oferta):** El servidor DHCP escucha el grito y responde: _"Hola, tengo libre la IP 192.168.1.50, ¿te va bien?"_.
@@ -46,7 +46,7 @@ El estándar original de DHCP (RFC 2131) **no tiene ninguna contraseña ni forma
 
 ***
 
-### 2. Ataques: Agotamiento de IPs (DHCP Starvation) <a href="#id-2-ataques-agotamiento-de-ips-dhcp-starvation" id="id-2-ataques-agotamiento-de-ips-dhcp-starvation"></a>
+### _<mark style="color:$danger;">**2. Ataques: Agotamiento de IPs (DHCP Starvation)**</mark>_ <a href="#id-2-ataques-agotamiento-de-ips-dhcp-starvation" id="id-2-ataques-agotamiento-de-ips-dhcp-starvation"></a>
 
 #### ¿Cómo funciona el ataque? <a href="#como-funciona-el-ataque" id="como-funciona-el-ataque"></a>
 
@@ -92,7 +92,7 @@ Cuando el servidor se queda sin IPs, si un usuario intenta conectarse a la red, 
 
 ***
 
-### 3. Defensas y Protección (Hardening) <a href="#id-3-defensas-y-proteccion-hardening" id="id-3-defensas-y-proteccion-hardening"></a>
+### _<mark style="color:$danger;">**3. Defensas y Protección (Hardening)**</mark>_ <a href="#id-3-defensas-y-proteccion-hardening" id="id-3-defensas-y-proteccion-hardening"></a>
 
 #### Solución en la infraestructura (En los Switches) <a href="#solucion-en-la-infraestructura-en-los-switches" id="solucion-en-la-infraestructura-en-los-switches"></a>
 
@@ -148,7 +148,7 @@ Mientras que `iptables` mira direcciones IP, `ebtables` trabaja revisando las tr
 
 ***
 
-### 4. Entorno Virtual y Consideraciones Legales <a href="#id-4-entorno-virtual-y-consideraciones-legales" id="id-4-entorno-virtual-y-consideraciones-legales"></a>
+### _<mark style="color:$danger;">**4. Entorno Virtual y Consideraciones Legales**</mark>_ <a href="#id-4-entorno-virtual-y-consideraciones-legales" id="id-4-entorno-virtual-y-consideraciones-legales"></a>
 
 #### El Modo Promiscuo en VirtualBox <a href="#el-modo-promiscuo-en-virtualbox" id="el-modo-promiscuo-en-virtualbox"></a>
 

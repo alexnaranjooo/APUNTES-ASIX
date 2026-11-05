@@ -4,7 +4,7 @@ description: Aquí podremos ver aspectos principales de la seguridad.
 
 # Aspectos Principales
 
-### Introducción
+### _<mark style="color:$danger;">**Introducción**</mark>_
 
 La **seguridad informática** es el conjunto de medidas y procedimientos orientados a proteger los sistemas informáticos frente a posibles ataques y daños, ya sean intencionados o accidentales. Estos ataques pueden dirigirse contra el **hardware**, el **software** o los **datos** de una organización.
 
@@ -17,7 +17,7 @@ Esta página recoge los apuntes de la unidad de seguridad: mecanismos de protecc
 
 ***
 
-### Mecanismos de seguridad de un sistema informático
+### _<mark style="color:$danger;">**Mecanismos de seguridad de un sistema informático**</mark>_
 
 Son los procedimientos que se llevan a cabo para garantizar la seguridad del sistema. Se agrupan en cuatro fases:
 
@@ -26,7 +26,7 @@ Son los procedimientos que se llevan a cabo para garantizar la seguridad del sis
 3. **Restauración** — recuperación del sistema mediante copias de seguridad, instantáneas (snapshots), etc.
 4. **Análisis forense** — determinar qué acciones ha realizado el atacante, con el objetivo de blindar el sistema ante ataques futuros.
 
-### Aspectos que incluye la seguridad
+#### _**Aspectos que incluye la seguridad**_
 
 * **CID**: confidencialidad, integridad y disponibilidad.
 * Seguridad **física** y **lógica**.
@@ -45,64 +45,68 @@ Son los procedimientos que se llevan a cabo para garantizar la seguridad del sis
 > 6. Seguridad lógica (listas de control de acceso, políticas de contraseñas, políticas de almacenamiento, copias de seguridad, medios de almacenamiento)
 > 7. Análisis forense en sistemas informáticos
 
+<figure><img src="../../.gitbook/assets/image (50).png" alt=""><figcaption></figcaption></figure>
+
 ***
 
-### Confidencialidad, integridad y disponibilidad (CID)
+### <mark style="color:$danger;">**Confidencialidad, integridad y disponibilidad (CID)**</mark>
 
-#### Confidencialidad
+#### _**Confidencialidad**_
 
 El acceso a la información se produce **solo por personas autorizadas**, estableciendo relaciones de confianza y seguridad en las comunicaciones.
 
 * **Ejemplo**: cifrar un email para que solo el destinatario pueda leerlo.
 * **Técnicas**: contraseñas seguras, cifrado, control de accesos, autenticación.
 
-#### Disponibilidad
+#### _**Disponibilidad**_
 
 Asegura que la información y los sistemas estén **accesibles cuando se necesitan**, evitando interrupciones.
 
 * **Ejemplo**: la web de un banco debe estar operativa 24/7 sin caídas.
 * **Técnicas**: copias de seguridad, redundancia, balanceo de carga, protección frente a ataques DoS/DDoS.
 
-#### Integridad
+#### _**Integridad**_
 
 Garantiza que la información **no sea alterada de manera indebida**, ya sea por accidente o por un ataque.
 
 * **Ejemplo**: verificar mediante un hash que la ISO de un sistema operativo descargada no ha sido manipulada.
 * **Técnicas**: sumas de verificación, firmas digitales, control de versiones.
 
+<figure><img src="../../.gitbook/assets/image (51).png" alt=""><figcaption></figcaption></figure>
+
 ***
 
-### Elementos vulnerables
+### _<mark style="color:$danger;">**Elementos vulnerables**</mark>_
 
-#### Hardware
+#### _**Hardware**_
 
 * Servidores, PC, routers, switches, firewalls.
 * Discos duros, SSD, NAS.
 * Dispositivos móviles: portátiles, smartphones.
 * **Riesgos**: robos, fallos eléctricos, incendios, humedad, manipulación física.
 
-#### Software
+#### _**Software**_
 
 * Sistemas operativos.
 * Aplicaciones de usuario.
 * Software de red: protocolos, servicios de correo, bases de datos, servidores web.
 * **Riesgos**: errores de programación, falta de actualizaciones, malware, configuraciones inseguras.
 
-#### Datos
+#### _**Datos**_
 
 * Archivos confidenciales.
 * Bases de datos.
 * Información en tránsito por la red: mensajes, contraseñas, emails.
 * **Riesgos**: pérdidas, corrupción, robo, alteraciones, interceptación en la red.
 
-#### Red
+#### _**Red**_
 
 * Conexiones a Internet.
 * Redes internas (LAN, WLAN).
 * Dispositivos de comunicación: antenas, puntos de acceso Wi-Fi.
 * **Riesgo principal**: acceso no autorizado.
 
-#### Usuarios
+#### _**Usuarios**_
 
 * Administradores del sistema.
 * Empleados con acceso a información sensible.
@@ -114,9 +118,11 @@ Garantiza que la información **no sea alterada de manera indebida**, ya sea por
 > * **Medidas preventivas (seguridad activa)**: evitan que se produzca el daño en el sistema (actualizaciones automáticas/parches, protección de S.O. y aplicaciones).
 > * **Medidas correctivas (seguridad pasiva)**: minimizan los daños una vez producido el incidente.
 
+<figure><img src="../../.gitbook/assets/image (52).png" alt="" width="544"><figcaption></figcaption></figure>
+
 ***
 
-### Vulnerabilidades
+### _<mark style="color:$danger;">**Vulnerabilidades**</mark>_
 
 Aunque suelen asociarse solo al software, una vulnerabilidad puede tener consecuencias graves:
 
@@ -132,18 +138,20 @@ Todas las vulnerabilidades detectadas se publican en informes **CVE** (_Common V
 * **Inyecciones SQL** (_SQL injection_): afectan a aplicaciones basadas en bases de datos.
 * **HTML/JS injects**: otro tipo de ataque común en aplicaciones web.
 
+<figure><img src="../../.gitbook/assets/image (53).png" alt="" width="542"><figcaption></figcaption></figure>
+
 ***
 
-### Amenazas y medidas de seguridad física (seguridad pasiva)
+### _<mark style="color:$danger;">**Amenazas y medidas de seguridad física (seguridad pasiva)**</mark>_
 
-#### Amenazas físicas
+#### _**Amenazas físicas**_
 
 * Cortes de suministro, robos, incendios, desastres atmosféricos.
 * Condiciones adversas: temperaturas extremas, humedad excesiva, inundaciones, terremotos.
 
 **Consecuencias**: falta de disponibilidad de servicios, pérdida de información, pérdida o mal funcionamiento del hardware.
 
-#### Barreras y protecciones físicas
+#### _**Barreras y protecciones físicas**_
 
 * Servidores cerrados con llave y acceso restringido.
 * Controles de acceso con tarjeta, guardia de seguridad o biometría.
@@ -152,7 +160,7 @@ Todas las vulnerabilidades detectadas se publican en informes **CVE** (_Common V
 
 > **Nota**: no se deben ubicar los centros de datos en plantas bajas o sótanos, por el riesgo de inundación.
 
-#### Medidas en CPD y grandes organizaciones
+#### _**Medidas en CPD y grandes organizaciones**_
 
 * **SAI** (Sistema de Alimentación Ininterrumpida) y generadores eléctricos.
 * Fuentes de alimentación redundantes.
@@ -161,23 +169,25 @@ Todas las vulnerabilidades detectadas se publican en informes **CVE** (_Common V
 * **Alta disponibilidad y monitorización**: objetivo típico de 99,99 %, servicio 24x7x365.
 * Redundancia y diversificación: almacenamiento externo de datos, tomas eléctricas independientes, telecomunicaciones con balanceo de carga.
 
-#### La sala fría
+#### _**La sala fría**_
 
 1. Concentra los grandes servidores, con sistema propio de refrigeración (**21–23 ºC** y humedad relativa entre **40 % y 60 %**).
 2. Medidas estrictas de control de acceso físico.
 3. Sistemas de extinción de incendios.
 
+<figure><img src="../../.gitbook/assets/image (54).png" alt="" width="563"><figcaption></figcaption></figure>
+
 ***
 
-### Amenazas y medidas de seguridad lógica (seguridad pasiva)
+### _<mark style="color:$danger;">**Amenazas y medidas de seguridad lógica (seguridad pasiva)**</mark>_
 
-#### Amenazas lógicas
+#### _**Amenazas lógicas**_
 
 Virus, ataques DoS, phishing y troyanos son ejemplos de amenazas lógicas que pueden descargarse o propagarse por la red, afectando no solo a un dispositivo sino a toda la infraestructura.
 
 La instalación de programas no testeados puede provocar **desbordamientos de búfer** (_buffer overflow_) y condiciones de carrera, permitiendo a un atacante obtener privilegios y leer o escribir ficheros protegidos.
 
-#### Medidas lógicas principales
+#### _**Medidas lógicas principales**_
 
 * Limitar el acceso a programas y archivos.
 * Restringir el acceso a datos según el usuario: claves de acceso, listas de control de acceso, roles, firewalls.
@@ -190,9 +200,11 @@ La instalación de programas no testeados puede provocar **desbordamientos de b�
 * Actualizaciones y filtrado de conexiones en aplicaciones de red.
 * Software antimalware.
 
+<figure><img src="../../.gitbook/assets/image (55).png" alt="" width="450"><figcaption></figcaption></figure>
+
 ***
 
-### Seguridad de la red
+### _<mark style="color:$danger;">**Seguridad de la red**</mark>_
 
 Para defender una red primero hay que entender de qué está compuesta, cómo se comunican sus elementos y cuál es su arquitectura. Las áreas clave son:
 
@@ -201,31 +213,24 @@ Para defender una red primero hay que entender de qué está compuesta, cómo se
 * **Defensa en profundidad** (_Defense in Depth_, DiD).
 * **Privilegios mínimos** desde el diseño.
 
-#### Amenazas y medidas por capa OSI
+#### _**Amenazas y medidas por capa OSI**_
 
-| Capa OSI            | Amenaza                                                                                                                         | Medida                                                                                                                       |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| **Física**          | _Sniffing_: interceptación de señales físicas (cables, Wi-Fi) para capturar datos sin cifrar (ej. Wireshark). Robo de cables.   | Cifrado robusto como **WPA3** en redes Wi-Fi. Fibra óptica en tubos sellados con gas inerte a presión (uso militar).         |
-| **Enlace de datos** | Suplantación de direcciones **MAC** para evitar el control de acceso (ej. _ARP spoofing_ para redirigir tráfico).               | Configuraciones **anti-spoofing** y detección de ataques ARP/DHCP. Uso de **VLAN** para segmentar la red.                    |
-| **Red**             | **Man in the Middle**: interceptar o modificar el tráfico entre dos dispositivos (ej. redes Wi-Fi abiertas o mal configuradas). | Uso de **VPN** para cifrar la información en redes vulnerables o monitorizadas.                                              |
-| **Transporte**      | Escaneo de puertos y ataques de denegación de servicio (ej. **Nmap**, usado tanto en hacking ético como malicioso).             | Auditar puertos y protocolos expuestos. Uso de **firewalls** (filtrado de paquetes, de red o de nueva generación) y **IDS**. |
-| **Sesión**          | _**Hijacking**_: secuestro de sesión activa (ej. robo de cookies de sesión).                                                    | Tokens de sesión seguros o de un solo uso. Autenticación multifactor (**MFA**).                                              |
-| **Presentación**    | **Phishing**: obtención de información mediante engaño e ingeniería social (ej. emails falsos).                                 | Formación de usuarios y herramientas de filtrado/anti-phishing.                                                              |
-| **Aplicación**      | **Exploits**: aprovechamiento de vulnerabilidades en aplicaciones (ej. explotación de CVE en software desactualizado).          | Mantener el software actualizado y usar soluciones antimalware contra vulnerabilidades de día cero.                          |
-| **Factor humano**   | Malas configuraciones, contraseñas débiles, caídas por error humano, falta de formación en ciberseguridad.                      | Formación continua y concienciación en ciberseguridad.                                                                       |
+<table><thead><tr><th width="154">Capa OSI</th><th width="296">Amenaza</th><th>Medida</th></tr></thead><tbody><tr><td><strong>Física</strong></td><td><em>Sniffing</em>: interceptación de señales físicas (cables, Wi-Fi) para capturar datos sin cifrar (ej. Wireshark). Robo de cables.</td><td>Cifrado robusto como <strong>WPA3</strong> en redes Wi-Fi. Fibra óptica en tubos sellados con gas inerte a presión (uso militar).</td></tr><tr><td><strong>Enlace de datos</strong></td><td>Suplantación de direcciones <strong>MAC</strong> para evitar el control de acceso (ej. <em>ARP spoofing</em> para redirigir tráfico).</td><td>Configuraciones <strong>anti-spoofing</strong> y detección de ataques ARP/DHCP. Uso de <strong>VLAN</strong> para segmentar la red.</td></tr><tr><td><strong>Red</strong></td><td><strong>Man in the Middle</strong>: interceptar o modificar el tráfico entre dos dispositivos (ej. redes Wi-Fi abiertas o mal configuradas).</td><td>Uso de <strong>VPN</strong> para cifrar la información en redes vulnerables o monitorizadas.</td></tr><tr><td><strong>Transporte</strong></td><td>Escaneo de puertos y ataques de denegación de servicio (ej. <strong>Nmap</strong>, usado tanto en hacking ético como malicioso).</td><td>Auditar puertos y protocolos expuestos. Uso de <strong>firewalls</strong> (filtrado de paquetes, de red o de nueva generación) y <strong>IDS</strong>.</td></tr><tr><td><strong>Sesión</strong></td><td><em><strong>Hijacking</strong></em>: secuestro de sesión activa (ej. robo de cookies de sesión).</td><td>Tokens de sesión seguros o de un solo uso. Autenticación multifactor (<strong>MFA</strong>).</td></tr><tr><td><strong>Presentación</strong></td><td><strong>Phishing</strong>: obtención de información mediante engaño e ingeniería social (ej. emails falsos).</td><td>Formación de usuarios y herramientas de filtrado/anti-phishing.</td></tr><tr><td><strong>Aplicación</strong></td><td><strong>Exploits</strong>: aprovechamiento de vulnerabilidades en aplicaciones (ej. explotación de CVE en software desactualizado).</td><td>Mantener el software actualizado y usar soluciones antimalware contra vulnerabilidades de día cero.</td></tr><tr><td><strong>Factor humano</strong></td><td>Malas configuraciones, contraseñas débiles, caídas por error humano, falta de formación en ciberseguridad.</td><td>Formación continua y concienciación en ciberseguridad.</td></tr></tbody></table>
+
+<figure><img src="../../.gitbook/assets/image (56).png" alt="" width="563"><figcaption></figcaption></figure>
 
 ***
 
-### Control de acceso
+### _<mark style="color:$danger;">**Control de acceso**</mark>_
 
-#### Autenticación vs. autorización
+#### _**Autenticación vs. autorización**_
 
 * **Autenticación**: verifica la **identidad** de un usuario en el sistema y determina si puede entrar o se queda fuera.
 * **Autorización**: determina si el usuario **puede acceder** al recurso solicitado, consultando la base de datos de autorización (mantenida por el administrador), donde se especifica el tipo de acceso de cada usuario a cada recurso.
 
 El flujo típico es: **usuario del sistema → autenticación → control de acceso → recursos del sistema** (ficheros, bases de datos, aplicaciones), todo ello validado contra la base de datos de autorización que gestiona el administrador.
 
-#### Objetos, sujetos y derechos de acceso
+#### _**Objetos, sujetos y derechos de acceso**_
 
 * **Objeto**: recurso cuyo acceso está controlado (una entidad para almacenar y/o recibir información). Ejemplos: ficheros, directorios y aplicaciones.
 * **Sujeto**: entidad capaz de acceder a un objeto, ligada al concepto de **proceso**. Habitualmente se habla de "usuarios" como sujetos, aunque en realidad el acceso se realiza a través de un proceso que representa a ese usuario o aplicación.
@@ -238,7 +243,7 @@ Un sistema de control de acceso básico define **tres clases de sujetos**:
 | **Grupo**       | Conjunto de usuarios con privilegios de acceso a determinados recursos; un usuario puede pertenecer a varios grupos. |
 | **Otros**       | Usuarios que han entrado en el sistema pero no son propietarios ni pertenecen al grupo del recurso.                  |
 
-#### Derechos de acceso
+#### _**Derechos de acceso**_
 
 * **Lectura**: visualizar información de un recurso (permite copiar o imprimir).
 * **Escritura**: agregar, modificar o eliminar datos de un recurso.
@@ -248,11 +253,11 @@ Un sistema de control de acceso básico define **tres clases de sujetos**:
 
 ***
 
-### Listas de control de acceso (ACL)
+### _<mark style="color:$danger;">**Listas de control de acceso (ACL)**</mark>_
 
 Las **ACL** se utilizan en sistemas y redes para administrar los permisos de acceso a recursos (archivos, directorios, dispositivos de red, etc.), determinando quién puede acceder a qué y qué acciones puede realizar. Son una pieza fundamental de la seguridad de la información.
 
-#### DAC — Control de acceso discrecional
+#### _**DAC — Control de acceso discrecional**_
 
 El **propietario del recurso** tiene control total sobre quién accede y con qué permisos. Por ejemplo, un usuario puede definir quién puede leer, escribir o ejecutar un archivo de su propiedad.
 
@@ -264,7 +269,7 @@ El **propietario del recurso** tiene control total sobre quién accede y con qu�
 | **Alicia** | —                    | Read, Write, Execute | —                    | Read        |
 | **Ricard** | Read, Write, Execute | Read, Write, Execute | Read, Write, Execute | Read, Write |
 
-#### MAC — Control de acceso obligatorio
+#### _**MAC — Control de acceso obligatorio**_
 
 Los sistemas operativos implementan mecanismos de control mediante **ACL** incorporadas en cada objeto (directorios, ficheros, recursos de red). Cuando un usuario intenta acceder a un objeto, el **núcleo del sistema operativo** comprueba su ACL para determinar si tiene derecho de acceso.
 
@@ -279,9 +284,11 @@ Los sistemas operativos implementan mecanismos de control mediante **ACL** incor
 * **Linux**: gestión de ACL mediante `setfacl` y `getfacl`.
 * **Windows**: las ACL son la base de los permisos **NTFS**.
 
+<figure><img src="../../.gitbook/assets/image (57).png" alt=""><figcaption></figcaption></figure>
+
 ***
 
-### Análisis forense en sistemas informáticos
+### _<mark style="color:$danger;">**Análisis forense en sistemas informáticos**</mark>_
 
 Consiste en realizar una búsqueda detallada para **reconstruir los acontecimientos** ocurridos hasta el momento de detección de un ataque, asegurando en todo momento la conservación intacta de la información del sistema comprometido.
 
@@ -289,7 +296,7 @@ El análisis se apoya en ficheros log, el estudio del sistema de ficheros (FS) d
 
 > **Nota**: no existe un procedimiento único aplicable "a rajatabla". Las técnicas generales deben combinarse con la experiencia del analista para desarrollar métodos propios.
 
-#### El análisis termina cuando el forense conoce
+#### _**El análisis termina cuando el forense conoce**_
 
 1. Cómo se produjo el compromiso.
 2. Bajo qué circunstancias.
@@ -301,7 +308,7 @@ El análisis se apoya en ficheros log, el estudio del sistema de ficheros (FS) d
 
 > Los archivos guardan metadatos (autor, compañía, fecha...) que pueden llegar a identificar el equipo usado para crearlos. Una imagen o archivo audiovisual puede protegerse mediante **marcas de agua digitales**, que permiten determinar su origen incluso si ha sido modificado.
 
-#### Políticas de seguridad de la organización
+#### _**Políticas de seguridad de la organización**_
 
 Antes de un incidente, una organización debe definir:
 
@@ -311,7 +318,7 @@ Antes de un incidente, una organización debe definir:
 * Estimación preliminar de riesgos a partir de los puntos débiles de la infraestructura.
 * El coste de una pérdida de información frente al coste de protegerla.
 
-#### Información a recopilar del equipo afectado
+#### _**Información a recopilar del equipo afectado**_
 
 * Sistema operativo e inventario del software instalado.
 * Hardware y periféricos conectados.
@@ -321,7 +328,7 @@ Antes de un incidente, una organización debe definir:
 * Si existe un IDS.
 * El resto de equipos de la red.
 
-#### Las cinco fases del análisis forense informático
+#### _**Las cinco fases del análisis forense informático**_
 
 1. **Identificación** — localizar los sistemas y dispositivos que pueden contener evidencia digital relevante (PC, servidores, móviles, medios de almacenamiento), para acotar el alcance del análisis.
 2. **Adquisición** — crear imágenes forenses (copia bit a bit) de los dispositivos originales, capturando también ficheros borrados y datos ocultos, sin alterar la evidencia.
@@ -331,14 +338,3 @@ Antes de un incidente, una organización debe definir:
 
 ***
 
-### Enlaces de referencia
-
-* [Access Control Lists — Arch Wiki (Español)](https://wiki.archlinux.org/index.php/Access_Control_Lists_\(Espa%C3%B1ol\))
-* [Crear directivas de seguridad con ACL extendidas — Microsoft Docs](https://docs.microsoft.com/es-es/windows-server/virtualization/hyper-v-virtual-switch/create-security-policies-with-extended-port-access-control-lists)
-* [Pautas de seguridad informática — apuntes SAD](https://oscarmaestre.github.io/apuntes_sad/tema_pautas_seguridad_informatica/tema_pautas_seguridad_informatica.html)
-
-### Próximos pasos
-
-* Ampliar con ejemplos prácticos de configuración de ACL en Linux (`setfacl`/`getfacl`) y en Windows (permisos NTFS).
-* Relacionar esta unidad con el proyecto de [HoneyNet del TFG](https://claude.ai/chat/honeynet-tfg.md), aplicando conceptos de segmentación, IDS (Wazuh) y defensa en profundidad.
-* Documentar un caso práctico de análisis forense siguiendo las cinco fases descritas.

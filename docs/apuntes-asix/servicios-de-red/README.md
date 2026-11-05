@@ -1,5 +1,7 @@
 ---
 description: Apuntes Servicios de Red
+cover: ../../.gitbook/assets/Gemini_Generated_Image_7w2ll27w2ll27w2l.jpg
+coverY: 0
 ---
 
 # 🖥️ Servicios de Red
