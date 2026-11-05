@@ -29,26 +29,28 @@ Definiciones breves de los conceptos que aparecen a lo largo del proyecto, orden
 | **VLAN**              | Red local virtual: separa lógicamente equipos que comparten la misma infraestructura física.                                                            |
 | **802.1Q**            | Estándar de etiquetado de VLANs en las tramas Ethernet.                                                                                                 |
 | **Trunk**             | Enlace entre dos dispositivos (por ejemplo, un PC y un switch) que transporta varias VLANs a la vez por el mismo cable, cada una etiquetada con 802.1Q. |
-| **NIC**               | _Network Interface Card_: tarjeta de red de un equipo. El PC de pfSense solo tiene una.                                                                 |
+| **NIC**               | _Network Interface Card_: tarjeta de red de un equipo. Los dos PCs del laboratorio solo tienen una.                                                     |
 | **Router on a stick** | Técnica que usa una única NIC en trunk para enrutar entre varias VLANs, creando una interfaz virtual por cada una.                                      |
 | **Switch**            | Dispositivo que conecta equipos en una red local y, si es gestionable, permite configurar VLANs y trunks (en el proyecto, un **HP 1810-24**).           |
 | **DMZ**               | Zona desmilitarizada: segmento expuesto al exterior, aislado del resto de la red interna.                                                               |
 | **Segmentación**      | Dividir una red en zonas con reglas de tráfico distintas entre ellas.                                                                                   |
 | **Firewall**          | Sistema que decide qué tráfico se permite o se bloquea según reglas (en el proyecto, **pfSense**).                                                      |
+| **NAT**               | Traducción de direcciones: cambia las IPs de los paquetes al pasar por un router, por ejemplo para que una red interna salga a internet.                |
 | **DNS**               | Sistema que traduce nombres de dominio a direcciones IP.                                                                                                |
 | **DHCP**              | Protocolo que asigna direcciones IP y otros parámetros de red automáticamente.                                                                          |
+| **DHCP relay**        | Servicio del router que reenvía las peticiones DHCP de una VLAN hacia un servidor que está en otra.                                                     |
 | **VPN**               | Red privada virtual: conexión cifrada para acceder a una red desde fuera; en el proyecto se usa **NetBird** para trabajar desde casa.                   |
-| **API**               | Interfaz que permite a un programa controlar otro; el script del proyecto usará la de pfSense para bloquear IPs.                                        |
+| **API**               | Interfaz que permite a un programa controlar otro; el script opcional del proyecto usaría la de pfSense para bloquear IPs.                              |
 
 ## Virtualización y contenedores
 
 | Término                 | Definición                                                                                                                                                         |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Hipervisor**          | Software que crea y gestiona máquinas virtuales. _Bare-metal_ significa que se instala directamente sobre el hardware, sin sistema operativo debajo (**Proxmox**). |
-| **Node**                | El PC físico que ejecuta Proxmox.                                                                                                                                  |
+| **Node**                | El PC físico que ejecuta Proxmox. El laboratorio tiene dos, independientes.                                                                                        |
 | **VM**                  | Máquina virtual: ordenador completo simulado, con su propia CPU, RAM, disco y sistema operativo.                                                                   |
 | **LXC**                 | Contenedor ligero de Linux que comparte el kernel del host; menos aislado pero mucho más ligero que una VM.                                                        |
-| **Bridge (vmbr)**       | Switch virtual de Proxmox al que se conectan las tarjetas de red de las VMs.                                                                                       |
+| **Bridge (vmbr)**       | Switch virtual de Proxmox al que se conectan las tarjetas de red de las VMs y los contenedores.                                                                    |
 | **Snapshot**            | Foto del estado completo de una VM para poder volver atrás.                                                                                                        |
 | **Template**            | VM maestra ya configurada que se clona para crear VMs nuevas rápidamente.                                                                                          |
 | **Imagen (Docker)**     | Plantilla de solo lectura a partir de la cual se crean contenedores.                                                                                               |

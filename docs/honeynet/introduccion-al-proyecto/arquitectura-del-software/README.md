@@ -12,14 +12,14 @@ Antes de instalar nada, conviene tener un plano de lo que se va a construir. En 
 
 * **Mitigar riesgos**: decidir con antelación qué servidor puede hablar con cuál evita errores de seguridad, como que la base de datos sea accesible desde fuera.
 * **Escalabilidad y mantenimiento**: separar web, base de datos, DNS/DHCP y copias en contenedores distintos permite actualizar o sustituir una pieza sin tocar las demás.
-* **Optimizar recursos**: el laboratorio corre sobre dos PCs con Proxmox, con solo 8 GB de RAM y un SSD de 128 GB cada uno; saber cuánta CPU, RAM y disco necesita cada máquina evita quedarse sin recursos a mitad de proyecto.
+* **Optimizar recursos**: el laboratorio corre sobre dos PCs con Proxmox, con solo 8 GB de RAM cada uno; saber cuánta CPU, RAM y disco necesita cada máquina evita quedarse sin recursos a mitad de proyecto.
 * **Trabajo en equipo**: con dos personas, los diagramas y las tablas de requisitos hacen que ambos entendamos el mismo objetivo y nos repartamos las tareas.
 
 ***
 
 ## Resumen de la arquitectura
 
-La arquitectura es **cliente-servidor**. Un cliente en la VLAN de Usuarios obtiene su IP por DHCP, resuelve el dominio con el DNS propio y accede por navegador a la web, que consulta la base de datos. Todo el tráfico entre VLANs pasa por pfSense.
+La arquitectura es **cliente-servidor**. Un cliente en la VLAN de Usuarios obtiene su IP por DHCP, resuelve el dominio con el DNS propio y accede por navegador a la web, que consulta la base de datos. El administrador ve en la misma web los paneles de Grafana, a través de un proxy. Todo el tráfico entre VLANs pasa por pfSense.
 
 ```mermaid
 flowchart LR
@@ -29,6 +29,7 @@ flowchart LR
     WEB["ct-web<br/>nginx + PHP-FPM · VLAN 60"]
     DB[("ct-db<br/>MariaDB · VLAN 20")]
     BK["ct-backup<br/>rsync + cron · VLAN 20"]
+    GF["Grafana<br/>VM SIEM · VLAN 30"]
 
     CL -- "DHCP y DNS" --> PF
     PF --> DNS
@@ -36,6 +37,8 @@ flowchart LR
     PF --> WEB
     WEB -- "SQL 3306" --> PF
     PF --> DB
+    WEB -- "proxy 3000" --> PF
+    PF --> GF
     BK -- "rsync por SSH" --> DB
 ```
 

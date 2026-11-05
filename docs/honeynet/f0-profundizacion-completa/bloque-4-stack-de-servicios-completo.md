@@ -51,9 +51,9 @@ No hace falta saber instalar cada servicio todavía (eso es de cada fase), pero 
 {% tab title="Bind9" %}
 **Qué es**: el servidor DNS más usado de internet.
 
-**Qué hace aquí**: traduce nombres a IPs dentro de la red. En vez de recordar una IP, se escribe un nombre como `www.honeypot.com`.
+**Qué hace aquí**: traduce nombres a IPs dentro de la red. En vez de recordar una IP, se escribe un nombre como `www.honeynet.lan`.
 
-**Dónde vive**: en `ct-dns-dhcp` (VLAN 20), con un servidor maestro y uno esclavo. Ya hay dos guías en estos apuntes: [Servidor DNS con Bind9](../../apuntes-asix/servicios-de-red/dns/servidor-dns-con-bind9-en-debian-13-trixie.md) y [Servidor DNS esclavo](../../apuntes-asix/servicios-de-red/dns/servidor-dns-esclavo-slave-con-bind9-en-debian-13-trixie.md).
+**Dónde vive**: en `ct-dns-dhcp` (VLAN 20), con un servidor maestro. En estos apuntes hay dos guías de clase: [Servidor DNS con Bind9](../../apuntes-asix/servicios-de-red/dns/servidor-dns-con-bind9-en-debian-13-trixie.md) y [Servidor DNS esclavo](../../apuntes-asix/servicios-de-red/dns/servidor-dns-esclavo-slave-con-bind9-en-debian-13-trixie.md). La del esclavo no se aplica de momento en el proyecto.
 
 **Puerto**: 53, TCP y UDP.
 {% endtab %}
@@ -203,7 +203,7 @@ Las alertas de Suricata también deben llegar a Wazuh; Wazuh puede recibir logs 
 | Gráficos y paneles                             | Grafana, que lee de Wazuh                 |
 
 {% hint style="warning" %}
-Wazuh en una sola máquina recomienda, para hasta 25 agentes, 4 vCPU, 8 GB de RAM y 50 GB de disco. La VM del SIEM está prevista con 4 GB de RAM y 30 GB, la mitad de lo recomendado, y el indexer es la pieza que más memoria consume. Habrá que ajustar la memoria del indexer, ampliar la RAM si el PC 2 lo permite o reducir los días de retención.
+Wazuh en una sola máquina recomienda, para hasta 25 agentes, 4 vCPU, 8 GB de RAM y 50 GB de disco. La VM del SIEM está prevista con 4 GB de RAM, la mitad de lo recomendado, y el indexer es la pieza que más memoria consume. El disco es menos problema, porque el PC 2 tiene un SSD de 256 GB, pero la RAM sí lo es: habrá que ajustar la memoria del indexer y reducir los días de retención.
 {% endhint %}
 
 ### Para ampliar

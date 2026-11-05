@@ -86,7 +86,7 @@ Porque engaña por completo a los aparatos de la red (switches). El switch cree 
 Cuando el servidor se queda sin IPs, si un usuario intenta conectarse a la red, su ordenador no recibe respuesta.
 
 * **¿Qué hace el sistema operativo?**\
-  Tanto Windows como Linux se asignan a sí mismos una IP especial que empieza por **`169.254.X.X`**. Esto se llama dirección **APIPA**.
+  Windows, y Linux según su configuración, se asignan a sí mismos una IP especial que empieza por **`169.254.X.X`**. Esto se llama dirección **APIPA**.
 * **¿Qué puedo hacer con una IP APIPA?**\
   **No tendrás acceso a Internet** ni a la puerta de enlace de la empresa. Solo podrás hablar con otros ordenadores de la misma sala que se hayan quedado en tu misma situación.
 
@@ -113,7 +113,7 @@ Permite decirle al switch: _"En este enchufe de pared solo se permite un ordenad
 
 #### Solución dentro de un Servidor Linux <a href="#solucion-dentro-de-un-servidor-linux" id="solucion-dentro-de-un-servidor-linux"></a>
 
-Como en nuestro laboratorio de VirtualBox no tenemos un switch físico, protegetemos directamente el propio servidor Linux (`isc-dhcp-server`):
+Como en nuestro laboratorio de VirtualBox no tenemos un switch físico, protegeremos directamente el propio servidor Linux (`isc-dhcp-server`):
 
 **1. Módulo `hashlimit` de `iptables`**
 

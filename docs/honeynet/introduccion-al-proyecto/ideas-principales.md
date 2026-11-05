@@ -71,7 +71,7 @@ detectar → analizar → responder → visualizar
 ### Riesgos a vigilar
 
 * Alcance grande para el tiempo disponible, con un equipo de solo dos personas
-* Hardware limitado y prestado por el centro (8 GB de RAM y un SSD de 128 GB por PC, sin posibilidad de ampliar)
+* Hardware limitado y prestado por el centro (8 GB de RAM por PC, sin posibilidad de ampliar)
 {% endstep %}
 {% endstepper %}
 

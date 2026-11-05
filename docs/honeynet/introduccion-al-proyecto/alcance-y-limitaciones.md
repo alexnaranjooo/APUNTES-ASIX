@@ -8,7 +8,7 @@ Delimita con claridad **qué incluye** HoneyNet, **qué queda fuera a propósito
 
 ## Dentro del alcance
 
-* Infraestructura sobre dos PCs del centro, cada uno con **Proxmox**: el **PC 1** con pfSense + Suricata (en una VM), honeypots, servidores, web y usuario, y el **PC 2** con el SIEM y Kali. Conectados con un switch **HP 1810-24**.
+* Infraestructura sobre dos PCs del centro, cada uno con **Proxmox**: el **PC 1** con pfSense + Suricata (en una VM), honeypots, servidores, web y cliente, y el **PC 2** con el SIEM y Kali. Conectados con un switch **HP 1810-24**.
 * Segmentación en seis VLANs internas (más la WAN) con **pfSense + Suricata**.
 * Servicios internos, cada uno en su contenedor: DNS y DHCP, MariaDB y copias de seguridad.
 * Tres honeypots en Docker: **Cowrie**, **Dionaea** y **DVWA**.
@@ -35,10 +35,11 @@ Delimita con claridad **qué incluye** HoneyNet, **qué queda fuera a propósito
 
 ### Técnicas
 
-* **Poca memoria y disco**: cada PC tiene **8 GB de RAM y un SSD de 128 GB**, y el centro no puede ampliarlos. Obliga a usar contenedores ligeros, a limitar la retención de datos de Wazuh y a encender Kali solo durante las pruebas.
+* **Poca memoria**: cada PC tiene **8 GB de RAM** y el centro no puede ampliarlos. En disco, el PC 1 tiene un SSD de 128 GB y el PC 2 tiene un disco duro de 500 GB y un SSD de 256 GB. Obliga a usar contenedores ligeros, a limitar la retención de datos de Wazuh y a encender Kali solo durante las pruebas.
 * **pfSense en una VM** del PC 1, con una sola tarjeta de red: WAN y redes internas viajan por el mismo cable en trunk, con la VLAN 99 como WAN. Todo el tráfico entre VLANs pasa por un único enlace.
-* **Wazuh completo es la pieza más pesada**: funciona, pero con poco margen. El plan B es una versión ligera (solo el manager con Loki y Grafana).
+* **Wazuh completo es la pieza más pesada**: funciona, pero con poco margen de memoria. El plan B es una versión ligera (solo el manager con Loki y Grafana).
 * **Hardware prestado**: los PCs, el switch y el firewall son del centro, y podrían reiniciarse o reinstalarse. Las configuraciones se guardan fuera de los equipos.
+* **Equipos en un aula cerrada**: no se puede acceder físicamente a los PCs, así que los cambios que puedan cortar la red se hacen con cuidado y se dejan para cuando haya acceso.
 * **Sin portátil de administración fijo**: se administra desde un puerto del switch en la VLAN 30.
 * **Herramientas nuevas**: Proxmox, Docker, pfSense, Wazuh y Grafana se aprenden durante el proyecto, por lo que cada fase incluye curva de aprendizaje.
 
@@ -60,4 +61,4 @@ Delimita con claridad **qué incluye** HoneyNet, **qué queda fuera a propósito
 * Los datos capturados (IPs, sesiones, malware) se tratan como material de estudio dentro del laboratorio.
 * Las muestras de malware **no deben ejecutarse** fuera de un entorno aislado.
 
-> El razonamiento detrás de estas reglas está en Diagrama de red, en [Seguridad](arquitectura-del-software/6.-seguridad.md) y en la Fase 0.
+> El razonamiento detrás de estas reglas está en [Diagrama de red](diagrama-de-red.md), en [Seguridad](arquitectura-del-software/6.-seguridad.md) y en la Fase 0.
