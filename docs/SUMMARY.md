@@ -9,6 +9,8 @@
   * [⚙️ Seguridad y Alta Disponibilidad](apuntes-asix/seguridad-y-alta-disponibilidad/README.md)
     * [Aspectos Principales](apuntes-asix/seguridad-y-alta-disponibilidad/aspectos-principales.md)
     * [Análisis y Seguridad del Servicio DHCP](apuntes-asix/seguridad-y-alta-disponibilidad/analisis-y-seguridad-del-servicio-dhcp.md)
+    * [Copias de seguridad](apuntes-asix/seguridad-y-alta-disponibilidad/copias-de-seguridad/README.md)
+      * [rsync + tar.gz](apuntes-asix/seguridad-y-alta-disponibilidad/copias-de-seguridad/rsync-+-tar.gz.md)
   * [💿 Administración de Sistemas Operativos](apuntes-asix/administracion-de-sistemas-operativos/README.md)
     * [FusionDirectory + NFS sobre OpenLDAP](apuntes-asix/administracion-de-sistemas-operativos/fusiondirectory-+-nfs-sobre-openldap.md)
 * [🍯 HoneyNet](honeynet/README.md)
