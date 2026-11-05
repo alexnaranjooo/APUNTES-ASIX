@@ -61,14 +61,6 @@ rsync -av /backup/contenidos/ /srv/contenidos/
 La barra final de `/srv/contenidos/` importa: con ella se copia **el contenido** de la carpeta; sin ella se copia la propia carpeta dentro del destino.
 {% endhint %}
 
-{% hint style="info" %}
-CAPTURA PENDIENTE: la creación de la copia con tar.gz, su listado y la restauración.
-{% endhint %}
-
-{% hint style="info" %}
-CAPTURA PENDIENTE: la copia y la restauración con rsync.
-{% endhint %}
-
 ### 12.2 En dos máquinas: una de origen y otra de destino
 
 Para que la copia no pida contraseña (y se pueda automatizar), se usa **SSH con clave**. En la máquina de origen:
@@ -101,15 +93,9 @@ rsync -avz -e ssh usuario@IP_DESTINO:/backup/contenidos/ /srv/contenidos/
 ssh usuario@IP_DESTINO "cat /backup/contenidos_2026-11-05.tar.gz" | tar -xzf - -C /srv
 ```
 
-{% hint style="info" %}
-CAPTURA PENDIENTE: la copia con rsync entre las dos máquinas y el archivo en el destino.
-{% endhint %}
+Para repetirlo cada noche, se añade el comando con `crontab -e`, por ejemplo a las 03:00:
 
-{% hint style="info" %}
-CAPTURA PENDIENTE: la restauración en la máquina de origen.
-{% endhint %}
-
-Para repetirlo cada noche, se añade el comando con `crontab -e`, por ejemplo a las 03:00: `0 3 * * * comando`.
+&#x20;`0 3 * * * comando`.
 
 ***
 
@@ -158,10 +144,6 @@ if [ "$(date +%u)" -eq 7 ]; then
   rm "/tmp/contenidos-$FECHA.tar.gz"
 fi
 ```
-
-{% hint style="warning" %}
-La opción `--delete` hace que el destino sea un espejo exacto: si se borra un archivo en el origen, también se borra en la copia. Por eso conviene el archivo fechado con tar.gz, o `--link-dest`, para no perder el historial.
-{% endhint %}
 
 ***
 
@@ -257,11 +239,3 @@ Con incrementales hacen falta **todas** en orden; con diferenciales, la completa
 | Martes                 | Lo del martes                | Lo del martes                           |
 | Miércoles              | Lo del miércoles             | Lo del martes y el miércoles            |
 | Restaurar el miércoles | Completa, martes y miércoles | Completa y la diferencial del miércoles |
-
-{% hint style="info" %}
-CAPTURA PENDIENTE: la copia completa y las incrementales, con sus listados.
-{% endhint %}
-
-{% hint style="info" %}
-CAPTURA PENDIENTE: la copia diferencial y la restauración en orden.
-{% endhint %}
