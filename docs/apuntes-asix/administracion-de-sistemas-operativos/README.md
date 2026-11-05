@@ -1,3 +1,8 @@
+---
+cover: ../../.gitbook/assets/Gemini_Generated_Image_hef2kahef2kahef2.jpg
+coverY: 0
+---
+
 # 💿 Administración de Sistemas Operativos
 
 ## Servidor LDAP con OpenLDAP en Ubuntu Server
