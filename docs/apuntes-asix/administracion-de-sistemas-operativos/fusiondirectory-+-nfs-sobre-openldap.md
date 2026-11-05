@@ -11,9 +11,7 @@ Playbook de instalación y configuración de FusionDirectory (panel web de admin
 * Usuarios de prueba: `analista1` (uid 10001), `analista2` (uid 10002)
 * Recurso NFS: `/srv/nfs/soc`, permisos `770`, grupo `soc`
 
-{% hint style="warning" %}
-Si vuelves a clonar o recrear la VM, confirma la IP real con `ip a` antes de seguir, por si ha cambiado respecto a `192.168.111.55`.
-{% endhint %}
+
 
 ***
 
@@ -29,15 +27,7 @@ sudo dpkg-reconfigure slapd
 
 Respuestas del asistente:
 
-| Pregunta                            | Respuesta           |
-| ----------------------------------- | ------------------- |
-| ¿Omitir configuración del servidor? | No                  |
-| Nombre de dominio DNS               | `honeynet.asix.com` |
-| Nombre de la organización           | `HoneyNet`          |
-| Contraseña administrador            | elige una (anótala) |
-| Motor de base de datos              | MDB                 |
-| ¿Eliminar la BD al purgar slapd?    | No                  |
-| ¿Mover la BD antigua?               | Sí                  |
+<table data-search="false"><thead><tr><th>Pregunta</th><th>Respuesta</th></tr></thead><tbody><tr><td>¿Omitir configuración del servidor?</td><td>No</td></tr><tr><td>Nombre de dominio DNS</td><td><code>honeynet.asix.com</code></td></tr><tr><td>Nombre de la organización</td><td><code>HoneyNet</code></td></tr><tr><td>Contraseña administrador</td><td>elige una (anótala)</td></tr><tr><td>Motor de base de datos</td><td>MDB</td></tr><tr><td>¿Eliminar la BD al purgar slapd?</td><td>No</td></tr><tr><td>¿Mover la BD antigua?</td><td>Sí</td></tr></tbody></table>
 
 ```bash
 sudo systemctl status slapd
@@ -161,9 +151,7 @@ cache_credentials = true
 enumerate = true
 ```
 
-{% hint style="warning" %}
-Sin `ldap_id_use_start_tls = False`, SSSD intenta negociar TLS al conectar y falla con `Could not start TLS encryption. unsupported extension` seguido de `Backend is offline`, porque este `slapd` no tiene TLS configurado. Para este laboratorio se desactiva la exigencia de TLS; en producción se configuraría un certificado en su lugar.
-{% endhint %}
+
 
 ```bash
 sudo chmod 600 /etc/sssd/sssd.conf
@@ -218,10 +206,6 @@ php -m | grep -i ldap
 
 ### A.2 Repositorio oficial de FusionDirectory
 
-{% hint style="info" %}
-El repositorio GitLab de FusionDirectory exige login para servir ficheros `raw`, así que no intentes descargar ficheros `.schema` directamente de ahí con `wget`/`curl`. El método de abajo (repositorio APT oficial) evita ese problema.
-{% endhint %}
-
 Comprueba tu versión de Debian:
 
 ```bash
@@ -249,7 +233,7 @@ sudo apt install fusiondirectory fusiondirectory-schema -y
 sudo fusiondirectory-insert-schema
 ```
 
-Este comando detecta `slapd` en ejecución e inyecta automáticamente todos los esquemas necesarios (`core-fd.schema`, `core-fd-conf.schema`, `template-fd.schema`, etc.) directamente en `cn=config`.
+Este comando detecta `slapd` en ejecución e inyecta automáticamente todos los esquemas necesarios directamente en `cn=config`.
 
 Verificación:
 
@@ -332,10 +316,6 @@ Una vez dentro con permisos de admin:
 3. Pestaña **POSIX** → cuenta POSIX, `uidNumber`, grupo primario (`soc`), `homeDirectory`, `loginShell`
 4. Establecer contraseña
 
-{% hint style="info" %}
-Captura obligatoria: listado de usuarios con `analista1` y `analista2`, y el grupo `soc` con sus miembros.
-{% endhint %}
-
 ***
 
 ## Módulo B — Servidor NFS
@@ -367,8 +347,6 @@ sudo nano /etc/exports
 ```
 /srv/nfs/soc 172.16.0.0/24(rw,sync,no_subtree_check)
 ```
-
-_(ajusta la subred a la real de tu proyecto si es distinta)_
 
 ```bash
 sudo exportfs -ra
@@ -407,7 +385,7 @@ rpcinfo -p 192.168.111.55
 
 ### C.2 Prueba de segregación de acceso
 
-**Caso 1 — Usuario del grupo `soc` (debe funcionar):**
+&#x20;**Usuario del grupo `soc` (debe funcionar):**
 
 ```bash
 su - analista1
@@ -416,28 +394,3 @@ touch prueba_analista1.txt
 ls -l
 ```
 
-**Caso 2 — Usuario ajeno (debe ser bloqueado):**
-
-```bash
-sudo useradd -m externo
-sudo passwd externo
-su - externo
-cd /mnt/soc
-touch prueba_externo.txt
-```
-
-Debe devolver `Permission denied`.
-
-{% hint style="info" %}
-Captura obligatoria: las dos pruebas, una debajo de otra.
-{% endhint %}
-
-### C.3 Tabla de problemas comunes
-
-| Síntoma                                           | Causa probable                                                                             | Solución                                                                                                                                                                                      |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `apt update` falla con el repo de FusionDirectory | Codename de Debian no coincide                                                             | Comprueba `VERSION_CODENAME` en `/etc/os-release` y corrige `/etc/apt/sources.list.d/fusiondirectory.list`                                                                                    |
-| No llegas a la IP de la VM desde tu navegador     | Adaptador tipo Red Interna (no alcanzable desde el host), o IP real distinta a la esperada | Verifica con `ip a` antes de escribir cualquier LDIF; usa Adaptador Puente o Solo-anfitrión                                                                                                   |
-| `LDAP error: No such object` en el asistente      | El Base DN o Bind DN no coincide con lo creado en `dpkg-reconfigure slapd`                 | Verifica con `ldapsearch -x -b "dc=honeynet,dc=asix,dc=com" "(objectClass=*)" -LLL`                                                                                                           |
-| Pantalla de FusionDirectory en blanco tras login  | Usuario sin ACL de FusionDirectory asignada                                                | No te saltes la Etapa 5-6 del asistente web                                                                                                                                                   |
-| `getent passwd`/`getent group` vacío, sin error   | Backend de SSSD offline por fallo de conexión al LDAP (IP incorrecta o TLS no soportado)   | Revisa `ldap_uri` en `sssd.conf`; si el log muestra `Could not start TLS encryption`, añade `ldap_id_use_start_tls = False`; limpia la caché con `rm -rf /var/lib/sss/db/*` y reinicia `sssd` |
