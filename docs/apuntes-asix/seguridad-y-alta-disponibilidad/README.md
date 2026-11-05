@@ -1,5 +1,7 @@
 ---
 description: Apuntes Seguridad y Alta Disponibilidad.
+cover: ../../.gitbook/assets/Gemini_Generated_Image_flvin6flvin6flvi.jpg
+coverY: 0
 ---
 
 # ⚙️ Seguridad y Alta Disponibilidad
