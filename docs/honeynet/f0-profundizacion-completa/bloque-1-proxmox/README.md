@@ -66,5 +66,5 @@ Todo se gestiona desde el navegador, accediendo a `https://IP-DEL-PC:8006`.
 
 ### Para ampliar
 
-* [Proxmox en detalle](proxmox-en-detalle.md): cómo funciona por dentro, almacenamiento, red, copias, usuarios y clúster.
+* [Proxmox en detalle](/broken/pages/wSx1MTVYad00x4kcO1jh): cómo funciona por dentro, almacenamiento, red, copias, usuarios y clúster.
 * [Preguntas sobre Proxmox](preguntas-sobre-proxmox.md): clúster, alta disponibilidad, hipervisores, QEMU, KVM, noVNC, Ceph, roles y almacenamiento.

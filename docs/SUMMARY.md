@@ -33,7 +33,6 @@
       * [6. Seguridad](honeynet/introduccion-al-proyecto/arquitectura-del-software/6.-seguridad.md)
   * [0️⃣ F0 — Profundización completa](honeynet/f0-profundizacion-completa/README.md)
     * [Bloque 1 — Proxmox](honeynet/f0-profundizacion-completa/bloque-1-proxmox/README.md)
-      * [Proxmox en detalle](honeynet/f0-profundizacion-completa/bloque-1-proxmox/proxmox-en-detalle.md)
       * [Preguntas sobre Proxmox](honeynet/f0-profundizacion-completa/bloque-1-proxmox/preguntas-sobre-proxmox.md)
     * [Bloque 2 — Docker](honeynet/f0-profundizacion-completa/bloque-2-docker.md)
     * [Bloque 3 — VLANs aplicadas a seguridad](honeynet/f0-profundizacion-completa/bloque-3-vlans-aplicadas-a-seguridad.md)
