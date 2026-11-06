@@ -26,7 +26,7 @@
     * [📡 Infraestructura física](honeynet/introduccion-al-proyecto/infraestructura-fisica.md)
     * [📄 Parte Web](honeynet/introduccion-al-proyecto/parte-web/README.md)
       * [Diseño y plan de producción](honeynet/introduccion-al-proyecto/parte-web/diseno-y-plan-de-produccion.md)
-    * [Arquitectura del software](honeynet/introduccion-al-proyecto/arquitectura-del-software/README.md)
+    * [💽 Arquitectura del software](honeynet/introduccion-al-proyecto/arquitectura-del-software/README.md)
       * [1. Planificación y funcionalidades](honeynet/introduccion-al-proyecto/arquitectura-del-software/1.-planificacion-y-funcionalidades.md)
       * [2. Arquitectura del sistema](honeynet/introduccion-al-proyecto/arquitectura-del-software/2.-arquitectura-del-sistema.md)
       * [3. Diagrama de la base de datos](honeynet/introduccion-al-proyecto/arquitectura-del-software/3.-diagrama-de-la-base-de-datos.md)

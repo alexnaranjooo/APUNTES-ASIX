@@ -1,4 +1,4 @@
-# Arquitectura del software
+# 💽 Arquitectura del software
 
 ## Objetivo de esta sección
 
