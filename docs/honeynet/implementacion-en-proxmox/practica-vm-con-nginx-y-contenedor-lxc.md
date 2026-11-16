@@ -6,6 +6,10 @@ description: >-
 
 # Práctica: VM con nginx y contenedor LXC
 
+{% hint style="warning" %}
+**Práctica previa a la red real.** Se hizo con máquinas de prueba (`vm-nginx` y `ct-prueba`) para aprender cómo funcionan una VM y un contenedor y cómo se conectan. En la red definitiva del proyecto la red interna, las VLANs y la publicación de la web las hace **pfSense**, con `ct-web` y `ct-db` (ver [Red real del proyecto](red-real-del-proyecto.md)).
+{% endhint %}
+
 ## Objetivo
 
 Montar en Proxmox una **VM con nginx** (clonada de la plantilla) y un **contenedor LXC**, conectados entre sí, para demostrar cómo funcionan, en qué se diferencian y cómo se comunican.

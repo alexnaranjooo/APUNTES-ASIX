@@ -6,11 +6,15 @@ description: >-
 
 # Red interna con VLAN (vmbr1)
 
-## **Objetivo**
+{% hint style="warning" %}
+**Práctica previa a la red real.** Aquí se ensayó con máquinas de prueba cómo funcionan el bridge `vmbr1` y las etiquetas de VLAN. En la red definitiva el enrutado entre VLANs, el firewall y la publicación de la web los hace **pfSense** (ver [Red real del proyecto](red-real-del-proyecto.md)); aquí no había router, por eso las VLANs aíslan del todo.
+{% endhint %}
+
+## Objetivo
 
 Crear dentro de Proxmox una **red interna aislada**, sin salida a la red del centro, y conectar a ella una VM y un contenedor en la **VLAN 60** (la de la web). Sirve para practicar las VLANs del proyecto sin tocar la red real.
 
-## **Conceptos**
+## Conceptos
 
 * **`vmbr0`** es el bridge principal: está unido a la tarjeta física, tiene la IP de gestión del nodo y da salida a la red del centro. **No se modifica**, porque un error cortaría el acceso a Proxmox.
 * **`vmbr1`** es un bridge **sin tarjeta física**: un switch virtual cerrado. Las máquinas conectadas a él solo se ven entre sí.
@@ -34,7 +38,7 @@ flowchart LR
 
 ***
 
-## **1. Crear el bridge `vmbr1`**
+## 1. Crear el bridge `vmbr1`
 
 En **honeynet → System → Network → Create → Linux Bridge**:
 
@@ -55,7 +59,7 @@ Comprobación en la Shell del nodo: `ip -br link show vmbr1` muestra el bridge, 
 CAPTURA PENDIENTE: _System → Network_ con `vmbr1` creado.
 {% endhint %}
 
-## **2. Conectar la VM a la VLAN 60**
+## 2. Conectar la VM a la VLAN 60
 
 En **vm-nginx → Hardware → Add → Network Device**:
 
@@ -76,13 +80,11 @@ iface ens19 inet static
 
 Y se activa con `ifup ens19`. La IP se mantiene tras reiniciar.
 
-<figure><img src="../../.gitbook/assets/2-ip-br-a-vm-ens19-10.0.60.250.png" alt=""><figcaption></figcaption></figure>
+{% hint style="info" %}
+CAPTURA PENDIENTE: la tarjeta de red nueva en _Hardware_ y el `ip -br a` de la VM.
+{% endhint %}
 
-
-
-<figure><img src="../../.gitbook/assets/2-ip-br-link-ens19-down.png" alt=""><figcaption></figcaption></figure>
-
-## **3. Conectar el contenedor a la VLAN 60**
+## 3. Conectar el contenedor a la VLAN 60
 
 En **ct-prueba → Network → Add**:
 
@@ -96,13 +98,13 @@ En **ct-prueba → Network → Add**:
 
 Los cambios de red de un contenedor se aplican **al arrancar**, así que hay que apagarlo del todo con **Shutdown** y volver a encenderlo con **Start**.
 
+{% hint style="info" %}
+CAPTURA PENDIENTE: la red del contenedor con `eth1` y su `ip -br a`.
+{% endhint %}
 
+## 4. Pruebas
 
-<figure><img src="../../.gitbook/assets/3-y-4.1-ct-eth1-ping-curl.png" alt=""><figcaption></figcaption></figure>
-
-## **4. Pruebas**
-
-### **4.1 Conexión dentro de la VLAN 60**
+### 4.1 Conexión dentro de la VLAN 60
 
 Desde el contenedor:
 
@@ -113,11 +115,19 @@ curl http://10.0.60.250
 
 Resultado obtenido: el `ping` responde con 3 paquetes recibidos, 0 % de pérdida y tiempos de unos 0,2 ms, y el `curl` devuelve `<h1>hola desde la VM con nginx</h1>`.
 
-### **4.2 Las VLANs aíslan**
+{% hint style="info" %}
+CAPTURA PENDIENTE: el `ping` y el `curl` desde el contenedor.
+{% endhint %}
+
+### 4.2 Las VLANs aíslan
 
 Se cambia la etiqueta de `eth1` del contenedor a `20` y su IP a `10.0.20.251/24`, con _Shutdown_ y _Start_. El `ping` a `10.0.60.250` **ya no responde**: están en VLANs distintas y no hay router entre ellas. Después se devuelve a la VLAN 60.
 
-### **4.3 El bridge une las dos máquinas**
+{% hint style="info" %}
+CAPTURA PENDIENTE: el `ping` que falla con el contenedor en la VLAN 20.
+{% endhint %}
+
+### 4.3 El bridge une las dos máquinas
 
 En la Shell del nodo:
 
@@ -127,9 +137,9 @@ bridge link | grep vmbr1
 
 Aparecen dos interfaces unidas a `vmbr1`: `tap100i1` (la tarjeta de la VM) y `veth101i1` (la del contenedor).
 
-<figure><img src="../../.gitbook/assets/4.3-bridge-link-vmbr1.png" alt=""><figcaption></figcaption></figure>
-
-
+{% hint style="info" %}
+CAPTURA PENDIENTE: la salida de `bridge link | grep vmbr1`.
+{% endhint %}
 
 ## 5. Dejar la VM solo en la red interna
 
