@@ -4,7 +4,7 @@
 
 Montar la red que se dibujé en la pizarra que será la red del proyecto: la red del centro entra por `vmbr0` a **pfSense**, que hace el reenvío de puertos, las VLANs y el DHCP por MAC, y por `vmbr1` cuelgan los servicios (NGINX, base de datos y copias). El **DNS lo hace el propio pfSense**, así que no hace falta un contenedor para él.
 
-<figure><img src="../../.gitbook/assets/image (63).png" alt="" width="431"><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (63).png" alt="" width="431"><figcaption></figcaption></figure>
 
 ```mermaid
 flowchart TB
@@ -32,7 +32,7 @@ flowchart TB
 
 La WAN va por `vmbr0` y recibe su IP por DHCP del centro. Las seis VLANs internas llegan por una única tarjeta virtual, que no lleva etiqueta de VLAN, y pfSense crea una interfaz por cada una.
 
-<figure><img src="../../.gitbook/assets/02-wan-pfsense.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/02-wan-pfsense.png" alt=""><figcaption></figcaption></figure>
 
 <table data-search="false"><thead><tr><th>Interfaz</th><th>Descripción</th><th>IP</th></tr></thead><tbody><tr><td>WAN</td><td>Red del centro</td><td>Por DHCP</td></tr><tr><td>LAN</td><td>MGMT (VLAN 30)</td><td><code>10.0.30.1/24</code></td></tr><tr><td>OPT1</td><td>DMZ (VLAN 10)</td><td><code>10.0.10.1/24</code></td></tr><tr><td>OPT2</td><td>SERV (VLAN 20)</td><td><code>10.0.20.1/24</code></td></tr><tr><td>OPT3</td><td>USERS (VLAN 40)</td><td><code>10.0.40.1/24</code></td></tr><tr><td>OPT4</td><td>ATK (VLAN 50)</td><td><code>10.0.50.1/24</code></td></tr><tr><td>OPT5</td><td>WEB (VLAN 60)</td><td><code>10.0.60.1/24</code></td></tr></tbody></table>
 
@@ -46,15 +46,15 @@ pfSense bloquea por defecto todo lo que no esté permitido, y las reglas se eval
 | USERS (40) | Ping a pfSense, DNS a pfSense, web (puertos 80 y 443) hacia `10.0.60.10`, bloqueo a pfSense, salida a internet |
 | WEB (60)   | Ping a pfSense, DNS a pfSense, base de datos (3306) hacia `10.0.20.11`, bloqueo a pfSense, salida a internet   |
 
-<figure><img src="../../.gitbook/assets/03-reglas-serv (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/03-reglas-serv (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/04-reglas-users (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/04-reglas-users (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/05-reglas-web (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/05-reglas-web (2).png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -68,21 +68,21 @@ La prueba desde la VM cliente: recibe `10.0.40.10`, la IP asignada a su MAC, y e
 
 
 
-<figure><img src="../../.gitbook/assets/06-dhcp-dns-cliente.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/06-dhcp-dns-cliente.png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/12-dig-vlan40.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/12-dig-vlan40.png" alt=""><figcaption></figcaption></figure>
 
 ### Reenvío de puertos
 
 La web se publica por la WAN de pfSense con una regla de NAT (puerto 80 de la WAN hacia `10.0.60.10`) y su regla asociada en la WAN, limitada a las redes del centro con un alias.
 
-<figure><img src="../../.gitbook/assets/13-nat-port-forward.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/13-nat-port-forward.png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/14-regla-wan.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/14-regla-wan.png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -104,11 +104,11 @@ Los dos son contenedores LXC sin privilegios, con 256 MiB de RAM, en `vmbr1` con
 | `ct-db`    | 211 | 20   | `10.0.20.11/24` | 3 GiB |
 | `ct-web`   | 610 | 60   | `10.0.60.10/24` | 2 GiB |
 
-<figure><img src="../../.gitbook/assets/07-ct-db-ajustes.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/07-ct-db-ajustes.png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../.gitbook/assets/08-ct-web-ajustes.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/08-ct-web-ajustes.png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -116,19 +116,19 @@ Salen a internet a través de pfSense, sin tarjetas temporales: el `ping` a la p
 
 
 
-<figure><img src="../../.gitbook/assets/09-ct-db-red.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/09-ct-db-red.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/10-ct-web-red.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/10-ct-web-red.png" alt=""><figcaption></figcaption></figure>
 
 
 
 ## **3.&#x20;**<mark style="color:$warning;">**Base de datos**</mark>
 
-En `ct-db` se instala MariaDB, que escucha solo en su IP interna, y se carga el script `honeypot_web.sql`, que crea las tablas, las vistas, los procedimientos, los triggers y los eventos. La web usa un usuario que solo puede ejecutar procedimientos (ver [Diagrama de la base de datos](../introduccion-al-proyecto/arquitectura-del-software/3.-diagrama-de-la-base-de-datos.md)).
+En `ct-db` se instala MariaDB, que escucha solo en su IP interna, y se carga el script `honeypot_web.sql`, que crea las tablas, las vistas, los procedimientos, los triggers y los eventos. La web usa un usuario que solo puede ejecutar procedimientos (ver [Diagrama de la base de datos](../../introduccion-al-proyecto/arquitectura-del-software/3.-diagrama-de-la-base-de-datos.md)).
 
 
 
-<figure><img src="../../.gitbook/assets/11-ct-db-tablas.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/11-ct-db-tablas.png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -136,7 +136,7 @@ En `ct-db` se instala MariaDB, que escucha solo en su IP interna, y se carga el 
 
 Desde la VM cliente (VLAN 40), el navegador abre `www.honeynet.lan` escribiendo `http://` delante: el DHCP da la IP, el DNS de pfSense resuelve el nombre, el firewall deja pasar el puerto 80, NGINX ejecuta PHP y PHP llama a un procedimiento de la base de datos, que devuelve los tres planes con sus características.
 
-<figure><img src="../../.gitbook/assets/image (62).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (62).png" alt=""><figcaption></figcaption></figure>
 
 ***
 

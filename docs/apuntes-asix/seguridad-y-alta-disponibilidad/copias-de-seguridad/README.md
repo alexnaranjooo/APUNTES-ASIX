@@ -103,7 +103,7 @@ Es una regla básica de las copias:
 
 Así, un solo fallo (un disco, un incendio, un ataque) no destruye todas las copias. Hay una versión ampliada, la **3-2-1-1-0**: una copia _offline_ o inmutable, y **cero errores** al verificar las copias.
 
-En HoneyNet se aplica así: el original en el nodo de Proxmox, una copia programada en el propio nodo, y otra copia fuera de los PCs (ver [Copias de seguridad y snapshots](../../../honeynet/implementacion-en-proxmox/copias-de-seguridad-y-snapshots.md)).
+En HoneyNet se aplica así: el original en el nodo de Proxmox, una copia programada en el propio nodo, y otra copia fuera de los PCs (ver [Copias de seguridad y snapshots](../../../honeynet/implementacion-en-proxmox/1.-plantillas-y-configuracion-basica/copias-de-seguridad-y-snapshots.md)).
 
 ## 8. ¿Qué herramientas de cifrado protegen las copias de seguridad?
 

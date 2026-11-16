@@ -12,7 +12,7 @@ Continuación de [Plantillas y configuración en Proxmox](plantillas-y-configura
 
 ***
 
-<figure><img src="../../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
 
 ## 1. Crear la VM
 
@@ -30,7 +30,7 @@ Se pulsa **Create VM** y se rellenan las pestañas:
 
 Se desmarca _Start after created_ antes de terminar.
 
-<figure><img src="../../.gitbook/assets/image (42).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (42).png" alt=""><figcaption></figcaption></figure>
 
 ## 2. Instalar Debian
 

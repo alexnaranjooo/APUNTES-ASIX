@@ -7,7 +7,7 @@ description: >-
 # Práctica: VM con nginx y contenedor LXC
 
 {% hint style="warning" %}
-**Práctica previa a la red real.** Se hizo con máquinas de prueba (`vm-nginx` y `ct-prueba`) para aprender cómo funcionan una VM y un contenedor y cómo se conectan. En la red definitiva del proyecto la red interna, las VLANs y la publicación de la web las hace **pfSense**, con `ct-web` y `ct-db` (ver [Red real del proyecto](red-real-del-proyecto.md)).
+**Práctica previa a la red real.** Se hizo con máquinas de prueba (`vm-nginx` y `ct-prueba`) para aprender cómo funcionan una VM y un contenedor y cómo se conectan. En la red definitiva del proyecto la red interna, las VLANs y la publicación de la web las hace **pfSense**, con `ct-web` y `ct-db` (ver [Red real del proyecto](../3.-despliegue-real/red-real-del-proyecto.md)).
 {% endhint %}
 
 ## Objetivo
@@ -41,7 +41,7 @@ flowchart LR
 
 Las dos máquinas se conectan al mismo **bridge** (`vmbr0`), que actúa como un switch virtual: por eso el contenedor puede hablar con la VM.
 
-Requisitos: la plantilla `debian13-base` ([Plantilla de VM Debian 13](plantilla-de-vm-debian-13.md)) y la plantilla de contenedor `debian-13` ([Clones y contenedor LXC](clones-y-contenedor-lxc.md)).
+Requisitos: la plantilla `debian13-base` ([Plantilla de VM Debian 13](../1.-plantillas-y-configuracion-basica/plantilla-de-vm-debian-13.md)) y la plantilla de contenedor `debian-13` ([Clones y contenedor LXC](../1.-plantillas-y-configuracion-basica/clones-y-contenedor-lxc.md)).
 
 ***
 

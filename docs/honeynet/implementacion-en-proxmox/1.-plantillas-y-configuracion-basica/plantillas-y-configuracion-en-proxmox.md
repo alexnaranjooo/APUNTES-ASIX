@@ -70,7 +70,7 @@ pveversion
 
 `apt update` no debe mostrar errores `401` y `pveversion` debe indicar una versión 9.x.
 
-<figure><img src="../../.gitbook/assets/image (39).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (39).png" alt=""><figcaption></figcaption></figure>
 
 ### 2.3 Usuario administrador propio
 
@@ -105,4 +105,4 @@ Se descarga en el portátil desde pfsense.org en formato **ISO (DVD)**, se desco
 
 * [Plantilla de VM Debian 13](plantilla-de-vm-debian-13.md): crear, instalar, preparar y limpiar la VM.
 * [Clones y contenedor LXC](clones-y-contenedor-lxc.md): convertirla en plantilla, clonarla y crear un contenedor.
-* [Práctica: VM con nginx y contenedor LXC](practica-vm-con-nginx-y-contenedor-lxc.md): la práctica que usa todo esto.
+* [Práctica: VM con nginx y contenedor LXC](../2.-pruebas/practica-vm-con-nginx-y-contenedor-lxc.md): la práctica que usa todo esto.

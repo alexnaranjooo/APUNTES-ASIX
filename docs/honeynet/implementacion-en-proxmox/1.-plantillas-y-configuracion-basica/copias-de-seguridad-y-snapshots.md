@@ -18,7 +18,7 @@ Los PCs del laboratorio son del centro y pueden reiniciarse o reinstalarse, y un
 | Protege si el disco falla | No                                                     | Sí, si la copia está fuera del disco                         |
 
 {% hint style="info" %}
-Documentado el 28 de octubre de 2026. Las máquinas usadas son `vm-nginx` y `ct-prueba`, creadas en la [práctica](practica-vm-con-nginx-y-contenedor-lxc.md).
+Documentado el 28 de octubre de 2026. Las máquinas usadas son `vm-nginx` y `ct-prueba`, creadas en la [práctica](../2.-pruebas/practica-vm-con-nginx-y-contenedor-lxc.md).
 {% endhint %}
 
 ***
@@ -31,9 +31,9 @@ Documentado el 28 de octubre de 2026. Las máquinas usadas son `vm-nginx` y `ct-
 
 **Comprobación con un rollback:** dentro de la VM se borra la página de nginx (`rm /var/www/html/index.html`) y después se elige el snapshot → **Rollback**. La página vuelve a estar.
 
-<figure><img src="../../.gitbook/assets/Captura de pantalla 2026-10-28 154819.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/Captura de pantalla 2026-10-28 154819.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/Captura de pantalla 2026-10-28 154808.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/Captura de pantalla 2026-10-28 154808.png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -45,7 +45,7 @@ En **Datacenter → Backup → Add**:
 
 Para no esperar a las 03:00, se selecciona el trabajo y se pulsa **Run now**. Al terminar (`TASK OK`), en **honeynet → local → Backups** aparecen los archivos de las dos máquinas.
 
-<figure><img src="../../.gitbook/assets/Captura de pantalla 2026-10-28 154617.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/Captura de pantalla 2026-10-28 154617.png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -57,6 +57,6 @@ Una copia que no se ha restaurado nunca no es de fiar, así que se prueba:
 2. Poner un ID nuevo (por ejemplo `199`) y desmarcar _Start after restore_.
 3. Comprobar que aparece el contenedor restaurado y borrarlo después (**More → Remove**).
 
-<figure><img src="../../.gitbook/assets/image (48).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (48).png" alt=""><figcaption></figcaption></figure>
 
 ***

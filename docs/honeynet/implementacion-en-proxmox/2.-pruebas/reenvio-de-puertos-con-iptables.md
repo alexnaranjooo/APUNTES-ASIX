@@ -7,7 +7,7 @@ description: >-
 # Reenvío de puertos con iptables
 
 {% hint style="warning" %}
-**Práctica sustituida por pfSense.** Esto se montó como práctica en un contenedor temporal (`ct-prueba`), que después se eliminó. En la red definitiva el reenvío de puertos lo hace **pfSense** (ver [Red real del proyecto](red-real-del-proyecto.md)). Esta página se conserva para explicar el mecanismo (DNAT, MASQUERADE y denegar por defecto), por eso no lleva capturas.
+**Práctica sustituida por pfSense.** Esto se montó como práctica en un contenedor temporal (`ct-prueba`), que después se eliminó. En la red definitiva el reenvío de puertos lo hace **pfSense** (ver [Red real del proyecto](../3.-despliegue-real/red-real-del-proyecto.md)). Esta página se conserva para explicar el mecanismo (DNAT, MASQUERADE y denegar por defecto), por eso no lleva capturas.
 {% endhint %}
 
 ## Objetivo

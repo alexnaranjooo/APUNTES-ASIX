@@ -7,7 +7,7 @@ description: >-
 # iptables: persistencia e IP fija
 
 {% hint style="warning" %}
-**Práctica sustituida por pfSense.** El contenedor de esta práctica (`ct-prueba`) era temporal y ya se eliminó. En la red definitiva las reglas y la IP de la WAN las gestiona **pfSense** (ver [Red real del proyecto](red-real-del-proyecto.md)). Esta página se conserva para explicar el mecanismo, por eso no lleva capturas.
+**Práctica sustituida por pfSense.** El contenedor de esta práctica (`ct-prueba`) era temporal y ya se eliminó. En la red definitiva las reglas y la IP de la WAN las gestiona **pfSense** (ver [Red real del proyecto](../3.-despliegue-real/red-real-del-proyecto.md)). Esta página se conserva para explicar el mecanismo, por eso no lleva capturas.
 {% endhint %}
 
 ## **Introducción**

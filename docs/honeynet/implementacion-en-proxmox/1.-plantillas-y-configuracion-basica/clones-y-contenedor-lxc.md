@@ -35,7 +35,7 @@ hostnamectl set-hostname NOMBRE-NUEVO
 
 Además, en el fichero `hosts` (dentro de la carpeta `etc`) se sustituye el nombre antiguo, `debian13-base`, por el nuevo. Y en **Hardware → Memory** se ajusta la RAM a lo que necesite cada clon.
 
-<figure><img src="../../.gitbook/assets/image (45).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (45).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -61,6 +61,6 @@ El campo **Name** de la red debe ser `eth0`, que es el nombre habitual de la int
 
 Al crearlo puede aparecer el aviso **«Systemd 257 detected. You may need to enable nesting»**. No es un error: el contenedor se crea igualmente. Si algún servicio fallara al arrancar, se activa en **Options → Features → Nesting**.
 
-<figure><img src="../../.gitbook/assets/image (44).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../.gitbook/assets/image (44).png" alt=""><figcaption></figcaption></figure>
 
 ***

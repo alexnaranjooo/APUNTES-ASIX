@@ -7,7 +7,7 @@ description: >-
 # Red interna con VLAN (vmbr1)
 
 {% hint style="warning" %}
-**Práctica previa a la red real.** Aquí se ensayó con máquinas de prueba cómo funcionan el bridge `vmbr1` y las etiquetas de VLAN. En la red definitiva el enrutado entre VLANs, el firewall y la publicación de la web los hace **pfSense** (ver [Red real del proyecto](red-real-del-proyecto.md)); aquí no había router, por eso las VLANs aíslan del todo.
+**Práctica previa a la red real.** Aquí se ensayó con máquinas de prueba cómo funcionan el bridge `vmbr1` y las etiquetas de VLAN. En la red definitiva el enrutado entre VLANs, el firewall y la publicación de la web los hace **pfSense** (ver [Red real del proyecto](../3.-despliegue-real/red-real-del-proyecto.md)); aquí no había router, por eso las VLANs aíslan del todo.
 {% endhint %}
 
 ## Objetivo

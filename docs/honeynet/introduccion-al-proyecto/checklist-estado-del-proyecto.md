@@ -40,9 +40,9 @@ Lo que se va haciendo se documenta en [Implementación en Proxmox](../implementa
 * [x] Usuario administrador propio y contraseñas fuertes
 * [x] Subir las ISOs de Debian 13, pfSense y Kali y la plantilla de contenedor Debian 13
 * [x] Plantilla de VM Debian 13 y prueba de clonado
-* [x] Práctica: VM con nginx y contenedor LXC conectados ([Práctica](../implementacion-en-proxmox/practica-vm-con-nginx-y-contenedor-lxc.md))
-* [x] Snapshots y copia programada, con una copia fuera de los PCs ([Copias de seguridad y snapshots](../implementacion-en-proxmox/copias-de-seguridad-y-snapshots.md))
-* [x] Red interna `vmbr1` con VLANs y reenvío de puertos con iptables ([Red interna con VLAN](../implementacion-en-proxmox/red-interna-con-vlan-vmbr1.md))
+* [x] Práctica: VM con nginx y contenedor LXC conectados ([Práctica](../implementacion-en-proxmox/2.-pruebas/practica-vm-con-nginx-y-contenedor-lxc.md))
+* [x] Snapshots y copia programada, con una copia fuera de los PCs ([Copias de seguridad y snapshots](../implementacion-en-proxmox/1.-plantillas-y-configuracion-basica/copias-de-seguridad-y-snapshots.md))
+* [x] Red interna `vmbr1` con VLANs y reenvío de puertos con iptables ([Red interna con VLAN](../implementacion-en-proxmox/2.-pruebas/red-interna-con-vlan-vmbr1.md))
 
 **Acceso y permisos**
 
@@ -59,7 +59,7 @@ Lo que se va haciendo se documenta en [Implementación en Proxmox](../implementa
 
 ### Fase 2 — VLANs, switch y pfSense
 
-Lo hecho está documentado en [Red real del proyecto](../implementacion-en-proxmox/red-real-del-proyecto.md).
+Lo hecho está documentado en [Red real del proyecto](../implementacion-en-proxmox/3.-despliegue-real/red-real-del-proyecto.md).
 
 * [ ] Configurar en el switch HP 1810-24 las VLANs 99, 10, 20, 30, 40, 50 y 60 y los puertos en trunk
 * [ ] Pasar `vmbr0` a VLAN-aware en los dos nodos y mover la gestión a la VLAN 30
