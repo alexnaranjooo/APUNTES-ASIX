@@ -208,6 +208,10 @@ Por último se borra la base de prueba:
 mariadb -e "DROP DATABASE honeypot_web_test"
 ```
 
+## <mark style="color:$warning;">**Limitación conocida**</mark>
+
+`ct-backup` está en el mismo PC físico (PC 1) que `ct-db` y `ct-web`, y el centro no permite añadir otro disco ni sacar una copia fuera de los PCs. Por eso las copias protegen de borrados, errores y ataques a los servidores (gracias al modelo pull), pero **no de un fallo del disco o del equipo**: si el PC 1 se estropea, se pierden los servidores y sus copias a la vez.
+
 ***
 
 ## <mark style="color:$warning;">**Problemas encontrados**</mark>
