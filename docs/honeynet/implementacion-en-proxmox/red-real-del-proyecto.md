@@ -1,6 +1,6 @@
 # Red real del proyecto
 
-## **Objetivo**
+## <mark style="color:$warning;">**Objetivo**</mark>
 
 Montar la red que se dibujé en la pizarra que será la red del proyecto: la red del centro entra por `vmbr0` a **pfSense**, que hace el reenvío de puertos, las VLANs y el DHCP por MAC, y por `vmbr1` cuelgan los servicios (NGINX, base de datos y copias). El **DNS lo hace el propio pfSense**, así que no hace falta un contenedor para él.
 
@@ -22,13 +22,13 @@ flowchart TB
     PF -- "vmbr1" --> CL
 ```
 
-## **Estado**
+## <mark style="color:$warning;">**Estado**</mark>
 
 <table data-search="false"><thead><tr><th width="384">Elemento</th><th>Resultado</th></tr></thead><tbody><tr><td>Red del centro → <code>vmbr0</code> → pfSense</td><td>Hecho: la WAN recibe IP por DHCP</td></tr><tr><td>VLANs 10, 20, 30, 40, 50 y 60 sobre <code>vmbr1</code></td><td>Hecho</td></tr><tr><td>Reglas del firewall por VLAN</td><td>Hecho</td></tr><tr><td>DHCP por MAC (VLAN 40) y DNS en pfSense</td><td>Hecho</td></tr><tr><td><code>ct-web</code> (NGINX y PHP-FPM) y <code>ct-db</code> (MariaDB)</td><td>Hecho</td></tr><tr><td>Reenvío de puertos hacia NGINX</td><td>Hecho</td></tr><tr><td><code>ct-backup</code></td><td>Hecho</td></tr></tbody></table>
 
 ***
 
-## **1. pfSense**
+## **1.&#x20;**<mark style="color:$warning;">**pfSense**</mark>
 
 La WAN va por `vmbr0` y recibe su IP por DHCP del centro. Las seis VLANs internas llegan por una única tarjeta virtual, que no lleva etiqueta de VLAN, y pfSense crea una interfaz por cada una.
 
@@ -95,7 +95,7 @@ TcpTestSucceeded : True
 
 ***
 
-## **2. Contenedores `ct-db` y `ct-web`**
+## **2.&#x20;**<mark style="color:$warning;">**Contenedores**</mark>**&#x20;`ct-db`&#x20;**<mark style="color:$warning;">**y**</mark>**&#x20;`ct-web`**
 
 Los dos son contenedores LXC sin privilegios, con 256 MiB de RAM, en `vmbr1` con su VLAN y su IP fija, y usan a pfSense como puerta de enlace y como DNS.
 
@@ -122,7 +122,7 @@ Salen a internet a través de pfSense, sin tarjetas temporales: el `ping` a la p
 
 
 
-## **3. Base de datos**
+## **3.&#x20;**<mark style="color:$warning;">**Base de datos**</mark>
 
 En `ct-db` se instala MariaDB, que escucha solo en su IP interna, y se carga el script `honeypot_web.sql`, que crea las tablas, las vistas, los procedimientos, los triggers y los eventos. La web usa un usuario que solo puede ejecutar procedimientos (ver [Diagrama de la base de datos](../introduccion-al-proyecto/arquitectura-del-software/3.-diagrama-de-la-base-de-datos.md)).
 
@@ -132,7 +132,7 @@ En `ct-db` se instala MariaDB, que escucha solo en su IP interna, y se carga el 
 
 
 
-## **4. Prueba de punta a punta**
+## **4.&#x20;**<mark style="color:$warning;">**Prueba de punta a punta**</mark>
 
 Desde la VM cliente (VLAN 40), el navegador abre `www.honeynet.lan` escribiendo `http://` delante: el DHCP da la IP, el DNS de pfSense resuelve el nombre, el firewall deja pasar el puerto 80, NGINX ejecuta PHP y PHP llama a un procedimiento de la base de datos, que devuelve los tres planes con sus características.
 
@@ -140,7 +140,7 @@ Desde la VM cliente (VLAN 40), el navegador abre `www.honeynet.lan` escribiendo 
 
 ***
 
-## **Problemas encontrados y soluciones**
+## **5.&#x20;**<mark style="color:$warning;">**Problemas encontrados y soluciones**</mark>
 
 | Problema                                            | Causa                                                          | Solución                                                                                     |
 | --------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
