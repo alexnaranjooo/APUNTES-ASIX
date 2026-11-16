@@ -47,7 +47,7 @@ Contenedor LXC sin privilegios, en la VLAN 20 junto a la base de datos.
 | Red           | `eth0`, bridge `vmbr1`, VLAN 20, `10.0.20.12/24`, gateway y DNS `10.0.20.1` (pfSense) |
 
 {% hint style="info" %}
-CAPTURA PENDIENTE: la pantalla de confirmación del contenedor.
+CAPTURA 01 → `01-crear-ct-confirmacion.png`: la pantalla de confirmación del contenedor.
 {% endhint %}
 
 ## 2. La clave SSH
@@ -59,6 +59,10 @@ ssh-keygen -t ed25519 -f /root/.ssh/backup_key -N ""
 ```
 
 La clave privada no sale de `ct-backup`; la pública (`backup_key.pub`) es la que se copia a los servidores.
+
+{% hint style="info" %}
+CAPTURA 02 → `02-clave-ssh-generada.png`: la clave generada en `ct-backup`, con su huella y la clave pública.
+{% endhint %}
 
 ## 3. Preparar `ct-db` y `ct-web`
 
@@ -82,7 +86,7 @@ ssh-keygen -lf /home/respaldo/.ssh/authorized_keys
 El último comando muestra la huella de la clave, que debe coincidir con la de `ct-backup`. El cortafuegos del servidor solo deja entrar por SSH a `10.0.20.12`.
 
 {% hint style="info" %}
-CAPTURA PENDIENTE: la huella en `ct-db` y en `ct-web`.
+CAPTURA 03 → `03-huella-ct-db.png`: la huella en `ct-db`. La huella de `ct-web` sale en la captura 05, junto a su copia.
 {% endhint %}
 
 ## 4. Los scripts de copia
@@ -99,6 +103,10 @@ find $D -name '*.gz' -mtime +7 -delete
 
 `--single-transaction` hace el volcado sin bloquear la base de datos, y `--routines --triggers --events` incluye los procedimientos, triggers y eventos, que son la lógica del proyecto.
 
+{% hint style="info" %}
+CAPTURA 04 → `04-volcado-ct-db.png`: el volcado de `ct-db` con su tamaño.
+{% endhint %}
+
 **En `ct-web`**, `/usr/local/sbin/backup-web.sh`:
 
 ```bash
@@ -110,6 +118,10 @@ find $D -name '*.tar.gz' -mtime +7 -delete
 ```
 
 Cada uno se programa con `cron` en `/etc/cron.d/` (02:50 y 02:55) y se prueba una vez a mano. Resultado: `honeypot_web-AAAA-MM-DD.sql.gz` de unos 7,6 KB en `ct-db` y `web-AAAA-MM-DD.tar.gz` de unos 700 bytes en `ct-web`.
+
+{% hint style="info" %}
+CAPTURA 05 → `05-huella-y-copia-ct-web.png`: la huella en `ct-web`, el script y la copia creada.
+{% endhint %}
 
 ## 5. Regla en pfSense
 
@@ -125,7 +137,11 @@ Cada uno se programa con `cron` en `/etc/cron.d/` (02:50 y 02:55) y se prueba un
 La regla es lo más estrecha posible: solo esa máquina, solo ese destino y solo ese puerto. Queda debajo de las demás y funciona igual, porque las reglas de arriba no coinciden con ese tráfico (una es el ping y el DNS a pfSense, otra bloquea solo hacia pfSense, y la de salida a internet solo deja pasar lo que no es red interna).
 
 {% hint style="info" %}
-CAPTURA PENDIENTE: las reglas de SERV con la nueva regla.
+CAPTURA 06 → `06-regla-pfsense-formulario.png`: el formulario de la regla.
+{% endhint %}
+
+{% hint style="info" %}
+CAPTURA 07 → `07-reglas-serv-lista.png`: la lista de reglas de SERV con la nueva regla al final.
 {% endhint %}
 
 ## 6. Recoger las copias
@@ -136,6 +152,10 @@ Primero, desde `ct-backup`, se hace una conexión de prueba a cada servidor para
 ssh -i /root/.ssh/backup_key -o StrictHostKeyChecking=accept-new respaldo@10.0.20.11 true
 ssh -i /root/.ssh/backup_key -o StrictHostKeyChecking=accept-new respaldo@10.0.60.10 true
 ```
+
+{% hint style="info" %}
+CAPTURA 08 → `08-ssh-prueba-sin-contrasena.png`: las dos conexiones de prueba, sin contraseña y sin error.
+{% endhint %}
 
 Después, el script `/usr/local/sbin/pull-backups.sh`:
 
@@ -168,7 +188,15 @@ zcat /srv/backups/ct-db/honeypot_web-*.sql.gz | grep -c "CREATE TABLE"
 Resultado: aparecen los dos archivos con el mismo tamaño que en los servidores (7684 y 703 bytes), el log muestra `OK ct-db` y `OK ct-web`, y el volcado contiene las **11 tablas** de la base de datos.
 
 {% hint style="info" %}
-CAPTURA PENDIENTE: `ls -lR /srv/backups`, el log y el recuento de 11 tablas.
+CAPTURA 09 → `09-ls-srv-backups.png`: `ls -lR /srv/backups` con las dos copias.
+{% endhint %}
+
+{% hint style="info" %}
+CAPTURA 10 → `10-log-backup-ok.png`: el log con `OK ct-db` y `OK ct-web`.
+{% endhint %}
+
+{% hint style="info" %}
+CAPTURA 11 → `11-recuento-11-tablas.png`: el recuento de 11 tablas en el volcado.
 {% endhint %}
 
 ***
