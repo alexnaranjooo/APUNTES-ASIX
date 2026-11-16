@@ -13,7 +13,7 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 | **F0** | Profundización: Proxmox, Docker, VLANs de seguridad, stack completo | ✅ Hecha     |
 | **F1** | Inventario y Proxmox en los dos PCs                                 | ✅ Hecha     |
 | **F2** | VLANs, switch y pfSense (en VM) + Suricata                          | 🟡 En curso |
-| **F3** | Servicios internos (MariaDB y copias), DNS y DHCP en pfSense, y web | 🟡 En curso |
+| **F3** | Servicios internos (MariaDB y copias), DNS y DHCP en pfSense, y web | ✅ Hecha     |
 | **F4** | Honeypots: Cowrie, Dionaea, DVWA                                    | ⚪ Pendiente |
 | **F5** | Wazuh completo (SIEM)                                               | ⚪ Pendiente |
 | **F6** | Grafana, alertas por Telegram y paneles en la web                   | ⚪ Pendiente |
@@ -76,7 +76,7 @@ Lo hecho está documentado en [Red real del proyecto](../implementacion-en-proxm
 * [x] `ct-db`: MariaDB con el esquema `honeypot_web` y los usuarios `web_app` y `web_admin` con permisos mínimos
 * [x] `ct-web`: nginx + PHP-FPM conectado a la base de datos
 * [x] Comprobar que la VLAN de Usuarios obtiene IP, resuelve nombres y abre la web
-* [ ] UFW y SSH con claves en `ct-db` y `ct-web`, y HTTPS en `ct-web`
+* [x] UFW y SSH con claves en `ct-db` y `ct-web`, y HTTPS en `ct-web`
 * [x] `ct-backup`: copias automáticas con rsync + cron ([Copias de seguridad con ct-backup](../implementacion-en-proxmox/3.-despliegue-real/contenedores/copias-de-seguridad-con-ct-backup.md))
 * [x] Borrar el contenedor `ct-dns-dhcp`, que ya no se usa
 
