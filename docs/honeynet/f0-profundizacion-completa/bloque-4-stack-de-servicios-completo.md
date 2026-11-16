@@ -16,7 +16,7 @@ No hace falta saber instalar cada servicio todavía (eso es de cada fase), pero 
 | ------------------ | ------------------------------ | --------------------------------- | -------------- |
 | Red y seguridad    | pfSense                        | VM en el PC 1                     | F2             |
 | Red y seguridad    | Suricata                       | Dentro de pfSense                 | F2             |
-| Servicios internos | Bind9 y Kea (DNS y DHCP)       | Contenedor `ct-dns-dhcp`, VLAN 20 | F3             |
+| Red y seguridad    | DNS Resolver y servidor DHCP   | Dentro de pfSense                 | F2             |
 | Servicios internos | MariaDB                        | Contenedor `ct-db`, VLAN 20       | F3             |
 | Servicios internos | rsync + cron                   | Contenedor `ct-backup`, VLAN 20   | F3             |
 | Servicios internos | nginx + PHP-FPM                | Contenedor `ct-web`, VLAN 60      | F3             |
@@ -31,9 +31,19 @@ No hace falta saber instalar cada servicio todavía (eso es de cada fase), pero 
 {% tab title="pfSense" %}
 **Qué es**: un firewall y router de código abierto con interfaz web, basado en FreeBSD.
 
-**Qué hace aquí**: hace de «aduana» entre todas las VLANs. Decide qué tráfico pasa y cuál no según las reglas definidas por interfaz, con denegación por defecto. También hace NAT y reenvía las peticiones DHCP de los clientes hacia el servidor de la VLAN 20 (DHCP relay).
+**Qué hace aquí**: hace de «aduana» entre todas las VLANs. Decide qué tráfico pasa y cuál no según las reglas definidas por interfaz, con denegación por defecto. También hace NAT, publica la web con un reenvío de puertos y da el DNS y el DHCP de la red.
 
 **Dónde vive**: en una VM del PC 1, con las VLANs llegando por trunk desde el switch.
+{% endtab %}
+
+{% tab title="DNS y DHCP" %}
+**Qué son**: el **DNS Resolver** (Unbound) y el **servidor DHCP** que trae pfSense.
+
+**Qué hacen aquí**: el DNS traduce nombres a IPs dentro de la red (por ejemplo, `www.honeynet.lan` a la IP de la web) con _host overrides_, y reenvía el resto de consultas al DNS del centro. El DHCP reparte las IPs de la VLAN de Usuarios con la puerta de enlace y el DNS que deben usar, y asigna una IP fija a cada equipo conocido según su MAC. Los servidores llevan IP fija, para que sigan funcionando si el DHCP cae.
+
+**Dónde viven**: dentro de pfSense, por lo que no necesitan contenedor propio. En los apuntes de clase se estudian Bind9 y Kea: [Servidor DNS con Bind9](../../apuntes-asix/servicios-de-red/dns/servidor-dns-con-bind9-en-debian-13-trixie.md) y [Servidor DNS esclavo](../../apuntes-asix/servicios-de-red/dns/servidor-dns-esclavo-slave-con-bind9-en-debian-13-trixie.md). Aquí se opta por pfSense para ahorrar memoria y una máquina que mantener.
+
+**Puertos**: 53 (DNS, TCP y UDP) y 67 y 68 (DHCP, UDP).
 {% endtab %}
 
 {% tab title="Suricata" %}
@@ -48,26 +58,6 @@ No hace falta saber instalar cada servicio todavía (eso es de cada fase), pero 
 ### Servicios internos
 
 {% tabs %}
-{% tab title="Bind9" %}
-**Qué es**: el servidor DNS más usado de internet.
-
-**Qué hace aquí**: traduce nombres a IPs dentro de la red. En vez de recordar una IP, se escribe un nombre como `www.honeynet.lan`.
-
-**Dónde vive**: en `ct-dns-dhcp` (VLAN 20), con un servidor maestro. En estos apuntes hay dos guías de clase: [Servidor DNS con Bind9](../../apuntes-asix/servicios-de-red/dns/servidor-dns-con-bind9-en-debian-13-trixie.md) y [Servidor DNS esclavo](../../apuntes-asix/servicios-de-red/dns/servidor-dns-esclavo-slave-con-bind9-en-debian-13-trixie.md). La del esclavo no se aplica de momento en el proyecto.
-
-**Puerto**: 53, TCP y UDP.
-{% endtab %}
-
-{% tab title="Kea (DHCP)" %}
-**Qué es**: el servidor DHCP actual de ISC. Sustituye a ISC DHCP (`isc-dhcp-server`), que dejó de mantenerse a finales de 2022.
-
-**Qué hace aquí**: reparte IPs a los equipos de la VLAN de Usuarios, junto con la puerta de enlace y el DNS que deben usar. Su configuración es en formato JSON y tiene API REST.
-
-**Dónde vive**: en `ct-dns-dhcp` (VLAN 20). Como los clientes están en otra VLAN, pfSense hace de relay entre ambas.
-
-**Puertos**: 67 y 68, UDP.
-{% endtab %}
-
 {% tab title="MariaDB" %}
 **Qué es**: un servidor de bases de datos relacionales, compatible con MySQL.
 
@@ -193,14 +183,15 @@ Las alertas de Suricata también deben llegar a Wazuh; Wazuh puede recibir logs 
 
 ### Dónde se guarda cada cosa
 
-| Dato                                           | Dónde se guarda                           |
-| ---------------------------------------------- | ----------------------------------------- |
-| Contenido de la web y cuentas de administrador | MariaDB (`ct-db`)                         |
-| Ataques capturados                             | Wazuh (indexer)                           |
-| Logs y sesiones originales de los honeypots    | Volúmenes de Docker en la VM de honeypots |
-| Muestras de malware                            | Volumen de Dionaea                        |
-| Copias de seguridad                            | `ct-backup`, con rsync nocturno           |
-| Gráficos y paneles                             | Grafana, que lee de Wazuh                 |
+| Dato                                                 | Dónde se guarda                           |
+| ---------------------------------------------------- | ----------------------------------------- |
+| Contenido de la web y cuentas de administrador       | MariaDB (`ct-db`)                         |
+| Ataques capturados                                   | Wazuh (indexer)                           |
+| Logs y sesiones originales de los honeypots          | Volúmenes de Docker en la VM de honeypots |
+| Muestras de malware                                  | Volumen de Dionaea                        |
+| Copias de seguridad                                  | `ct-backup`, con rsync nocturno           |
+| Gráficos y paneles                                   | Grafana, que lee de Wazuh                 |
+| Nombres del laboratorio y asignaciones de IP por MAC | pfSense (DNS Resolver y servidor DHCP)    |
 
 {% hint style="warning" %}
 Wazuh en una sola máquina recomienda, para hasta 25 agentes, 4 vCPU, 8 GB de RAM y 50 GB de disco. La VM del SIEM está prevista con 4 GB de RAM, la mitad de lo recomendado, y el indexer es la pieza que más memoria consume. El disco es menos problema, porque el PC 2 tiene un SSD de 256 GB, pero la RAM sí lo es: habrá que ajustar la memoria del indexer y reducir los días de retención.
@@ -213,8 +204,7 @@ Wazuh en una sola máquina recomienda, para hasta 25 agentes, 4 vCPU, 8 GB de RA
 * [Cowrie, repositorio y documentación](https://github.com/cowrie/cowrie)
 * [Dionaea, repositorio](https://github.com/DinoTools/dionaea)
 * [Dionaea: de Conficker a WannaCry — The Honeynet Project](https://honeynet.org/2017/05/30/dionaea-honeypot-from-conficker-to-wannacry-sambacry-cve-2017-7494/)
-* [Fin de mantenimiento de ISC DHCP — ISC](https://isc.org/dhcp/)
-* [Kea DHCP — ISC](https://www.isc.org/kea/)
+* [Documentación de pfSense — Netgate](https://docs.netgate.com/pfsense/en/latest/)
 
 ### Próximos pasos
 

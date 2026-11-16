@@ -13,27 +13,27 @@ Tabla única con todas las herramientas del proyecto: qué hace cada una, en qu�
 | Herramienta          | Función                                                                                 | Fase  | Documentación                                                        |
 | -------------------- | --------------------------------------------------------------------------------------- | ----- | -------------------------------------------------------------------- |
 | **Proxmox VE**       | Hipervisor bare-metal instalado en los dos PCs (dos nodos independientes, sin clúster). | F1    | [pve.proxmox.com/pve-docs](https://pve.proxmox.com/pve-docs/)        |
-| **Contenedores LXC** | Servidores ligeros de Proxmox: DNS y DHCP, base de datos, copias y web.                 | F3    | [pve.proxmox.com](https://pve.proxmox.com/pve-docs/chapter-pct.html) |
+| **Contenedores LXC** | Servidores ligeros de Proxmox: base de datos, copias y web.                             | F3    | [pve.proxmox.com](https://pve.proxmox.com/pve-docs/chapter-pct.html) |
 | **Docker + Compose** | Empaqueta y despliega honeypots, Wazuh y Grafana.                                       | F4–F6 | [docs.docker.com](https://docs.docker.com/)                          |
 
 ### Red y seguridad perimetral
 
-| Herramienta  | Función                                                      | Fase | Documentación                                                   |
-| ------------ | ------------------------------------------------------------ | ---- | --------------------------------------------------------------- |
-| **pfSense**  | Firewall y router entre todas las VLANs, en una VM del PC 1. | F2   | [docs.netgate.com](https://docs.netgate.com/pfsense/en/latest/) |
-| **Suricata** | IDS dentro de pfSense; alerta con firmas ET Open.            | F2   | [suricata.io](https://suricata.io/documentation/)               |
-| **UFW**      | Cortafuegos de cada servidor, con mínimo privilegio.         | F3   | [help.ubuntu.com](https://help.ubuntu.com/community/UFW)        |
+| Herramienta          | Función                                                                                                                                                     | Fase | Documentación                                                   |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | --------------------------------------------------------------- |
+| **pfSense CE 2.7.2** | Firewall y router entre todas las VLANs, en una VM del PC 1. También da el DNS (DNS Resolver), el DHCP con asignación fija por MAC y el reenvío de puertos. | F2   | [docs.netgate.com](https://docs.netgate.com/pfsense/en/latest/) |
+| **Suricata**         | IDS dentro de pfSense; alerta con firmas ET Open.                                                                                                           | F2   | [suricata.io](https://suricata.io/documentation/)               |
+| **UFW**              | Cortafuegos de cada servidor, con mínimo privilegio.                                                                                                        | F3   | [help.ubuntu.com](https://help.ubuntu.com/community/UFW)        |
 
 ### Servicios internos y web
 
-| Herramienta                      | Función                                                            | Fase | Documentación                                                 |
-| -------------------------------- | ------------------------------------------------------------------ | ---- | ------------------------------------------------------------- |
-| **Bind9**                        | Servidor DNS interno (`ct-dns-dhcp`).                              | F3   | [bind9.readthedocs.io](https://bind9.readthedocs.io/)         |
-| **DHCP (Kea o isc-dhcp-server)** | Reparte IPs en la VLAN de Usuarios, con relay en pfSense.          | F3   | [isc.org/kea](https://www.isc.org/kea/)                       |
-| **MariaDB**                      | Base de datos del contenido de la web (`ct-db`).                   | F3   | [mariadb.org](https://mariadb.org/documentation/)             |
-| **rsync + cron**                 | Copias de seguridad automáticas nocturnas (`ct-backup`).           | F3   | [rsync.samba.org](https://rsync.samba.org/documentation.html) |
-| **nginx + PHP-FPM**              | Servidor web de la empresa y su lógica en PHP (`ct-web`, VLAN 60). | F3   | [nginx.org/en/docs](https://nginx.org/en/docs/)               |
-| **Bootstrap**                    | Frontend responsive de la web.                                     | F3   | [getbootstrap.com](https://getbootstrap.com/docs/5.3/)        |
+| Herramienta         | Función                                                            | Fase | Documentación                                                 |
+| ------------------- | ------------------------------------------------------------------ | ---- | ------------------------------------------------------------- |
+| **MariaDB**         | Base de datos del contenido de la web (`ct-db`).                   | F3   | [mariadb.org](https://mariadb.org/documentation/)             |
+| **rsync + cron**    | Copias de seguridad automáticas nocturnas (`ct-backup`).           | F3   | [rsync.samba.org](https://rsync.samba.org/documentation.html) |
+| **nginx + PHP-FPM** | Servidor web de la empresa y su lógica en PHP (`ct-web`, VLAN 60). | F3   | [nginx.org/en/docs](https://nginx.org/en/docs/)               |
+| **Bootstrap**       | Frontend responsive de la web.                                     | F3   | [getbootstrap.com](https://getbootstrap.com/docs/5.3/)        |
+
+El DNS y el DHCP no tienen herramienta propia: los da pfSense (ver la capa de red).
 
 ### Honeypots
 

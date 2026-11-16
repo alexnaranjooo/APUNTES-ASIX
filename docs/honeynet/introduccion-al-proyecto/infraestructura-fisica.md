@@ -8,12 +8,12 @@ Esta página describe el **hardware real** del laboratorio de HoneyNet: qué equ
 
 ## Inventario de hardware
 
-| Equipo                                | Papel en el proyecto                                                                                                                                                                             | Estado                                                 |
-| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
-| **PC 1: Proxmox «honeynet»**          | Intel i5-8500 (6 núcleos), 8 GB de RAM y SSD de 128 GB. Aloja la VM de **pfSense + Suricata**, los **honeypots**, los **servidores**, la **web** y la VM de **cliente**. Está siempre encendido. | ✅ En uso                                               |
-| **PC 2: Proxmox «honeynet2»**         | 8 GB de RAM, un **disco duro de 500 GB** con Proxmox y un **SSD de 256 GB** libre. Tiene una sola tarjeta de red. Aloja el **SIEM** (Wazuh completo y Grafana) y **Kali**.                       | 🟡 Proxmox instalado; falta preparar el almacenamiento |
-| **Switch HP 1810-24** (J9801A)        | Conecta los dos PCs y transporta las VLANs. Se encuentra en el centro.                                                                                                                           | 🟡 Reservado (se configura en la Fase 2)               |
-| **Juniper NetScreen-25** (NS-025-005) | Firewall físico prestado por el centro.                                                                                                                                                          | ⏸️ Aparcado                                            |
+| Equipo                                | Papel en el proyecto                                                                                                                                                                             | Estado                                                              |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- |
+| **PC 1: Proxmox «honeynet»**          | Intel i5-8500 (6 núcleos), 8 GB de RAM y SSD de 128 GB. Aloja la VM de **pfSense + Suricata**, los **honeypots**, los **servidores**, la **web** y la VM de **cliente**. Está siempre encendido. | ✅ En uso                                                            |
+| **PC 2: Proxmox «honeynet2»**         | 8 GB de RAM, un **disco duro de 500 GB** con Proxmox y un **SSD de 256 GB** libre. Tiene una sola tarjeta de red. Aloja el **SIEM** (Wazuh completo y Grafana) y **Kali**.                       | 🟡 Proxmox instalado; falta preparar el almacenamiento              |
+| **Switch HP 1810-24** (J9801A)        | Conecta los dos PCs y transporta las VLANs. Se encuentra en el centro.                                                                                                                           | 🟡 Reservado (se configura cuando haya acceso físico a los equipos) |
+| **Juniper NetScreen-25** (NS-025-005) | Firewall físico prestado por el centro.                                                                                                                                                          | ⏸️ Aparcado                                                         |
 
 {% hint style="warning" %}
 Los dos PCs, el switch y el firewall son **material del centro**, no propio.
@@ -103,17 +103,17 @@ sequenceDiagram
 
 **PC 1** (unos 7,6 GB de RAM y 54 GB para máquinas)
 
-| Máquina                                          | Tipo    | RAM          | Disco       |
-| ------------------------------------------------ | ------- | ------------ | ----------- |
-| Proxmox                                          | Sistema | 1,4 GB       | —           |
-| pfSense con Suricata                             | VM      | 2 GB         | 12 GB       |
-| Honeypots (Docker)                               | VM      | 1 GB         | 10 GB       |
-| Servidores: `ct-dns-dhcp`, `ct-db` y `ct-backup` | 3 LXC   | 0,65 GB      | 7 GB        |
-| Web (`ct-web`: nginx + PHP-FPM)                  | LXC     | 0,25 GB      | 2 GB        |
-| Cliente                                          | VM      | 1,5 GB       | 10 GB       |
-| **Total**                                        |         | **≈ 6,8 GB** | **≈ 41 GB** |
+| Máquina                                            | Tipo    | RAM           | Disco       |
+| -------------------------------------------------- | ------- | ------------- | ----------- |
+| Proxmox                                            | Sistema | 1,4 GB        | —           |
+| pfSense con Suricata (también da el DNS y el DHCP) | VM      | 2 GB          | 12 GB       |
+| Honeypots (Docker)                                 | VM      | 1 GB          | 10 GB       |
+| Servidores: `ct-db` y `ct-backup`                  | 2 LXC   | 0,4 GB        | 5 GB        |
+| Web (`ct-web`: nginx + PHP-FPM)                    | LXC     | 0,25 GB       | 2 GB        |
+| Cliente                                            | VM      | 1,5 GB        | 10 GB       |
+| **Total**                                          |         | **≈ 6,55 GB** | **≈ 39 GB** |
 
-Quedan unos 0,8 GB de margen de RAM en el PC 1. Si hiciera falta, la VM cliente puede apagarse cuando no se use.
+Quedan más de 1 GB de margen de RAM en el PC 1. Si hiciera falta, la VM cliente puede apagarse cuando no se use.
 
 **PC 2** (8 GB de RAM; el SIEM y Kali van en el SSD de 256 GB)
 
@@ -130,16 +130,17 @@ Quedan unos 0,8 GB de margen de RAM en el PC 1. Si hiciera falta, la VM cliente 
 
 * **Dos Proxmox independientes**, uno por PC, sin clúster. Cada uno gestiona sus máquinas.
 * **pfSense + Suricata va en una VM** del PC 1. Antes iba en hardware real, pero el PC dedicado casi no usaba su memoria y la RAM total era insuficiente.
+* **El DNS y el DHCP los da pfSense**, con direcciones fijas por MAC. Así no hace falta un contenedor para ellos, lo que ahorra memoria y una máquina que mantener.
 * **Wazuh completo** (manager, indexador y panel) con **Grafana**, en el PC 2, con retención corta de datos. Los ataques se guardan en Wazuh y se ven en Grafana, no en la base de datos de la web.
 * **El SIEM y Kali, en el SSD del PC 2**, porque el disco duro de ese equipo es lento para un indexador que escribe mucho.
 * **Kali en el PC 2** y encendida solo durante las pruebas. El **cliente** va en el PC 1.
-* Servicios internos en **tres contenedores LXC** (DNS y DHCP, base de datos y copias), más uno para la web, para ahorrar memoria y separar privilegios.
+* Servicios internos en **dos contenedores LXC** (base de datos y copias), más uno para la web, para ahorrar memoria y separar privilegios.
 * **WAN como VLAN 99**, **VLAN 50** para el atacante y **VLAN 60** para la web.
 * El **NetScreen-25 queda aparcado**: no forma parte de la arquitectura.
 * **No hay portátil de administración fijo**: se administra desde un puerto del switch en la VLAN 30.
 
 {% hint style="warning" %}
-Si la VM de pfSense se apaga, cae el enrutado entre VLANs. El **puerto de administración** de la VLAN 30 sigue llegando a los dos Proxmox, porque no depende de pfSense.
+Si la VM de pfSense se apaga, cae el enrutado entre VLANs (y también el DNS y el DHCP). El **puerto de administración** de la VLAN 30 sigue llegando a los dos Proxmox, porque no depende de pfSense.
 {% endhint %}
 
 ***

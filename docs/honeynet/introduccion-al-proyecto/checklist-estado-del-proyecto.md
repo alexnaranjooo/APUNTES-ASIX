@@ -13,7 +13,7 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 | **F0** | Profundización: Proxmox, Docker, VLANs de seguridad, stack completo | ✅ Hecha                            |
 | **F1** | Inventario y Proxmox en los dos PCs                                 | 🟡 En curso (falta cerrar el PC 2) |
 | **F2** | VLANs, switch y pfSense (en VM) + Suricata                          | 🟡 En curso                        |
-| **F3** | Servidores internos (DNS, DHCP, MariaDB, Backup) y web              | ⚪ Pendiente                        |
+| **F3** | Servicios internos (MariaDB y copias), DNS y DHCP en pfSense, y web | 🟡 En curso                        |
 | **F4** | Honeypots: Cowrie, Dionaea, DVWA                                    | ⚪ Pendiente                        |
 | **F5** | Wazuh completo (SIEM)                                               | ⚪ Pendiente                        |
 | **F6** | Grafana, alertas por Telegram y paneles en la web                   | ⚪ Pendiente                        |
@@ -59,22 +59,27 @@ Lo que se va haciendo se documenta en [Implementación en Proxmox](../implementa
 
 ### Fase 2 — VLANs, switch y pfSense
 
+Lo hecho está documentado en [Red real del proyecto](../implementacion-en-proxmox/red-real-del-proyecto.md).
+
 * [ ] Configurar en el switch HP 1810-24 las VLANs 99, 10, 20, 30, 40, 50 y 60 y los puertos en trunk
 * [ ] Pasar `vmbr0` a VLAN-aware en los dos nodos y mover la gestión a la VLAN 30
 * [x] Crear la VM de pfSense en el PC 1 (una tarjeta para la WAN y otra con todas las VLANs, arranque automático)
 * [x] Definir las VLANs 10, 20, 30, 40, 50 y 60 sobre la tarjeta de pfSense (la WAN va por `vmbr0` hasta tener el switch)
 * [ ] Desactivar el checksum offload de pfSense
-* [ ] Escribir las reglas de firewall según la tabla de tráfico de [Seguridad](arquitectura-del-software/6.-seguridad.md)
+* [x] Escribir las reglas de firewall de las VLANs de servidores, usuarios y web ([Seguridad](arquitectura-del-software/6.-seguridad.md))
+* [x] DNS Resolver y DHCP por MAC en pfSense, con la zona `honeynet.lan` (sin contenedor de DNS)
+* [x] Reenvío de puertos de la WAN hacia `ct-web`
 * [ ] Instalar y activar Suricata con reglas ET Open
 * [ ] Probar el aislamiento entre VLANs
 
-### Fase 3 — Servidores internos y web
+### Fase 3 — Servicios internos y web
 
-* [ ] `ct-dns-dhcp`: Bind9 (zona `honeynet.lan`) y DHCP para la VLAN de Usuarios, con relay en pfSense
-* [ ] `ct-db`: MariaDB con el esquema `honeypot_web` y el usuario `web_app` con permisos mínimos
+* [x] `ct-db`: MariaDB con el esquema `honeypot_web` y los usuarios `web_app` y `web_admin` con permisos mínimos
+* [x] `ct-web`: nginx + PHP-FPM conectado a la base de datos
+* [x] Comprobar que la VLAN de Usuarios obtiene IP, resuelve nombres y abre la web
+* [ ] UFW y SSH con claves en `ct-db` y `ct-web`, y HTTPS en `ct-web`
 * [ ] `ct-backup`: copias automáticas con rsync + cron
-* [ ] `ct-web`: nginx + PHP-FPM, HTTPS, UFW y SSH con claves
-* [ ] Comprobar que la VLAN de Usuarios obtiene IP, resuelve nombres y abre la web (prueba «Hello world»)
+* [ ] Borrar el contenedor `ct-dns-dhcp`, que ya no se usa
 
 ### Fase 4 — Honeypots
 
@@ -124,5 +129,5 @@ Detalle en [Parte web](parte-web/) y en [Arquitectura del software](arquitectura
 * [x] Datos por pantalla
 * [x] Webgrafía
 * [x] Arquitectura del software documentada (requisitos, sistema, base de datos, UI/UX, infraestructura y seguridad)
-* [ ] Servidor nginx para alojar la web (en la Fase 3)
+* [x] Servidor nginx para alojar la web (en la Fase 3)
 * [ ] Login de administrador y panel `/admin` (en la Fase 6)

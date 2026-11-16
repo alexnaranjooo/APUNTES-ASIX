@@ -15,7 +15,7 @@ Diseñar, desplegar y documentar una **red de laboratorio segmentada** capaz de 
 ### Infraestructura
 
 * Montar **Proxmox** en dos PCs del centro, como base de todas las VMs y contenedores del laboratorio.
-* Segmentar la red en **seis VLANs internas** (DMZ, Servidores, Gestión, Usuarios, Atacante y Web) más la WAN, con **pfSense + Suricata** (en una VM) como firewall, router e IDS, conectado todo mediante un switch **HP 1810-24**.
+* Segmentar la red en **seis VLANs internas** (DMZ, Servidores, Gestión, Usuarios, Atacante y Web) más la WAN, con **pfSense + Suricata** (en una VM) como firewall, router e IDS, que además da el DNS y el DHCP, conectado todo mediante un switch **HP 1810-24**.
 * Aplicar **defensa en profundidad**: que comprometer una pieza no dé acceso a las demás.
 
 El hardware se detalla en [Infraestructura física](infraestructura-fisica.md).

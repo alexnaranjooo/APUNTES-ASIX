@@ -9,8 +9,8 @@ Delimita con claridad **qué incluye** HoneyNet, **qué queda fuera a propósito
 ## Dentro del alcance
 
 * Infraestructura sobre dos PCs del centro, cada uno con **Proxmox**: el **PC 1** con pfSense + Suricata (en una VM), honeypots, servidores, web y cliente, y el **PC 2** con el SIEM y Kali. Conectados con un switch **HP 1810-24**.
-* Segmentación en seis VLANs internas (más la WAN) con **pfSense + Suricata**.
-* Servicios internos, cada uno en su contenedor: DNS y DHCP, MariaDB y copias de seguridad.
+* Segmentación en seis VLANs internas (más la WAN) con **pfSense + Suricata**, que además da el **DNS** y el **DHCP** de la red.
+* Servicios internos en contenedores: base de datos MariaDB y copias de seguridad.
 * Tres honeypots en Docker: **Cowrie**, **Dionaea** y **DVWA**.
 * SIEM con **Wazuh completo** y visualización con **Grafana**.
 * Alertas por **Telegram** desde Grafana.
@@ -26,6 +26,7 @@ Delimita con claridad **qué incluye** HoneyNet, **qué queda fuera a propósito
 * Análisis forense profundo del malware capturado (se guardan las muestras, pero no se hace ingeniería inversa).
 * El firewall físico **Juniper NetScreen-25**, prestado por el centro, queda aparcado.
 * **Bloqueo automático de IPs** en pfSense: es un extra opcional si sobra tiempo.
+* Un servidor DNS y DHCP propio en un contenedor (Bind9 y Kea): se estudian en clase, pero el proyecto usa los de pfSense para ahorrar memoria.
 * Guardar los ataques capturados en la base de datos de la web: los registra Wazuh y los muestra Grafana.
 * Atribución de los atacantes: se registran IPs y comportamiento, no se investiga quién hay detrás.
 
@@ -37,6 +38,7 @@ Delimita con claridad **qué incluye** HoneyNet, **qué queda fuera a propósito
 
 * **Poca memoria**: cada PC tiene **8 GB de RAM** y el centro no puede ampliarlos. En disco, el PC 1 tiene un SSD de 128 GB y el PC 2 tiene un disco duro de 500 GB y un SSD de 256 GB. Obliga a usar contenedores ligeros, a limitar la retención de datos de Wazuh y a encender Kali solo durante las pruebas.
 * **pfSense en una VM** del PC 1, con una sola tarjeta de red: WAN y redes internas viajan por el mismo cable en trunk, con la VLAN 99 como WAN. Todo el tráfico entre VLANs pasa por un único enlace.
+* **pfSense concentra varios servicios** (firewall, DNS y DHCP): si la VM se apaga, la red interna se queda sin ellos. Los servidores llevan IP fija para que sigan funcionando entre ellos.
 * **Wazuh completo es la pieza más pesada**: funciona, pero con poco margen de memoria. El plan B es una versión ligera (solo el manager con Loki y Grafana).
 * **Hardware prestado**: los PCs, el switch y el firewall son del centro, y podrían reiniciarse o reinstalarse. Las configuraciones se guardan fuera de los equipos.
 * **Equipos en un aula cerrada**: no se puede acceder físicamente a los PCs, así que los cambios que puedan cortar la red se hacen con cuidado y se dejan para cuando haya acceso.

@@ -2,7 +2,7 @@
 
 ### **Introducción**
 
-Esquema general de la arquitectura de **HoneyNet**: dos PCs con **Proxmox** (el PC 1 con pfSense + Suricata en una VM, honeypots, servidores, web y usuario; el PC 2 con el SIEM y Kali), un switch **HP 1810-24**, seis VLANs internas más la WAN y el flujo de tráfico permitido entre ellas. El hardware se detalla en [Infraestructura física](infraestructura-fisica.md) y el direccionamiento en [Infraestructura y red (Proxmox)](arquitectura-del-software/5.-infraestructura-y-red-proxmox.md).
+Esquema general de la arquitectura de **HoneyNet**: dos PCs con **Proxmox** (el PC 1 con pfSense + Suricata en una VM, honeypots, servidores, web y usuario; el PC 2 con el SIEM y Kali), un switch **HP 1810-24**, seis VLANs internas más la WAN y el flujo de tráfico permitido entre ellas. pfSense da además el DNS y el DHCP de la red. El hardware se detalla en [Infraestructura física](infraestructura-fisica.md) y el direccionamiento en [Infraestructura y red (Proxmox)](arquitectura-del-software/5.-infraestructura-y-red-proxmox.md).
 
 ***
 
@@ -12,7 +12,7 @@ Esquema general de la arquitectura de **HoneyNet**: dos PCs con **Proxmox** (el 
 flowchart TB
     INTERNET(("Red del centro<br/>VLAN 99 · WAN"))
 
-    PF{{"pfSense + Suricata (VM en PC 1)<br/>Firewall / Router / IDS"}}
+    PF{{"pfSense + Suricata (VM en PC 1)<br/>Firewall / Router / IDS / DNS / DHCP"}}
 
     subgraph ATK["VLAN 50 — Atacante (PC 2)"]
         KALI["Kali Linux<br/>(solo en pruebas)"]
@@ -25,7 +25,6 @@ flowchart TB
     end
 
     subgraph SRV["VLAN 20 — Servidores (PC 1)"]
-        DNS["ct-dns-dhcp<br/>Bind9 y DHCP"]
         MYSQL[("ct-db<br/>MariaDB de la web")]
         BACKUP["ct-backup<br/>rsync + cron"]
     end
@@ -53,9 +52,8 @@ flowchart TB
     PF <--> USERS
     PF <--> WEB
 
-    USERS -- "DNS / DHCP" --> SRV
     USERS -- "80 / 443" --> WEB
-    WEB -- "3306 y DNS" --> SRV
+    WEB -- "3306" --> SRV
     WEB -- "Grafana 3000" --> MGMT
     ADMIN -- "único acceso directo" --> MGMT
 
@@ -68,19 +66,20 @@ flowchart TB
 
 ### **Reglas de tráfico**
 
-| Origen                   | Destino                         | ¿Permitido?                         | Motivo                                                                                                     |
-| ------------------------ | ------------------------------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Atacante (Kali, VLAN 50) | DMZ, vía pfSense                | ✅ Sí                                | Es el tráfico que el proyecto busca atraer y capturar                                                      |
-| Atacante                 | Web                             | ✅ Solo 80 y 443                     | Probar el sitio de la empresa                                                                              |
-| Atacante                 | Servidores / Gestión / Usuarios | ❌ No                                | pfSense nunca expone directamente las VLANs internas                                                       |
-| DMZ                      | Gestión                         | ✅ Solo logs (1514/1515, un sentido) | Monitorización, no es tráfico de ataque                                                                    |
-| DMZ                      | Resto de VLANs                  | ❌ No                                | Si un honeypot se compromete, debe quedar aislado. No necesita base de datos: los ataques los guarda Wazuh |
-| Servidores               | Gestión                         | ✅ Solo logs                         | Igual que el caso anterior                                                                                 |
-| Web                      | Servidores                      | ✅ Solo `ct-db` (3306) y DNS (53)    | La web consulta su base de datos y resuelve nombres                                                        |
-| Web                      | Gestión                         | ✅ Grafana (3000) y logs (1514/1515) | Proxy de `/grafana/` para el panel de administración y agente de logs                                      |
-| Usuarios                 | Servidores                      | ✅ DNS y DHCP                        | Consumo normal de los servicios internos                                                                   |
-| Usuarios                 | Web                             | ✅ Solo 80 y 443                     | Visitar la web de la empresa                                                                               |
-| Usuarios                 | DMZ / Gestión                   | ❌ No                                | Los empleados simulados no tienen motivo para tocar esas VLANs                                             |
-| Administrador            | Gestión                         | ✅ Único acceso directo              | Es la VLAN más protegida de todas                                                                          |
+| Origen                     | Destino                         | ¿Permitido?                                | Motivo                                                                                                     |
+| -------------------------- | ------------------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| Atacante (Kali, VLAN 50)   | DMZ, vía pfSense                | ✅ Sí                                       | Es el tráfico que el proyecto busca atraer y capturar                                                      |
+| Atacante                   | Web                             | ✅ Solo 80 y 443                            | Probar el sitio de la empresa                                                                              |
+| Atacante                   | Servidores / Gestión / Usuarios | ❌ No                                       | pfSense nunca expone directamente las VLANs internas                                                       |
+| DMZ                        | Gestión                         | ✅ Solo logs (1514/1515, un sentido)        | Monitorización, no es tráfico de ataque                                                                    |
+| DMZ                        | Resto de VLANs                  | ❌ No                                       | Si un honeypot se compromete, debe quedar aislado. No necesita base de datos: los ataques los guarda Wazuh |
+| Servidores                 | Gestión                         | ✅ Solo logs                                | Igual que el caso anterior                                                                                 |
+| Servidores, Usuarios y Web | pfSense                         | ✅ Solo DNS (y DHCP en la VLAN de Usuarios) | pfSense da el DNS y el DHCP; el resto de su administración está bloqueada                                  |
+| Web                        | Servidores                      | ✅ Solo `ct-db` (3306)                      | La web consulta su base de datos                                                                           |
+| Web                        | Gestión                         | ✅ Grafana (3000) y logs (1514/1515)        | Proxy de `/grafana/` para el panel de administración y agente de logs                                      |
+| Usuarios                   | Web                             | ✅ Solo 80 y 443                            | Visitar la web de la empresa                                                                               |
+| Usuarios                   | DMZ / Gestión / Servidores      | ❌ No                                       | Los empleados simulados no tienen motivo para tocar esas VLANs                                             |
+| Red del centro (WAN)       | Web                             | ✅ Solo 80, por reenvío de puertos          | La web se publica a través de pfSense, solo para las redes del centro                                      |
+| Administrador              | Gestión                         | ✅ Único acceso directo                     | Es la VLAN más protegida de todas                                                                          |
 
 El detalle de las reglas de pfSense y de UFW está en [Seguridad](arquitectura-del-software/6.-seguridad.md).

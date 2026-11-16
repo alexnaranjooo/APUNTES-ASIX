@@ -25,7 +25,7 @@ detectar → analizar → responder → visualizar
 ### **Infraestructura base**
 
 * **Proxmox** como servidor de virtualización, en **dos PCs** del centro (dos nodos independientes, sin clúster)
-* **pfSense + Suricata** como cerebro de red: firewall, router e IDS a la vez, en una **máquina virtual** del PC 1 con una sola tarjeta de red
+* **pfSense + Suricata** como cerebro de red: firewall, router e IDS a la vez, y también DNS y DHCP, en una **máquina virtual** del PC 1 con una sola tarjeta de red
 * **Switch HP 1810-24** que conecta los dos PCs y transporta las VLANs
 * Segmentación en VLANs
 * Acceso remoto al laboratorio con NetBird (VPN)
@@ -54,7 +54,7 @@ detectar → analizar → responder → visualizar
 {% step %}
 ### **Empresa simulada**
 
-* DNS, DHCP, MariaDB, Backup → dan credibilidad de infraestructura real, cada uno en su contenedor
+* DNS y DHCP (en pfSense), MariaDB y Backup → dan credibilidad de infraestructura real; la base de datos y las copias van cada una en su contenedor
 * VM de usuarios → contexto de empleados
 * Web de la empresa (honeypots como servicio) alojada en nginx, con PHP y MariaDB
 {% endstep %}
