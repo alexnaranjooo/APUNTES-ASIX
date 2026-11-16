@@ -6,6 +6,10 @@ description: >-
 
 # iptables: persistencia e IP fija
 
+{% hint style="warning" %}
+**Práctica sustituida por pfSense.** El contenedor de esta práctica (`ct-prueba`) era temporal y ya se eliminó. En la red definitiva las reglas y la IP de la WAN las gestiona **pfSense** (ver [Red real del proyecto](red-real-del-proyecto.md)). Esta página se conserva para explicar el mecanismo, por eso no lleva capturas.
+{% endhint %}
+
 ## Introducción
 
 Continuación de [Reenvío de puertos con iptables](reenvio-de-puertos-con-iptables.md). Las reglas funcionan, pero viven en memoria: al reiniciar el contenedor se pierden. Además, la IP externa la reparte el DHCP del centro y puede cambiar. Aquí se resuelven las dos cosas.
@@ -32,10 +36,6 @@ Hacen falta las dos para que la web siga funcionando tras reiniciar.
 
 **Comprobación:** se apaga el contenedor del todo (**Shutdown**), se vuelve a encender y se miran `sysctl net.ipv4.ip_forward` (debe dar `1`), `iptables -t nat -L -n`, `iptables -L FORWARD -n` y `ip -br a`. Después se abre la web.
 
-{% hint style="info" %}
-CAPTURA PENDIENTE: las reglas guardadas y el contenedor tras reiniciar.
-{% endhint %}
-
 Si no se cargan solas, se comprueba el servicio con `systemctl status netfilter-persistent` y se activa con `systemctl enable netfilter-persistent`.
 
 ## 2. IP fija en la tarjeta externa
@@ -59,10 +59,6 @@ Las reglas de `iptables` siguen valiendo porque usan los **nombres** de las tarj
 Una IP fija puede chocar con la que el DHCP dé a otro equipo, y los dos fallarían a ratos. Si hay dudas, se pide al centro una dirección reservada.
 {% endhint %}
 
-{% hint style="info" %}
-CAPTURA PENDIENTE: la pantalla _Network_ con `eth0` en Static, y la web abierta con la IP fija.
-{% endhint %}
-
 ***
 
 ## Problemas frecuentes
@@ -77,4 +73,4 @@ CAPTURA PENDIENTE: la pantalla _Network_ con `eth0` en Static, y la web abierta 
 
 ## Relación con el proyecto
 
-En la Fase 2 esto lo hará **pfSense**: una regla de reenvío de puertos desde la WAN hacia `ct-web` (`10.0.60.10`) y reglas de firewall que solo dejan pasar el 80 y el 443. Aquí se ha hecho a mano con `iptables` para entender el mecanismo.
+En la Fase 2 esto lo hace **pfSense**: una regla de reenvío de puertos desde la WAN hacia `ct-web` (`10.0.60.10`) y reglas de firewall que solo dejan pasar el 80 y el 443. Aquí se hizo a mano con `iptables` para entender el mecanismo. La práctica ya está sustituida por la red real.

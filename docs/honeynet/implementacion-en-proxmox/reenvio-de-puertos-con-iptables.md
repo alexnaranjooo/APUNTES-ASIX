@@ -6,6 +6,10 @@ description: >-
 
 # Reenvío de puertos con iptables
 
+{% hint style="warning" %}
+**Práctica sustituida por pfSense.** Esto se montó como práctica en un contenedor temporal (`ct-prueba`), que después se eliminó. En la red definitiva el reenvío de puertos lo hace **pfSense** (ver [Red real del proyecto](red-real-del-proyecto.md)). Esta página se conserva para explicar el mecanismo (DNAT, MASQUERADE y denegar por defecto), por eso no lleva capturas.
+{% endhint %}
+
 ## Objetivo
 
 Que la web de `vm-nginx`, que solo está en la red interna, se vea desde el navegador de un PC entrando por la **IP externa del contenedor** `ct-prueba`. Es lo mismo que hará pfSense en la Fase 2: recibir el tráfico por la WAN y reenviarlo a la web interna.
@@ -38,10 +42,6 @@ flowchart LR
 
 Antes de seguir, desde el contenedor, un `curl` a la IP interna de la VM debe mostrar su página. La preparación de la red interna está en la página [Red interna con VLAN](red-interna-con-vlan-vmbr1.md).
 
-{% hint style="info" %}
-CAPTURA PENDIENTE: las dos tarjetas de `ct-prueba` y su `ip -br a`.
-{% endhint %}
-
 ## 2. Instalar y activar el reenvío
 
 ```bash
@@ -70,14 +70,6 @@ iptables -P FORWARD DROP
 | `FORWARD` (vuelta)             | Permite las respuestas                                                              |
 | `-P FORWARD DROP`              | **Denegar por defecto**: todo lo que no está permitido se bloquea. Se pone al final |
 
-{% hint style="info" %}
-CAPTURA PENDIENTE: las reglas con `iptables -t nat -L -n -v` y `iptables -L FORWARD -n -v`.
-{% endhint %}
-
 ## 4. Probar
 
 Desde el navegador del PC se abre la IP externa del contenedor, con `http` y sin puerto, y debe mostrarse el mensaje de la VM. Los contadores (`pkts`) de la regla `DNAT` suben cada vez que se recarga la página. Otro puerto, por ejemplo el 8080, no responde: lo bloquea la política por defecto.
-
-{% hint style="info" %}
-CAPTURA PENDIENTE: la web abierta en el navegador con la IP del contenedor.
-{% endhint %}
