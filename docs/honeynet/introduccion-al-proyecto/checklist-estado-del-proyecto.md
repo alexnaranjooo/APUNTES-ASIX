@@ -8,17 +8,17 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 
 ## Resumen de estado
 
-| Fase   | Contenido                                                           | Estado                             |
-| ------ | ------------------------------------------------------------------- | ---------------------------------- |
-| **F0** | Profundización: Proxmox, Docker, VLANs de seguridad, stack completo | ✅ Hecha                            |
-| **F1** | Inventario y Proxmox en los dos PCs                                 | 🟡 En curso (falta cerrar el PC 2) |
-| **F2** | VLANs, switch y pfSense (en VM) + Suricata                          | 🟡 En curso                        |
-| **F3** | Servicios internos (MariaDB y copias), DNS y DHCP en pfSense, y web | 🟡 En curso                        |
-| **F4** | Honeypots: Cowrie, Dionaea, DVWA                                    | ⚪ Pendiente                        |
-| **F5** | Wazuh completo (SIEM)                                               | ⚪ Pendiente                        |
-| **F6** | Grafana, alertas por Telegram y paneles en la web                   | ⚪ Pendiente                        |
-| **F7** | Exposición controlada a internet (VPS)                              | ⚪ Pendiente                        |
-| **F8** | Memoria y presentación                                              | ⚪ Pendiente                        |
+| Fase   | Contenido                                                           | Estado      |
+| ------ | ------------------------------------------------------------------- | ----------- |
+| **F0** | Profundización: Proxmox, Docker, VLANs de seguridad, stack completo | ✅ Hecha     |
+| **F1** | Inventario y Proxmox en los dos PCs                                 | ✅ Hecha     |
+| **F2** | VLANs, switch y pfSense (en VM) + Suricata                          | 🟡 En curso |
+| **F3** | Servicios internos (MariaDB y copias), DNS y DHCP en pfSense, y web | 🟡 En curso |
+| **F4** | Honeypots: Cowrie, Dionaea, DVWA                                    | ⚪ Pendiente |
+| **F5** | Wazuh completo (SIEM)                                               | ⚪ Pendiente |
+| **F6** | Grafana, alertas por Telegram y paneles en la web                   | ⚪ Pendiente |
+| **F7** | Exposición controlada a internet (VPS)                              | ⚪ Pendiente |
+| **F8** | Memoria y presentación                                              | ⚪ Pendiente |
 
 ### Fase 0 — Profundización
 
@@ -55,7 +55,6 @@ Lo que se va haciendo se documenta en [Implementación en Proxmox](../implementa
 * [x] Inventario del PC 2 (8 GB de RAM, disco duro de 500 GB, SSD de 256 GB y una NIC)
 * [x] Instalar Proxmox en el PC 2
 * [x] Repositorios gratuitos, actualización y usuario administrador del PC 2
-* [ ] Añadir el SSD de 256 GB del PC 2 como almacenamiento para el SIEM y Kali
 
 ### Fase 2 — VLANs, switch y pfSense
 
@@ -78,7 +77,7 @@ Lo hecho está documentado en [Red real del proyecto](../implementacion-en-proxm
 * [x] `ct-web`: nginx + PHP-FPM conectado a la base de datos
 * [x] Comprobar que la VLAN de Usuarios obtiene IP, resuelve nombres y abre la web
 * [ ] UFW y SSH con claves en `ct-db` y `ct-web`, y HTTPS en `ct-web`
-* [ ] `ct-backup`: copias automáticas con rsync + cron
+* [x] `ct-backup`: copias automáticas con rsync + cron ([Copias de seguridad con ct-backup](../implementacion-en-proxmox/3.-despliegue-real/contenedores/copias-de-seguridad-con-ct-backup.md))
 * [x] Borrar el contenedor `ct-dns-dhcp`, que ya no se usa
 
 ### Fase 4 — Honeypots
