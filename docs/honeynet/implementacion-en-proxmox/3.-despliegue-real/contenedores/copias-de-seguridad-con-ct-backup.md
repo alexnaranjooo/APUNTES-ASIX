@@ -22,7 +22,7 @@ flowchart LR
 
 ## <mark style="color:$warning;">**Por qué modelo pull**</mark>
 
-En un modelo **push** cada servidor sube sus copias al servidor de copias, así que todos necesitan acceso a él. Si un atacante entra en uno, puede borrar también las copias. En el modelo **pull** es  `ct-backup` quien entra a buscar los datos, y los servidores no tienen ninguna forma de entrar en él. Esto importa en un proyecto de honeypots, donde las máquinas expuestas pueden verse comprometidas.
+En un modelo **push** cada servidor sube sus copias al servidor de copias, así que todos necesitan acceso a él. Si un atacante entra en uno, puede borrar también las copias. En el modelo **pull** es `ct-backup` quien entra a buscar los datos, y los servidores no tienen ninguna forma de entrar en él. Esto importa en un proyecto de honeypots, donde las máquinas expuestas pueden verse comprometidas.
 
 ## <mark style="color:$warning;">**Qué se copia y cuándo**</mark>
 
@@ -50,7 +50,7 @@ La clave privada no sale de `ct-backup`; la pública (`backup_key.pub`) es la qu
 
 <figure><img src="../../../../.gitbook/assets/02-clave-ssh-generada.png" alt=""><figcaption></figcaption></figure>
 
-## **3.&#x20;**<mark style="color:$warning;">**Preparar**</mark>**&#x20;`ct-db`&#x20;**<mark style="color:$warning;">**y**</mark>**&#x20;`ct-web`**
+## **3.&#x20;**<mark style="color:$warning;">**Preparar**</mark> **`ct-db`** <mark style="color:$warning;">**y**</mark> **`ct-web`**
 
 En los dos servidores se crea un usuario `respaldo` sin privilegios, que solo puede leer la carpeta `/var/backups/honeynet`, y se instala la clave pública con dos restricciones:
 
@@ -118,11 +118,7 @@ La regla es lo más estrecha posible: solo esa máquina, solo ese destino y solo
 
 <figure><img src="../../../../.gitbook/assets/06-regla-pfsense-formulario.png" alt=""><figcaption></figcaption></figure>
 
-
-
 <figure><img src="../../../../.gitbook/assets/07-reglas-serv-lista.png" alt=""><figcaption></figcaption></figure>
-
-
 
 ## **6.&#x20;**<mark style="color:$warning;">**Recoger las copias**</mark>
 
@@ -170,6 +166,47 @@ Resultado: aparecen los dos archivos con el mismo tamaño que en los servidores 
 <figure><img src="../../../../.gitbook/assets/10-log-backup-ok.png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../../../.gitbook/assets/11-recuento-11-tablas.png" alt=""><figcaption></figcaption></figure>
+
+## **8.&#x20;**<mark style="color:$warning;">**Prueba de restauración**</mark>
+
+**Concepto:** una copia que nunca se ha restaurado no se sabe si vale. Se restaura el volcado en una base de datos de prueba (`honeypot_web_test`), se comprueba el contenido y se borra, sin tocar la base real.
+
+Primero se comprueba que la copia de `ct-backup` es idéntica a la original de `ct-db` comparando su huella `sha256`:
+
+```bash
+# En ct-backup
+sha256sum $(ls -t /srv/backups/ct-db/*.sql.gz | head -1)
+# En ct-db
+F=$(ls -t /var/backups/honeynet/*.sql.gz | head -1)
+sha256sum $F
+```
+
+Las dos huellas coinciden (`8734a326…`), así que la copia no se ha alterado en el traslado.
+
+{% hint style="info" %}
+**CAPTURA PENDIENTE** — `12-huellas-sha256-iguales`: las dos salidas de `sha256sum` (ct-backup y ct-db).
+{% endhint %}
+
+Después se restaura en la base de prueba y se cuentan los objetos:
+
+```bash
+mariadb -e "CREATE DATABASE honeypot_web_test"
+zcat $F | mariadb honeypot_web_test
+mariadb -e "SELECT COUNT(*) AS tablas FROM information_schema.tables WHERE table_schema='honeypot_web_test'"
+mariadb -e "SHOW TABLES FROM honeypot_web_test"
+```
+
+Salen **16 objetos**: las **11 tablas** más **5 vistas** (`vw_accesos_fallidos_recientes`, `vw_estadisticas_mensuales`, `vw_mensajes_admin`, `vw_planes_detalle` y `vw_usuarios_resumen`), porque `information_schema.tables` cuenta también las vistas. La importación termina sin errores.
+
+{% hint style="info" %}
+**CAPTURA PENDIENTE** — `13-restauracion-16-objetos`: `CREATE DATABASE`, importación, recuento de 16 y listado de tablas y vistas.
+{% endhint %}
+
+Por último se borra la base de prueba:
+
+```bash
+mariadb -e "DROP DATABASE honeypot_web_test"
+```
 
 ***
 
