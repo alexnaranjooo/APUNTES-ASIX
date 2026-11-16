@@ -6,7 +6,7 @@ description: Las interfaces y VLANs de pfSense y las reglas del firewall de cada
 
 La WAN va por `vmbr0` y recibe su IP por DHCP del centro. Las seis VLANs internas llegan por una única tarjeta virtual, que no lleva etiqueta de VLAN, y pfSense crea una interfaz por cada una.
 
-<figure><img src="../../../.gitbook/assets/02-wan-pfsense.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/02-wan-pfsense.png" alt=""><figcaption></figcaption></figure>
 
 ## Interfaces
 
@@ -30,8 +30,8 @@ pfSense bloquea por defecto todo lo que no esté permitido, y las reglas se eval
 | USERS (40) | Ping a pfSense, DNS a pfSense, web (puertos 80 y 443) hacia `10.0.60.10`, bloqueo a pfSense, salida a internet |
 | WEB (60)   | Ping a pfSense, DNS a pfSense, base de datos (3306) hacia `10.0.20.11`, bloqueo a pfSense, salida a internet   |
 
-<figure><img src="../../../.gitbook/assets/03-reglas-serv (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/03-reglas-serv (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../../.gitbook/assets/04-reglas-users (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/04-reglas-users (2).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../../.gitbook/assets/05-reglas-web (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/05-reglas-web (2).png" alt=""><figcaption></figcaption></figure>

@@ -14,6 +14,6 @@ El DNS Resolver de pfSense reenvía las consultas al DNS del centro y resuelve l
 
 La VM cliente recibe `10.0.40.10`, la IP asignada a su MAC, y el DNS de pfSense resuelve `www.honeynet.lan` a `10.0.60.10`, con una respuesta autoritativa.
 
-<figure><img src="../../../.gitbook/assets/06-dhcp-dns-cliente.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/06-dhcp-dns-cliente.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../../.gitbook/assets/12-dig-vlan40.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/12-dig-vlan40.png" alt=""><figcaption></figcaption></figure>

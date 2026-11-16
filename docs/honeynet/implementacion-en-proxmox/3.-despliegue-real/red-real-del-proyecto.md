@@ -42,12 +42,6 @@ flowchart TB
 
 ## Cómo se organiza esta parte
 
-Cada pieza tiene su página, en el orden en que se montó:
-
-1. [pfSense: interfaces y reglas](pfsense-interfaces-y-reglas.md): las VLANs y el firewall de cada red.
-2. [DHCP por MAC y DNS](dhcp-por-mac-y-dns.md): direcciones fijas por MAC y resolución de `honeynet.lan`.
-3. [Reenvío de puertos (NAT)](reenvio-de-puertos-nat.md): cómo se publica la web por la WAN.
-4. [Contenedores ct-db y ct-web](contenedores-ct-db-y-ct-web.md): los servidores de la base de datos y de la web.
-5. [Base de datos](base-de-datos.md): MariaDB y el script de la base de datos.
-6. [Prueba de punta a punta y problemas](prueba-de-punta-a-punta-y-problemas.md): la web completa desde la VM cliente y lo que falló por el camino.
-7. [Copias de seguridad con ct-backup](copias-de-seguridad-con-ct-backup.md): copias nocturnas de la base de datos y de la web.
+1. [Red con pfSense](red-con-pfsense/): las VLANs y el firewall, el DHCP por MAC y el DNS, y el reenvío de puertos que publica la web.
+2. [Contenedores](contenedores/): los servidores `ct-db` y `ct-web`, la base de datos y las copias de seguridad con `ct-backup`.
+3. [Prueba de punta a punta y problemas](prueba-de-punta-a-punta-y-problemas.md): la web completa desde la VM cliente y lo que falló por el camino.

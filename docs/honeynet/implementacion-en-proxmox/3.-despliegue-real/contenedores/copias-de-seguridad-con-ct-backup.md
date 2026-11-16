@@ -36,7 +36,7 @@ Contenedor LXC sin privilegios, en la VLAN 20 junto a la base de datos.
 
 <table><thead><tr><th width="155">Ajuste</th><th>Valor</th></tr></thead><tbody><tr><td>ID y hostname</td><td>212, <code>ct-backup</code></td></tr><tr><td>Plantilla</td><td><code>debian-13-standard_13.6-1_amd64.tar.zst</code></td></tr><tr><td>CPU y memoria</td><td>1 núcleo, 256 MiB de RAM y 256 MiB de swap</td></tr><tr><td>Disco</td><td>8 GiB en <code>local-lvm</code></td></tr><tr><td>Red</td><td><code>eth0</code>, bridge <code>vmbr1</code>, VLAN 20, <code>10.0.20.12/24</code>, gateway y DNS <code>10.0.20.1</code> (pfSense)</td></tr></tbody></table>
 
-<figure><img src="../../../.gitbook/assets/01-crear-ct-confirmacion.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/01-crear-ct-confirmacion.png" alt=""><figcaption></figcaption></figure>
 
 ## **2.&#x20;**<mark style="color:$warning;">**La clave SSH**</mark>
 
@@ -48,7 +48,7 @@ ssh-keygen -t ed25519 -f /root/.ssh/backup_key -N ""
 
 La clave privada no sale de `ct-backup`; la pública (`backup_key.pub`) es la que se copia a los servidores.
 
-<figure><img src="../../../.gitbook/assets/02-clave-ssh-generada.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/02-clave-ssh-generada.png" alt=""><figcaption></figcaption></figure>
 
 ## **3.&#x20;**<mark style="color:$warning;">**Preparar**</mark>**&#x20;`ct-db`&#x20;**<mark style="color:$warning;">**y**</mark>**&#x20;`ct-web`**
 
@@ -71,7 +71,7 @@ ssh-keygen -lf /home/respaldo/.ssh/authorized_keys
 
 El último comando muestra la huella de la clave, que debe coincidir con la de `ct-backup`. El cortafuegos del servidor solo deja entrar por SSH a `10.0.20.12`.
 
-<figure><img src="../../../.gitbook/assets/03-huella-ct-db.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/03-huella-ct-db.png" alt=""><figcaption></figcaption></figure>
 
 ## **4.&#x20;**<mark style="color:$warning;">**Los scripts de copia**</mark>
 
@@ -87,7 +87,7 @@ find $D -name '*.gz' -mtime +7 -delete
 
 `--single-transaction` hace el volcado sin bloquear la base de datos, y `--routines --triggers --events` incluye los procedimientos, triggers y eventos, que son la lógica del proyecto.
 
-<figure><img src="../../../.gitbook/assets/04-volcado-ct-db.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/04-volcado-ct-db.png" alt=""><figcaption></figcaption></figure>
 
 **En `ct-web`**, `/usr/local/sbin/backup-web.sh`:
 
@@ -101,7 +101,7 @@ find $D -name '*.tar.gz' -mtime +7 -delete
 
 Cada uno se programa con `cron` en `/etc/cron.d/` (02:50 y 02:55) y se prueba una vez a mano. Resultado: `honeypot_web-AAAA-MM-DD.sql.gz` de unos 7,6 KB en `ct-db` y `web-AAAA-MM-DD.tar.gz` de unos 700 bytes en `ct-web`.
 
-<figure><img src="../../../.gitbook/assets/05-huella-y-copia-ct-web.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/05-huella-y-copia-ct-web.png" alt=""><figcaption></figcaption></figure>
 
 ## **5.&#x20;**<mark style="color:$warning;">**Regla en pfSense**</mark>
 
@@ -116,11 +116,11 @@ Cada uno se programa con `cron` en `/etc/cron.d/` (02:50 y 02:55) y se prueba un
 
 La regla es lo más estrecha posible: solo esa máquina, solo ese destino y solo ese puerto. Queda debajo de las demás y funciona igual, porque las reglas de arriba no coinciden con ese tráfico (una es el ping y el DNS a pfSense, otra bloquea solo hacia pfSense, y la de salida a internet solo deja pasar lo que no es red interna).
 
-<figure><img src="../../../.gitbook/assets/06-regla-pfsense-formulario.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/06-regla-pfsense-formulario.png" alt=""><figcaption></figcaption></figure>
 
 
 
-<figure><img src="../../../.gitbook/assets/07-reglas-serv-lista.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/07-reglas-serv-lista.png" alt=""><figcaption></figcaption></figure>
 
 
 
@@ -133,7 +133,7 @@ ssh -i /root/.ssh/backup_key -o StrictHostKeyChecking=accept-new respaldo@10.0.2
 ssh -i /root/.ssh/backup_key -o StrictHostKeyChecking=accept-new respaldo@10.0.60.10 true
 ```
 
-<figure><img src="../../../.gitbook/assets/08-ssh-prueba-sin-contrasena.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/08-ssh-prueba-sin-contrasena.png" alt=""><figcaption></figcaption></figure>
 
 Después, el script `/usr/local/sbin/pull-backups.sh`:
 
@@ -165,11 +165,11 @@ zcat /srv/backups/ct-db/honeypot_web-*.sql.gz | grep -c "CREATE TABLE"
 
 Resultado: aparecen los dos archivos con el mismo tamaño que en los servidores (7684 y 703 bytes), el log muestra `OK ct-db` y `OK ct-web`, y el volcado contiene las **11 tablas** de la base de datos.
 
-<figure><img src="../../../.gitbook/assets/09-ls-srv-backups.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/09-ls-srv-backups.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../../.gitbook/assets/10-log-backup-ok.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/10-log-backup-ok.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../../.gitbook/assets/11-recuento-11-tablas.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../../../.gitbook/assets/11-recuento-11-tablas.png" alt=""><figcaption></figcaption></figure>
 
 ***
 
