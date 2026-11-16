@@ -49,3 +49,4 @@
     * [Red interna con VLAN (vmbr1)](honeynet/implementacion-en-proxmox/red-interna-con-vlan-vmbr1.md)
     * [Reenvío de puertos con iptables](honeynet/implementacion-en-proxmox/reenvio-de-puertos-con-iptables.md)
     * [iptables: persistencia e IP fija](honeynet/implementacion-en-proxmox/iptables-persistencia-e-ip-fija.md)
+    * [Red real del proyecto](honeynet/implementacion-en-proxmox/red-real-del-proyecto.md)

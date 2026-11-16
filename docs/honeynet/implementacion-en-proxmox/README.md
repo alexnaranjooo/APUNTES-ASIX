@@ -1,8 +1,8 @@
 ---
 description: >-
   Documentación de lo que se va construyendo en Proxmox: cómo se preparan las
-  plantillas y las máquinas, las redes internas y las prácticas que se hacen con
-  ellas.
+  plantillas y las máquinas, las redes internas y la red real del proyecto con
+  pfSense, y las prácticas que se hacen con ellas
 ---
 
 # Implementación en Proxmox
@@ -11,7 +11,7 @@ description: >-
 
 Esta sección recoge **lo que se hace de verdad en Proxmox**, paso a paso, con las configuraciones explicadas. Está separada de la _Introducción al proyecto_ porque aquí no se describe el diseño, sino la **implementación**: lo que se ha montado, cómo y por qué se ha configurado así.
 
-Se organiza en tres partes:
+Se organiza en cuatro partes:
 
 **Plantillas y configuración en Proxmox:** qué es una plantilla, cómo se prepara cada tipo y qué significa cada ajuste de una máquina virtual y de un contenedor, y cómo se protegen las máquinas con copias.
 
@@ -24,11 +24,15 @@ Se organiza en tres partes:
 
 * [Práctica: VM con nginx y contenedor LXC](practica-vm-con-nginx-y-contenedor-lxc.md)
 
-**Red interna y reenvío de puertos:** una red aislada con VLANs dentro de Proxmox y cómo se publica una web interna a través de un contenedor, como hará pfSense.
+**Red interna y reenvío de puertos:** una red aislada con VLANs dentro de Proxmox y cómo se publica una web interna a través de un contenedor, como hace pfSense.
 
 * [Red interna con VLAN](red-interna-con-vlan-vmbr1.md): el bridge `vmbr1` y la VLAN 60.
 * [Reenvío de puertos con iptables](reenvio-de-puertos-con-iptables.md): DNAT, MASQUERADE y denegar por defecto.
 * [iptables: persistencia e IP fija](iptables-persistencia-e-ip-fija.md): guardar las reglas y fijar la IP externa.
+
+**Red real del proyecto:** la red definitiva con pfSense, el DNS y el DHCP por MAC, los contenedores de la web y de la base de datos, y la publicación de la web.
+
+* [Red real del proyecto](red-real-del-proyecto.md): pfSense, reglas, contenedores, base de datos y prueba de punta a punta.
 
 {% hint style="info" %}
 El hardware y el diseño de la red están en [Infraestructura física](../introduccion-al-proyecto/infraestructura-fisica.md) y en [Diagrama de red](../introduccion-al-proyecto/diagrama-de-red.md). El plan de trabajo por fases está en la [Checklist del proyecto](../introduccion-al-proyecto/checklist-estado-del-proyecto.md).
