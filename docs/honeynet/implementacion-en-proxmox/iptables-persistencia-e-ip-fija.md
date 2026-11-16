@@ -10,13 +10,13 @@ description: >-
 **Práctica sustituida por pfSense.** El contenedor de esta práctica (`ct-prueba`) era temporal y ya se eliminó. En la red definitiva las reglas y la IP de la WAN las gestiona **pfSense** (ver [Red real del proyecto](red-real-del-proyecto.md)). Esta página se conserva para explicar el mecanismo, por eso no lleva capturas.
 {% endhint %}
 
-## Introducción
+## **Introducción**
 
 Continuación de [Reenvío de puertos con iptables](reenvio-de-puertos-con-iptables.md). Las reglas funcionan, pero viven en memoria: al reiniciar el contenedor se pierden. Además, la IP externa la reparte el DHCP del centro y puede cambiar. Aquí se resuelven las dos cosas.
 
 ***
 
-## 1. Que las reglas sobrevivan a un reinicio
+## **1.&#x20;**<mark style="color:$warning;">**Que las reglas sobrevivan a un reinicio**</mark>
 
 El paquete `iptables-persistent` guarda las reglas en un archivo y las recarga al arrancar:
 
@@ -36,9 +36,11 @@ Hacen falta las dos para que la web siga funcionando tras reiniciar.
 
 **Comprobación:** se apaga el contenedor del todo (**Shutdown**), se vuelve a encender y se miran `sysctl net.ipv4.ip_forward` (debe dar `1`), `iptables -t nat -L -n`, `iptables -L FORWARD -n` y `ip -br a`. Después se abre la web.
 
+
+
 Si no se cargan solas, se comprueba el servicio con `systemctl status netfilter-persistent` y se activa con `systemctl enable netfilter-persistent`.
 
-## 2. IP fija en la tarjeta externa
+## **2.&#x20;**<mark style="color:$warning;">**IP fija en la tarjeta externa**</mark>
 
 **Concepto:** una IP fija evita que la dirección de la web cambie. Hay que elegir una que el DHCP del centro no pueda dar a otro equipo; lo ideal es pedir una reservada. Los datos de la red del centro son: máscara `/24`, puerta de enlace `192.168.111.1` y DNS `192.168.111.1`.
 
@@ -61,7 +63,7 @@ Una IP fija puede chocar con la que el DHCP dé a otro equipo, y los dos fallar�
 
 ***
 
-## Problemas frecuentes
+## **3.&#x20;**<mark style="color:$warning;">**Problemas frecuentes**</mark>
 
 | Síntoma                                    | Qué mirar                                                                                         |
 | ------------------------------------------ | ------------------------------------------------------------------------------------------------- |
