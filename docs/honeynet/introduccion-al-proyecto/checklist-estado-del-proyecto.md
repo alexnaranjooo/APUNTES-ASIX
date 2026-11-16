@@ -54,7 +54,7 @@ Lo que se va haciendo se documenta en [Implementación en Proxmox](../implementa
 
 * [x] Inventario del PC 2 (8 GB de RAM, disco duro de 500 GB, SSD de 256 GB y una NIC)
 * [x] Instalar Proxmox en el PC 2
-* [ ] Repositorios gratuitos, actualización y usuario administrador del PC 2
+* [x] Repositorios gratuitos, actualización y usuario administrador del PC 2
 * [ ] Añadir el SSD de 256 GB del PC 2 como almacenamiento para el SIEM y Kali
 
 ### Fase 2 — VLANs, switch y pfSense
@@ -79,7 +79,7 @@ Lo hecho está documentado en [Red real del proyecto](../implementacion-en-proxm
 * [x] Comprobar que la VLAN de Usuarios obtiene IP, resuelve nombres y abre la web
 * [ ] UFW y SSH con claves en `ct-db` y `ct-web`, y HTTPS en `ct-web`
 * [ ] `ct-backup`: copias automáticas con rsync + cron
-* [ ] Borrar el contenedor `ct-dns-dhcp`, que ya no se usa
+* [x] Borrar el contenedor `ct-dns-dhcp`, que ya no se usa
 
 ### Fase 4 — Honeypots
 
