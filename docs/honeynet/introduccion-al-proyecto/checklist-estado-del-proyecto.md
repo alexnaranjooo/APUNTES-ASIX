@@ -68,7 +68,7 @@ Lo hecho está documentado en [Red real del proyecto](../implementacion-en-proxm
 * [x] Escribir las reglas de firewall de las VLANs de servidores, usuarios y web ([Seguridad](arquitectura-del-software/6.-seguridad.md))
 * [x] DNS Resolver y DHCP por MAC en pfSense, con la zona `honeynet.lan` (sin contenedor de DNS)
 * [x] Reenvío de puertos de la WAN hacia `ct-web`
-* [ ] Instalar y activar Suricata con reglas ET Open
+* [x] Instalar y activar Suricata con reglas ET Open, en la VLAN Web (la DMZ se añade en la Fase 4) ([Suricata](../implementacion-en-proxmox/3.-despliegue-real/red-con-pfsense/suricata-ids.md))
 * [x] Probar el aislamiento entre VLANs (desde la VLAN de Usuarios)
 
 ### Fase 3 — Servicios internos y web

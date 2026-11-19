@@ -58,6 +58,7 @@
         * [pfSense: interfaces y reglas](honeynet/implementacion-en-proxmox/3.-despliegue-real/red-con-pfsense/pfsense-interfaces-y-reglas.md)
         * [DHCP por MAC y DNS](honeynet/implementacion-en-proxmox/3.-despliegue-real/red-con-pfsense/dhcp-por-mac-y-dns.md)
         * [Reenvío de puertos (NAT)](honeynet/implementacion-en-proxmox/3.-despliegue-real/red-con-pfsense/reenvio-de-puertos-nat.md)
+        * [Suricata (IDS)](honeynet/implementacion-en-proxmox/3.-despliegue-real/red-con-pfsense/suricata-ids.md)
       * [Contenedores](honeynet/implementacion-en-proxmox/3.-despliegue-real/contenedores/README.md)
         * [Contenedores ct-db y ct-web](honeynet/implementacion-en-proxmox/3.-despliegue-real/contenedores/contenedores-ct-db-y-ct-web.md)
         * [Base de datos](honeynet/implementacion-en-proxmox/3.-despliegue-real/contenedores/base-de-datos.md)
