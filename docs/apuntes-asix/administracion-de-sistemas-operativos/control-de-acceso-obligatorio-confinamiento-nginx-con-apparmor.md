@@ -1,6 +1,6 @@
 # Control de Acceso Obligatorio: confinamiento Nginx con AppArmor
 
-## Objetivo
+## **Objetivo**
 
 Configurar un servidor web **Nginx** en una máquina Linux (Kali) y crear un perfil de **AppArmor** que lo confine, primero en modo **complain** (aprendizaje) y después en modo **enforce** (aplicación), comprobando que el servicio sigue funcionando correctamente tras el confinamiento.
 
@@ -8,7 +8,7 @@ AppArmor es un framework de **Control de Acceso Obligatorio (MAC)** para Linux q
 
 ***
 
-## Entorno utilizado
+## **Entorno utilizado**
 
 | Parámetro                           | Valor                                       |
 | ----------------------------------- | ------------------------------------------- |
@@ -19,7 +19,7 @@ AppArmor es un framework de **Control de Acceso Obligatorio (MAC)** para Linux q
 
 ***
 
-## 1. Configuración inicial de Nginx
+## **1. Configuración inicial de Nginx**
 
 Instalación de Nginx y de las utilidades de AppArmor:
 
@@ -70,7 +70,7 @@ Server: nginx
 
 ***
 
-## 2. Creación y ajuste del perfil de AppArmor (modo complain)
+## **2. Creación y ajuste del perfil de AppArmor (modo complain)**
 
 Se lanza el generador de perfiles sobre el binario de Nginx:
 
@@ -112,7 +112,7 @@ Se repite el ciclo de generar tráfico → escanear (**S**) una vez más para cu
 
 ***
 
-## 3. Evidencias de los registros en modo complain
+## **3. Evidencias de los registros en modo complain**
 
 Con el perfil todavía en complain, se consultan los eventos AppArmor registrados en el log del sistema:
 
@@ -138,7 +138,7 @@ Estos eventos `ALLOWED` con `info="failed af match"` indican que el tráfico se 
 
 ***
 
-## 4. Perfil final en modo enforce
+## **4. Perfil final en modo enforce**
 
 Se activa el modo enforce sobre el perfil de Nginx:
 
@@ -195,7 +195,7 @@ include <tunables/global>
 
 ***
 
-## 5. Comprobación de Nginx tras el confinamiento (modo enforce)
+## **5. Comprobación de Nginx tras el confinamiento (modo enforce)**
 
 Con el perfil ya en enforce, se repite la verificación del servicio:
 
@@ -226,7 +226,7 @@ Nginx sigue respondiendo con normalidad (**200 OK**, página por defecto servida
 
 ***
 
-## 6. Reflexión: accesos necesarios y por qué
+## **6. Reflexión: accesos necesarios y por qué**
 
 Mirando el perfil final, estos son los permisos que hizo falta dar y para qué sirve cada uno:
 
@@ -241,7 +241,7 @@ En resumen, la idea es darle a Nginx solo lo justo y necesario para funcionar, e
 
 ***
 
-## Complain vs. Enforce
+## **Complain vs. Enforce**
 
 |                        | Modo complain                                                           | Modo enforce                                                        |
 | ---------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------- |
@@ -250,7 +250,7 @@ En resumen, la idea es darle a Nginx solo lo justo y necesario para funcionar, e
 | Riesgo                 | Ninguno de romper el servicio, pero tampoco protege                     | Puede romper el servicio si el perfil está incompleto               |
 | Comando para activarlo | `sudo aa-complain <perfil>`                                             | `sudo aa-enforce <perfil>`                                          |
 
-### Resumen de comandos
+### **Resumen de comandos**
 
 | Comando                                   | Para qué sirve                                                                                |
 | ----------------------------------------- | --------------------------------------------------------------------------------------------- |
