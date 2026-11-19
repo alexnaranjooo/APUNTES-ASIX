@@ -64,12 +64,12 @@ Lo hecho está documentado en [Red real del proyecto](../implementacion-en-proxm
 * [ ] Pasar `vmbr0` a VLAN-aware en los dos nodos y mover la gestión a la VLAN 30
 * [x] Crear la VM de pfSense en el PC 1 (una tarjeta para la WAN y otra con todas las VLANs, arranque automático)
 * [x] Definir las VLANs 10, 20, 30, 40, 50 y 60 sobre la tarjeta de pfSense (la WAN va por `vmbr0` hasta tener el switch)
-* [ ] Desactivar el checksum offload de pfSense
+* [x] Desactivar el checksum offload de pfSense
 * [x] Escribir las reglas de firewall de las VLANs de servidores, usuarios y web ([Seguridad](arquitectura-del-software/6.-seguridad.md))
 * [x] DNS Resolver y DHCP por MAC en pfSense, con la zona `honeynet.lan` (sin contenedor de DNS)
 * [x] Reenvío de puertos de la WAN hacia `ct-web`
 * [ ] Instalar y activar Suricata con reglas ET Open
-* [ ] Probar el aislamiento entre VLANs
+* [x] Probar el aislamiento entre VLANs (desde la VLAN de Usuarios)
 
 ### Fase 3 — Servicios internos y web
 
