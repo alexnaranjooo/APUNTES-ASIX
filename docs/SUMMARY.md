@@ -14,6 +14,7 @@
     * [Simulación de DHCP Starvation y Mitigación mediante Rate Limiting en iptables & Kea DHCP](apuntes-asix/seguridad-y-alta-disponibilidad/simulacion-de-dhcp-starvation-y-mitigacion-mediante-rate-limiting-en-iptables-and-kea-dhcp.md)
   * [💿 Administración de Sistemas Operativos](apuntes-asix/administracion-de-sistemas-operativos/README.md)
     * [FusionDirectory + NFS sobre OpenLDAP](apuntes-asix/administracion-de-sistemas-operativos/fusiondirectory-+-nfs-sobre-openldap.md)
+    * [Control de Acceso Obligatorio: confinamiento Nginx con AppArmor](apuntes-asix/administracion-de-sistemas-operativos/control-de-acceso-obligatorio-confinamiento-nginx-con-apparmor.md)
 * [🍯 HoneyNet](honeynet/README.md)
   * [Introducción al proyecto](honeynet/introduccion-al-proyecto/README.md)
     * [💡 Ideas Principales](honeynet/introduccion-al-proyecto/ideas-principales.md)
