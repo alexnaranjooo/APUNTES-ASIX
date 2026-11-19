@@ -5,7 +5,7 @@ coverY: 0
 
 # Introducción al proyecto
 
-## Resumen
+## <mark style="color:$warning;">**Resumen**</mark>
 
 **HoneyNet** es el proyecto de fin de ciclo de 2º de ASIX, orientado a ciberseguridad: una red de laboratorio completa, aislada mediante VLANs, diseñada para **atraer, capturar y analizar ataques reales** mediante honeypots, mientras un SIEM centraliza y correlaciona todo lo que ocurre.
 
@@ -19,13 +19,13 @@ En esencia, replica —a pequeña escala— lo que hacen los equipos de ciberseg
 
 ***
 
-## Motivación
+## <mark style="color:$warning;">**Motivación**</mark>
 
 El proyecto nace del interés personal por la ciberseguridad ofensiva y defensiva, con la idea de continuar en ese campo profesionalmente. Una HoneyNet es un ejercicio especialmente completo porque obliga a dominar, a la vez, redes, virtualización, hardening, automatización y análisis de datos — prácticamente todo el temario de 2º de ASIX aplicado a un caso real.
 
 ***
 
-## Objetivos del proyecto
+## <mark style="color:$warning;">**Objetivos del proyecto**</mark>
 
 * Montar una infraestructura de red segmentada (VLANs) con un hipervisor bare-metal (**Proxmox**) como base.
 * Desplegar varios **honeypots** (Cowrie, Dionaea, DVWA) que simulen servicios vulnerables reales.
@@ -37,7 +37,7 @@ El detalle está en [Objetivos del proyecto](objetivos-del-proyecto.md).
 
 ***
 
-## Arquitectura general
+## <mark style="color:$warning;">**Arquitectura general**</mark>
 
 El proyecto se construye sobre dos PCs del centro conectados por un switch **HP 1810-24**: un PC con **Proxmox** como hipervisor (sin Windows ni ningún sistema operativo intermedio debajo), que aloja todas las VMs, y otro PC dedicado a **pfSense + Suricata** en hardware real, que actúa de firewall, router e IDS entre cinco VLANs.
 
@@ -69,7 +69,7 @@ Como pieza final, un **script en Python** leerá los logs de Cowrie, consultará
 
 ***
 
-## Cronograma por fases
+## <mark style="color:$warning;">**Cronograma por fases**</mark>
 
 ```mermaid
 flowchart LR

@@ -12,7 +12,7 @@ La web se publica por la WAN de pfSense con una regla de NAT (puerto 80 de la WA
 
 <figure><img src="../../../../.gitbook/assets/14-regla-wan.png" alt=""><figcaption></figcaption></figure>
 
-## Prueba desde otro PC del centro
+## <mark style="color:$warning;">**Prueba desde otro PC del centro**</mark>
 
 ```
 PS> Test-NetConnection 192.168.135.31 -Port 80

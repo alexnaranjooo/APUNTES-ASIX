@@ -10,7 +10,7 @@ description: >-
 **Práctica sustituida por pfSense.** Esto se montó como práctica en un contenedor temporal (`ct-prueba`), que después se eliminó. En la red definitiva el reenvío de puertos lo hace **pfSense** (ver [Red real del proyecto](../3.-despliegue-real/red-real-del-proyecto.md)). Esta página se conserva para explicar el mecanismo (DNAT, MASQUERADE y denegar por defecto), por eso no lleva capturas.
 {% endhint %}
 
-## Objetivo
+## <mark style="color:$warning;">**Objetivo**</mark>
 
 Que la web de `vm-nginx`, que solo está en la red interna, se vea desde el navegador de un PC entrando por la **IP externa del contenedor** `ct-prueba`. Es lo mismo que hará pfSense en la Fase 2: recibir el tráfico por la WAN y reenviarlo a la web interna.
 
@@ -24,7 +24,7 @@ flowchart LR
     INT --> VM["vm-nginx · 10.0.60.250<br/>nginx"]
 ```
 
-## Conceptos
+## <mark style="color:$warning;">**Conceptos**</mark>
 
 * **DNAT**: cambia el destino de un paquete. Lo que llega a la IP externa del contenedor por el puerto 80 se redirige a la VM, a su puerto 80.
 * **MASQUERADE**: cambia el origen del paquete por la IP interna del contenedor, para que la VM pueda contestarle (la VM no sabe llegar al PC).
@@ -33,7 +33,7 @@ flowchart LR
 
 ***
 
-## 1. Preparar las máquinas
+## **1.&#x20;**<mark style="color:$warning;">**Preparar las máquinas**</mark>
 
 | Máquina     | Tarjetas                                                                                     |
 | ----------- | -------------------------------------------------------------------------------------------- |
@@ -42,7 +42,7 @@ flowchart LR
 
 Antes de seguir, desde el contenedor, un `curl` a la IP interna de la VM debe mostrar su página. La preparación de la red interna está en la página [Red interna con VLAN](red-interna-con-vlan-vmbr1.md).
 
-## 2. Instalar y activar el reenvío
+## **2.&#x20;**<mark style="color:$warning;">**Instalar y activar el reenvío**</mark>
 
 ```bash
 apt update && apt install iptables -y
@@ -52,7 +52,7 @@ echo "net.ipv4.ip_forward=1" > /etc/sysctl.d/99-forward.conf
 
 La comprobación es `sysctl net.ipv4.ip_forward`, que debe mostrar `1`. El archivo del tercer comando hace que el reenvío siga activo tras reiniciar.
 
-## 3. Las reglas
+## **3.&#x20;**<mark style="color:$warning;">**Las reglas**</mark>
 
 ```bash
 iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j DNAT --to-destination 10.0.60.250:80
@@ -70,6 +70,6 @@ iptables -P FORWARD DROP
 | `FORWARD` (vuelta)             | Permite las respuestas                                                              |
 | `-P FORWARD DROP`              | **Denegar por defecto**: todo lo que no está permitido se bloquea. Se pone al final |
 
-## 4. Probar
+## **4.&#x20;**<mark style="color:$warning;">**Probar**</mark>
 
 Desde el navegador del PC se abre la IP externa del contenedor, con `http` y sin puerto, y debe mostrarse el mensaje de la VM. Los contadores (`pkts`) de la regla `DNAT` suben cada vez que se recarga la página. Otro puerto, por ejemplo el 8080, no responde: lo bloquea la política por defecto.

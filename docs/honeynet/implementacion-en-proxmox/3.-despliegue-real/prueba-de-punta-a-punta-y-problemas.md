@@ -6,13 +6,13 @@ description: >-
 
 # Prueba de punta a punta y problemas
 
-## Prueba de punta a punta
+## <mark style="color:$warning;">**Prueba de punta a punta**</mark>
 
 Desde la VM cliente (VLAN 40), el navegador abre `www.honeynet.lan` escribiendo `http://` delante: el DHCP da la IP, el DNS de pfSense resuelve el nombre, el firewall deja pasar el puerto 80, NGINX ejecuta PHP y PHP llama a un procedimiento de la base de datos, que devuelve los tres planes con sus características.
 
 <figure><img src="../../../.gitbook/assets/image (62).png" alt=""><figcaption></figcaption></figure>
 
-## Problemas encontrados y soluciones
+## <mark style="color:$warning;">**Problemas encontrados y soluciones**</mark>
 
 | Problema                                            | Causa                                                          | Solución                                                                                     |
 | --------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |

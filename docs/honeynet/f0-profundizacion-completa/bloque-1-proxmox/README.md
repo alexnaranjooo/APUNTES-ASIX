@@ -1,8 +1,8 @@
 # Bloque 1 — Proxmox
 
-## **Proxmox**
+## <mark style="color:$warning;">**Proxmox**</mark>
 
-### Por qué existe y qué problema resuelve
+### <mark style="color:$warning;">**Por qué existe y qué problema resuelve**</mark>
 
 Con VirtualBox, el sistema operativo base ya consume RAM y CPU de fondo, y VirtualBox reparte entre las VMs lo que sobra. Para un proyecto que necesita **varias máquinas virtuales y contenedores corriendo a la vez**, esto es ineficiente e insuficiente.
 
@@ -12,7 +12,7 @@ Todo el hardware (RAM, CPU, disco) se reparte directamente entre las VMs y se ge
 
 <figure><img src="../../../.gitbook/assets/1200_628_Proxmox-vs.-Vmware@2x.png" alt=""><figcaption></figcaption></figure>
 
-### **Conceptos clave**
+### <mark style="color:$warning;">**Conceptos clave**</mark>
 
 {% tabs %}
 {% tab title="Node" %}
@@ -58,13 +58,13 @@ Por ejemplo: instalar Ubuntu Server una vez, dejarlo limpio y actualizado, conve
 {% endtab %}
 {% endtabs %}
 
-### **Cómo se ve en la práctica**
+### <mark style="color:$warning;">**Cómo se ve en la práctica**</mark>
 
 Todo se gestiona desde el navegador, accediendo a `https://IP-DEL-PC:8006`.
 
 <figure><img src="../../../.gitbook/assets/proxmox-intro.png" alt=""><figcaption></figcaption></figure>
 
-### Para ampliar
+### <mark style="color:$warning;">**Para ampliar**</mark>
 
 * [Proxmox en detalle](/broken/pages/wSx1MTVYad00x4kcO1jh): cómo funciona por dentro, almacenamiento, red, copias, usuarios y clúster.
 * [Preguntas sobre Proxmox](preguntas-sobre-proxmox.md): clúster, alta disponibilidad, hipervisores, QEMU, KVM, noVNC, Ceph, roles y almacenamiento.

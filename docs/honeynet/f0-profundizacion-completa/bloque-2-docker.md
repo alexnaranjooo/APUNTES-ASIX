@@ -1,6 +1,6 @@
 # Bloque 2 — Docker
 
-### La analogía que lo explica mejor
+### <mark style="color:$warning;">**La analogía que lo explica mejor**</mark>
 
 Montar un bar tiene dos caminos. **Opción A**: construir la cocina desde cero, instalar los fogones, conectar el gas, comprar los utensilios uno a uno. **Opción B**: pedir un módulo de cocina prefabricado, enchufarlo, y ya funciona.
 
@@ -8,7 +8,7 @@ Montar un bar tiene dos caminos. **Opción A**: construir la cocina desde cero, 
 
 <figure><img src="../../.gitbook/assets/image (31).png" alt=""><figcaption></figcaption></figure>
 
-### Conceptos clave
+### <mark style="color:$warning;">**Conceptos clave**</mark>
 
 * **Imagen**: la plantilla de solo lectura, el plano del contenedor. Docker Hub tiene miles de imágenes públicas ya hechas (`cowrie/cowrie`, `grafana/grafana`, etc.) — no se construyen desde cero, se descargan.
 * **Contenedor**: una imagen puesta en marcha. Pueden coexistir varios contenedores de la misma imagen (por ejemplo, dos instancias de un servicio web).
@@ -16,7 +16,7 @@ Montar un bar tiene dos caminos. **Opción A**: construir la cocina desde cero, 
 * **Docker Compose**: un archivo que describe varios contenedores a la vez — qué imagen usa cada uno, qué puertos expone, qué volúmenes monta y cómo se conectan entre sí. Con un solo comando (`docker compose up -d`) se levantan, por ejemplo, los tres honeypots a la vez.
 * **Red Docker**: los contenedores definidos en el mismo archivo de Compose pueden hablarse entre sí usando su nombre, como un mini-DNS interno de Docker. Así, por ejemplo, Grafana puede llegar a Wazuh sin necesidad de buscar IPs.
 
-### Por qué importa para este proyecto
+### <mark style="color:$warning;">**Por qué importa para este proyecto**</mark>
 
 Se desplegarán **Cowrie + Dionaea + DVWA** con un solo archivo de Compose, en la VM de honeypots del PC 1, y después **Wazuh + Grafana** con otro, en la VM del SIEM del PC 2.
 

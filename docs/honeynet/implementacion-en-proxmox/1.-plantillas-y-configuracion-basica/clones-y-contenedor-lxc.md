@@ -6,17 +6,17 @@ description: >-
 
 # Clones y contenedor LXC
 
-## Introducción
+## <mark style="color:$warning;">**Introducción**</mark>
 
 Continuación de [Plantilla de VM Debian 13](plantilla-de-vm-debian-13.md). La VM `debian13-base` ya está instalada, actualizada y limpia. Aquí se convierte en plantilla, se clona y se explica cómo se crea un **contenedor LXC** con la plantilla de contenedor.
 
 ***
 
-## 1. Convertir en plantilla
+## **1.&#x20;**<mark style="color:$warning;">**Convertir en plantilla**</mark>
 
 Clic derecho sobre la VM → **Convert to template**. El icono cambia y la máquina ya no se puede encender: solo sirve para clonar.
 
-## 2. Clonar la plantilla
+## **2.&#x20;**<mark style="color:$warning;">**Clonar la plantilla**</mark>
 
 Clic derecho sobre la plantilla → **Clone**. Hay dos modos:
 
@@ -39,7 +39,7 @@ Además, en el fichero `hosts` (dentro de la carpeta `etc`) se sustituye el nomb
 
 ***
 
-## 3. Contenedor LXC
+## **3.&#x20;**<mark style="color:$warning;">**Contenedor LXC**</mark>
 
 Se crea con **Create CT**. Cada ajuste significa lo siguiente:
 

@@ -10,11 +10,11 @@ description: >-
 **Práctica previa a la red real.** Se hizo con máquinas de prueba (`vm-nginx` y `ct-prueba`) para aprender cómo funcionan una VM y un contenedor y cómo se conectan. En la red definitiva del proyecto la red interna, las VLANs y la publicación de la web las hace **pfSense**, con `ct-web` y `ct-db` (ver [Red real del proyecto](../3.-despliegue-real/red-real-del-proyecto.md)).
 {% endhint %}
 
-## Objetivo
+## <mark style="color:$warning;">**Objetivo**</mark>
 
 Montar en Proxmox una **VM con nginx** (clonada de la plantilla) y un **contenedor LXC**, conectados entre sí, para demostrar cómo funcionan, en qué se diferencian y cómo se comunican.
 
-## Qué se monta
+## <mark style="color:$warning;">**Qué se monta**</mark>
 
 ```mermaid
 flowchart LR
@@ -30,7 +30,7 @@ flowchart LR
     CT -. "curl http://192.168.111.53" .-> VM
 ```
 
-## Conceptos clave
+## <mark style="color:$warning;">**Conceptos clave**</mark>
 
 |             | VM                  | Contenedor LXC |
 | ----------- | ------------------- | -------------- |
@@ -45,9 +45,9 @@ Requisitos: la plantilla `debian13-base` ([Plantilla de VM Debian 13](../1.-plan
 
 ***
 
-## Parte 1. VM con nginx
+## **Parte 1.&#x20;**<mark style="color:$warning;">**VM con nginx**</mark>
 
-### 1.1 Clonar la plantilla
+### **1.1&#x20;**<mark style="color:$warning;">**Clonar la plantilla**</mark>
 
 Clic derecho sobre `debian13-base` → **Clone** → _Full Clone_, nombre `vm-nginx`. Después, en **Hardware → Memory**, 512 MiB, y **Start**.
 
@@ -55,7 +55,7 @@ Clic derecho sobre `debian13-base` → **Clone** → _Full Clone_, nombre `vm-ng
 CAPTURA PENDIENTE: el asistente de clonado y la VM `vm-nginx` en el árbol.
 {% endhint %}
 
-### 1.2 Darle identidad propia
+### **1.2&#x20;**<mark style="color:$warning;">**Darle identidad propia**</mark>
 
 En la consola de la VM, como `root`:
 
@@ -72,7 +72,7 @@ La interfaz `ens18` recibió la IP **192.168.111.53/24**.
 CAPTURA PENDIENTE: la consola con los comandos y la salida de `ip -br a`.
 {% endhint %}
 
-### 1.3 Instalar nginx y publicar una página
+### **1.3&#x20;**<mark style="color:$warning;">**Instalar nginx y publicar una página**</mark>
 
 ```bash
 apt update && apt install nginx -y
@@ -89,9 +89,9 @@ CAPTURA PENDIENTE: `curl localhost` mostrando el mensaje.
 
 ***
 
-## Parte 2. Contenedor LXC
+## **Parte 2.&#x20;**<mark style="color:$warning;">**Contenedor LXC**</mark>
 
-### 2.1 Crearlo
+### **2.1&#x20;**<mark style="color:$warning;">**Crearlo**</mark>
 
 Con **Create CT** y estos valores:
 
@@ -110,7 +110,7 @@ La tarea de creación termina con el aviso _«Systemd 257 detected. You may need
 CAPTURA PENDIENTE: la pantalla de confirmación del contenedor y el resultado de la tarea de creación.
 {% endhint %}
 
-### 2.2 Arrancarlo y comprobar la red
+### **2.2&#x20;**<mark style="color:$warning;">**Arrancarlo y comprobar la red**</mark>
 
 En la consola del contenedor:
 
@@ -127,7 +127,7 @@ CAPTURA PENDIENTE: `ip -br a` y `ip route` en el contenedor.
 
 ***
 
-## Parte 3. Conectar el contenedor con la VM
+## **Parte 3.&#x20;**<mark style="color:$warning;">**Conectar el contenedor con la VM**</mark>
 
 ```bash
 apt update && apt install curl -y
@@ -142,9 +142,9 @@ CAPTURA PENDIENTE: `curl` desde el contenedor mostrando el mensaje de la VM.
 
 ***
 
-## Parte 4. Comparar la VM y el contenedor
+## **Parte 4.&#x20;**<mark style="color:$warning;">**Comparar la VM y el contenedor**</mark>
 
-### 4.1 Kernel
+### **4.1&#x20;**<mark style="color:$warning;">**Kernel**</mark>
 
 ```bash
 uname -r
@@ -156,7 +156,7 @@ En la VM sale el kernel de Debian (`6.12.113+deb13-amd64`). En el contenedor sal
 CAPTURA PENDIENTE: `uname -r` en la VM y en el contenedor.
 {% endhint %}
 
-### 4.2 El bridge
+### **4.2&#x20;**<mark style="color:$warning;">**El bridge**</mark>
 
 En la Shell del nodo (**honeynet → Shell**):
 
@@ -172,7 +172,7 @@ bridge link | grep vmbr0
 CAPTURA PENDIENTE: la salida de los tres comandos.
 {% endhint %}
 
-### 4.3 Memoria
+### **4.3&#x20;**<mark style="color:$warning;">**Memoria**</mark>
 
 En **honeynet → Summary** se compara lo que gastan: 512 MiB asignados a la VM frente a 256 MiB al contenedor.
 
@@ -182,7 +182,7 @@ CAPTURA PENDIENTE: el uso de memoria de las dos máquinas.
 
 ***
 
-## Problema encontrado y solución
+## <mark style="color:$warning;">**Problema encontrado y solución**</mark>
 
 | Fase        | Qué pasó                                                                                                                                  |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
@@ -198,8 +198,8 @@ CAPTURA PENDIENTE: el error de `apt`, `ip -br a` sin IP y `ip -br a` ya con IP.
 
 ***
 
-## Conclusiones
+## <mark style="color:$warning;">**Conclusiones**</mark>
 
 * Una **VM** lleva su propio sistema y kernel; un **contenedor** comparte el del host, por eso arranca antes y gasta menos memoria.
 * Las dos pueden estar en la misma red gracias al **bridge** de Proxmox.
-* Esta práctica es una versión pequeña de lo que se usará en el laboratorio: servidores en contenedores y máquinas virtuales clonadas de una plantilla.
+* Esta práctica es una versión pequeña de lo que se usa en el laboratorio: servidores en contenedores y máquinas virtuales clonadas de una plantilla.

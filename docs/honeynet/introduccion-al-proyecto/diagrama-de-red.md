@@ -1,12 +1,12 @@
 # 🌐 Diagrama de red
 
-### **Introducción**
+### <mark style="color:$warning;">**Introducción**</mark>
 
 Esquema general de la arquitectura de **HoneyNet**: dos PCs con **Proxmox** (el PC 1 con pfSense + Suricata en una VM, honeypots, servidores, web y usuario; el PC 2 con el SIEM y Kali), un switch **HP 1810-24**, seis VLANs internas más la WAN y el flujo de tráfico permitido entre ellas. pfSense da además el DNS y el DHCP de la red. El hardware se detalla en [Infraestructura física](infraestructura-fisica.md) y el direccionamiento en [Infraestructura y red (Proxmox)](arquitectura-del-software/5.-infraestructura-y-red-proxmox.md).
 
 ***
 
-### **Esquema general**
+### <mark style="color:$warning;">**Esquema general**</mark>
 
 ```mermaid
 flowchart TB
@@ -64,7 +64,7 @@ flowchart TB
 
 ***
 
-### **Reglas de tráfico**
+### <mark style="color:$warning;">**Reglas de tráfico**</mark>
 
 | Origen                     | Destino                         | ¿Permitido?                                | Motivo                                                                                                     |
 | -------------------------- | ------------------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |

@@ -1,17 +1,17 @@
 # 📄 Parte Web
 
-## Introducción
+## <mark style="color:$warning;">**Introducción**</mark>
 
 Además de la infraestructura, el proyecto incluye una **parte web**: la página de una empresa de ciberseguridad que ofrece **honeypots como servicio**, es decir, desplegar señuelos para estudiar cómo atacan los hackers y ayudar a las empresas a defenderse.
 
 ***
 
-## Referencia y diseño
+## <mark style="color:$warning;">**Referencia y diseño**</mark>
 
 * **Web de referencia**: `tworockets.consulting`.
 * **Mockup de baja fidelidad**: ya realizado en **Figma**.
 
-## Documentación del diseño
+## <mark style="color:$warning;">**Documentación del diseño**</mark>
 
 El diseño de la web incluye:
 
@@ -23,7 +23,7 @@ El diseño de la web incluye:
 
 Todo ello está recogido en [Diseño y plan de producción](diseno-y-plan-de-produccion.md).
 
-## Alojamiento
+## <mark style="color:$warning;">**Alojamiento**</mark>
 
 La web se aloja en un servidor **nginx** dentro del contenedor `ct-web`, en la **VLAN 60**. El detalle de la arquitectura, el direccionamiento y el reenvío de puertos está en [Arquitectura del software](../arquitectura-del-software/).
 

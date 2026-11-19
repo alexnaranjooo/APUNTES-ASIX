@@ -1,12 +1,12 @@
 # ✂️ Alcance y limitaciones
 
-## Introducción
+## <mark style="color:$warning;">**Introducción**</mark>
 
 Delimita con claridad **qué incluye** HoneyNet, **qué queda fuera a propósito** y qué factores limitan el proyecto. Dejarlo por escrito evita que una decisión consciente parezca un olvido.
 
 ***
 
-## Dentro del alcance
+## <mark style="color:$warning;">**Dentro del alcance**</mark>
 
 * Infraestructura sobre dos PCs del centro, cada uno con **Proxmox**: el **PC 1** con pfSense + Suricata (en una VM), honeypots, servidores, web y cliente, y el **PC 2** con el SIEM y Kali. Conectados con un switch **HP 1810-24**.
 * Segmentación en seis VLANs internas (más la WAN) con **pfSense + Suricata**, que además da el **DNS** y el **DHCP** de la red.
@@ -19,7 +19,7 @@ Delimita con claridad **qué incluye** HoneyNet, **qué queda fuera a propósito
 * Parte web del proyecto, alojada en un servidor **nginx** con PHP y MariaDB, con login de administrador y paneles de Grafana incrustados.
 * Documentación completa en este GitBook, memoria y defensa.
 
-## Fuera del alcance
+## <mark style="color:$warning;">**Fuera del alcance**</mark>
 
 * Alta disponibilidad real o clúster: los dos Proxmox son **independientes**, sin clúster.
 * Entornos de producción: es un laboratorio de estudio, no una red para proteger una empresa real.
@@ -32,9 +32,9 @@ Delimita con claridad **qué incluye** HoneyNet, **qué queda fuera a propósito
 
 ***
 
-## Limitaciones
+## <mark style="color:$warning;">**Limitaciones**</mark>
 
-### Técnicas
+### <mark style="color:$warning;">**Técnicas**</mark>
 
 * **Poca memoria**: cada PC tiene **8 GB de RAM** y el centro no puede ampliarlos. En disco, el PC 1 tiene un SSD de 128 GB y el PC 2 tiene un disco duro de 500 GB y un SSD de 256 GB. Obliga a usar contenedores ligeros, a limitar la retención de datos de Wazuh y a encender Kali solo durante las pruebas.
 * **pfSense en una VM** del PC 1, con una sola tarjeta de red: WAN y redes internas viajan por el mismo cable en trunk, con la VLAN 99 como WAN. Todo el tráfico entre VLANs pasa por un único enlace.
@@ -45,18 +45,18 @@ Delimita con claridad **qué incluye** HoneyNet, **qué queda fuera a propósito
 * **Sin portátil de administración fijo**: se administra desde un puerto del switch en la VLAN 30.
 * **Herramientas nuevas**: Proxmox, Docker, pfSense, Wazuh y Grafana se aprenden durante el proyecto, por lo que cada fase incluye curva de aprendizaje.
 
-### De equipo y tiempo
+### <mark style="color:$warning;">**De equipo y tiempo**</mark>
 
 * Equipo de **dos personas**, sin un especialista dedicado a monitorización.
 * Fecha de entrega fija (febrero-marzo), lo que obliga a priorizar.
 
-### Ambición del proyecto
+### <mark style="color:$warning;">**Ambición del proyecto**</mark>
 
 * El **bloqueo automático de IPs** es la parte más ambiciosa. Puede no completarse en esta primera versión; si ocurre, las fases anteriores siguen siendo un proyecto completo y funcional por sí mismas.
 
 ***
 
-## Consideraciones de seguridad
+## <mark style="color:$warning;">**Consideraciones de seguridad**</mark>
 
 * La exposición a internet se hace **solo al final** (Fase 7), desde una VPS y tras revisar y endurecer las reglas.
 * La DMZ **nunca puede iniciar conexiones** hacia otras VLANs, salvo el envío de logs a Wazuh, que está documentado.

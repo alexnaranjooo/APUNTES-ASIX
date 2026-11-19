@@ -1,12 +1,12 @@
 # 🏷️ Glosario de términos
 
-## Introducción
+## <mark style="color:$warning;">**Introducción**</mark>
 
 Definiciones breves de los conceptos que aparecen a lo largo del proyecto, ordenadas por bloques. Desde cualquier otra página se puede enlazar aquí en vez de repetir explicaciones.
 
 ***
 
-## Seguridad
+## <mark style="color:$warning;">**Seguridad**</mark>
 
 | Término                    | Definición                                                                                                                                                               |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -22,7 +22,7 @@ Definiciones breves de los conceptos que aparecen a lo largo del proyecto, orden
 | **SQLi / XSS**             | Inyección SQL y _Cross-Site Scripting_: ataques web habituales que DVWA permite practicar y registrar.                                                                   |
 | **Log**                    | Registro de eventos de un sistema o aplicación.                                                                                                                          |
 
-## Redes
+## <mark style="color:$warning;">**Redes**</mark>
 
 | Término               | Definición                                                                                                                                              |
 | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -42,7 +42,7 @@ Definiciones breves de los conceptos que aparecen a lo largo del proyecto, orden
 | **VPN**               | Red privada virtual: conexión cifrada para acceder a una red desde fuera; en el proyecto se usa **NetBird** para trabajar desde casa.                   |
 | **API**               | Interfaz que permite a un programa controlar otro; el script opcional del proyecto usaría la de pfSense para bloquear IPs.                              |
 
-## Virtualización y contenedores
+## <mark style="color:$warning;">**Virtualización y contenedores**</mark>
 
 | Término                 | Definición                                                                                                                                                         |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -58,7 +58,7 @@ Definiciones breves de los conceptos que aparecen a lo largo del proyecto, orden
 | **Volumen**             | Carpeta fuera del contenedor que conserva los datos aunque este se borre.                                                                                          |
 | **Docker Compose**      | Archivo YAML que describe varios contenedores y cómo se conectan entre sí.                                                                                         |
 
-## Automatización, copias y web
+## <mark style="color:$warning;">**Automatización, copias y web**</mark>
 
 | Término                | Definición                                                                                            |
 | ---------------------- | ----------------------------------------------------------------------------------------------------- |
@@ -68,7 +68,7 @@ Definiciones breves de los conceptos que aparecen a lo largo del proyecto, orden
 | **nginx**              | Servidor web ligero; aloja la web de la empresa del proyecto.                                         |
 | **Mockup / wireframe** | Boceto visual de una pantalla de la web, de baja o alta fidelidad (en el proyecto, se hace en Figma). |
 
-## Próximos pasos
+## <mark style="color:$warning;">**Próximos pasos**</mark>
 
 * Añadir términos nuevos según aparezcan en cada fase.
 * Enlazar este glosario desde las páginas donde se usen conceptos técnicos por primera vez.

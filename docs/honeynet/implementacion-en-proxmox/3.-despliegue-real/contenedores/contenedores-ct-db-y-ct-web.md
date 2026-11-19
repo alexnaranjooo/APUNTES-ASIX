@@ -17,7 +17,7 @@ Los dos son contenedores LXC sin privilegios, con 256 MiB de RAM, en `vmbr1` con
 
 <figure><img src="../../../../.gitbook/assets/08-ct-web-ajustes.png" alt=""><figcaption></figcaption></figure>
 
-## Salida a internet
+## <mark style="color:$warning;">**Salida a internet**</mark>
 
 Salen a internet a través de pfSense, sin tarjetas temporales: el `ping` a la puerta de enlace y a `1.1.1.1` responde y `apt update` funciona.
 

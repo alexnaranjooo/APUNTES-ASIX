@@ -10,7 +10,7 @@ El servidor DHCP de pfSense reparte las IPs de la VLAN 40 del `.100` al `.200` y
 
 El DNS Resolver de pfSense reenvía las consultas al DNS del centro y resuelve los nombres del laboratorio (`honeynet.lan`) con _host overrides_: `ct-web`, `www`, `ct-db` y `ct-backup`.
 
-## Prueba desde la VM cliente
+## <mark style="color:$warning;">**Prueba desde la VM cliente**</mark>
 
 La VM cliente recibe `10.0.40.10`, la IP asignada a su MAC, y el DNS de pfSense resuelve `www.honeynet.lan` a `10.0.60.10`, con una respuesta autoritativa.
 

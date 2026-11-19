@@ -6,7 +6,7 @@ description: >-
 
 # Copias de seguridad y snapshots
 
-## Introducción
+## <mark style="color:$warning;">**Introducción**</mark>
 
 Los PCs del laboratorio son del centro y pueden reiniciarse o reinstalarse, y un cambio mal hecho puede romper una máquina. Por eso, antes de seguir construyendo, se configuran dos protecciones distintas:
 
@@ -23,7 +23,7 @@ Documentado el 28 de octubre de 2026. Las máquinas usadas son `vm-nginx` y `ct-
 
 ***
 
-## 1. Snapshots
+## **1.&#x20;**<mark style="color:$warning;">**Snapshots**</mark>
 
 1. Seleccionar `vm-nginx` → **Snapshots** → **Take Snapshot**.
 2. Nombre `practica-ok` (sin espacios) y sin marcar _Include RAM_. Pulsar **Take Snapshot**.
@@ -37,7 +37,7 @@ Documentado el 28 de octubre de 2026. Las máquinas usadas son `vm-nginx` y `ct-
 
 ***
 
-## 2. Copia de seguridad programada
+## **2.&#x20;**<mark style="color:$warning;">**Copia de seguridad programada**</mark>
 
 En **Datacenter → Backup → Add**:
 
@@ -49,7 +49,7 @@ Para no esperar a las 03:00, se selecciona el trabajo y se pulsa **Run now**. Al
 
 ***
 
-## 3. Probar la restauración
+## **3.&#x20;**<mark style="color:$warning;">**Probar la restauración**</mark>
 
 Una copia que no se ha restaurado nunca no es de fiar, así que se prueba:
 

@@ -1,14 +1,14 @@
 # 🗃️ Stack tecnológico
 
-## Introducción
+## <mark style="color:$warning;">**Introducción**</mark>
 
 Tabla única con todas las herramientas del proyecto: qué hace cada una, en qué fase se instala y dónde está su documentación oficial. Funciona como índice rápido del laboratorio.
 
 ***
 
-## Resumen por capas
+## <mark style="color:$warning;">**Resumen por capas**</mark>
 
-### Virtualización e infraestructura
+### <mark style="color:$warning;">**Virtualización e infraestructura**</mark>
 
 | Herramienta          | Función                                                                                 | Fase  | Documentación                                                        |
 | -------------------- | --------------------------------------------------------------------------------------- | ----- | -------------------------------------------------------------------- |
@@ -16,7 +16,7 @@ Tabla única con todas las herramientas del proyecto: qué hace cada una, en qu�
 | **Contenedores LXC** | Servidores ligeros de Proxmox: base de datos, copias y web.                             | F3    | [pve.proxmox.com](https://pve.proxmox.com/pve-docs/chapter-pct.html) |
 | **Docker + Compose** | Empaqueta y despliega honeypots, Wazuh y Grafana.                                       | F4–F6 | [docs.docker.com](https://docs.docker.com/)                          |
 
-### Red y seguridad perimetral
+### <mark style="color:$warning;">**Red y seguridad perimetral**</mark>
 
 | Herramienta          | Función                                                                                                                                                     | Fase | Documentación                                                   |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- | --------------------------------------------------------------- |
@@ -24,7 +24,7 @@ Tabla única con todas las herramientas del proyecto: qué hace cada una, en qu�
 | **Suricata**         | IDS dentro de pfSense; alerta con firmas ET Open.                                                                                                           | F2   | [suricata.io](https://suricata.io/documentation/)               |
 | **UFW**              | Cortafuegos de cada servidor, con mínimo privilegio.                                                                                                        | F3   | [help.ubuntu.com](https://help.ubuntu.com/community/UFW)        |
 
-### Servicios internos y web
+### <mark style="color:$warning;">**Servicios internos y web**</mark>
 
 | Herramienta         | Función                                                            | Fase | Documentación                                                 |
 | ------------------- | ------------------------------------------------------------------ | ---- | ------------------------------------------------------------- |
@@ -35,7 +35,7 @@ Tabla única con todas las herramientas del proyecto: qué hace cada una, en qu�
 
 El DNS y el DHCP no tienen herramienta propia: los da pfSense (ver la capa de red).
 
-### Honeypots
+### <mark style="color:$warning;">**Honeypots**</mark>
 
 | Herramienta | Función                                               | Fase | Documentación                                                        |
 | ----------- | ----------------------------------------------------- | ---- | -------------------------------------------------------------------- |
@@ -43,7 +43,7 @@ El DNS y el DHCP no tienen herramienta propia: los da pfSense (ver la capa de re
 | **Dionaea** | Honeypot multi-protocolo para capturar malware.       | F4   | [github.com/DinoTools/dionaea](https://github.com/DinoTools/dionaea) |
 | **DVWA**    | Aplicación web vulnerable para registrar ataques web. | F4   | [github.com/digininja/DVWA](https://github.com/digininja/DVWA)       |
 
-### Monitorización y respuesta
+### <mark style="color:$warning;">**Monitorización y respuesta**</mark>
 
 | Herramienta            | Función                                                                       | Fase     | Documentación                                                                 |
 | ---------------------- | ----------------------------------------------------------------------------- | -------- | ----------------------------------------------------------------------------- |
@@ -52,7 +52,7 @@ El DNS y el DHCP no tienen herramienta propia: los da pfSense (ver la capa de re
 | **Telegram Bot API**   | Alertas al móvil, enviadas desde Grafana.                                     | F6       | [core.telegram.org/bots/api](https://core.telegram.org/bots/api)              |
 | **Python + AbuseIPDB** | _Extra opcional:_ script de respuesta y bloqueo automático de IPs en pfSense. | Opcional | [docs.abuseipdb.com](https://docs.abuseipdb.com/)                             |
 
-### Hardware y acceso remoto
+### <mark style="color:$warning;">**Hardware y acceso remoto**</mark>
 
 | Elemento              | Función                                                   | Fase | Documentación                               |
 | --------------------- | --------------------------------------------------------- | ---- | ------------------------------------------- |
@@ -64,7 +64,7 @@ El DNS y el DHCP no tienen herramienta propia: los da pfSense (ver la capa de re
 
 > Detalle del hardware en [Infraestructura física](infraestructura-fisica.md). El firewall Juniper NetScreen-25 está aparcado y no forma parte del stack.
 
-### Máquinas auxiliares
+### <mark style="color:$warning;">**Máquinas auxiliares**</mark>
 
 | Herramienta             | Función                                                           | Fase           | Documentación                               |
 | ----------------------- | ----------------------------------------------------------------- | -------------- | ------------------------------------------- |
@@ -75,7 +75,7 @@ El DNS y el DHCP no tienen herramienta propia: los da pfSense (ver la capa de re
 
 > Para ver dónde vive cada herramienta dentro de la red, consulta el [Diagrama de red](diagrama-de-red.md). Para entender por qué cada pieza está ahí, consulta [F0 — Profundización completa](../f0-profundizacion-completa/).
 
-## Próximos pasos
+## <mark style="color:$warning;">**Próximos pasos**</mark>
 
 * Añadir la versión exacta de cada herramienta cuando se instale.
 * Anotar aquí cualquier herramienta nueva que se incorpore durante el proyecto.

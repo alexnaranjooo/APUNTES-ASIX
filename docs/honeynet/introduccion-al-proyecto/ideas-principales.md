@@ -7,11 +7,11 @@ description: >-
 
 # 💡 Ideas Principales
 
-## Ideas
+## <mark style="color:$warning;">**Ideas**</mark>
 
 {% stepper %}
 {% step %}
-### **Concepto central**
+### <mark style="color:$warning;">**Concepto central**</mark>
 
 * Red de empresa simulada + señuelos (honeypots) que atraen ataques reales de internet
 * No es solo tener honeypots sino cerrar el círculo completo:
@@ -22,7 +22,7 @@ detectar → analizar → responder → visualizar
 {% endstep %}
 
 {% step %}
-### **Infraestructura base**
+### <mark style="color:$warning;">**Infraestructura base**</mark>
 
 * **Proxmox** como servidor de virtualización, en **dos PCs** del centro (dos nodos independientes, sin clúster)
 * **pfSense + Suricata** como cerebro de red: firewall, router e IDS a la vez, y también DNS y DHCP, en una **máquina virtual** del PC 1 con una sola tarjeta de red
@@ -32,7 +32,7 @@ detectar → analizar → responder → visualizar
 {% endstep %}
 
 {% step %}
-### **Los señuelos (HoneyPots)**
+### <mark style="color:$warning;">**Los señuelos (HoneyPots)**</mark>
 
 * Cowrie → ataques SSH/Telnet (fuerza bruta, sesiones interactivas)
 * Dionaea → malware
@@ -52,7 +52,7 @@ detectar → analizar → responder → visualizar
 {% endstep %}
 
 {% step %}
-### **Empresa simulada**
+### <mark style="color:$warning;">**Empresa simulada**</mark>
 
 * DNS y DHCP (en pfSense), MariaDB y Backup → dan credibilidad de infraestructura real; la base de datos y las copias van cada una en su contenedor
 * VM de usuarios → contexto de empleados
@@ -60,7 +60,7 @@ detectar → analizar → responder → visualizar
 {% endstep %}
 
 {% step %}
-### Inteligencia y respuesta
+### <mark style="color:$warning;">**Inteligencia y respuesta**</mark>
 
 * **Wazuh** completo centraliza todos los logs (SIEM)
 * **Grafana** los visualiza y envía las alertas por Telegram
@@ -68,7 +68,7 @@ detectar → analizar → responder → visualizar
 {% endstep %}
 
 {% step %}
-### Riesgos a vigilar
+### <mark style="color:$warning;">**Riesgos a vigilar**</mark>
 
 * Alcance grande para el tiempo disponible, con un equipo de solo dos personas
 * Hardware limitado y prestado por el centro (8 GB de RAM por PC, sin posibilidad de ampliar)

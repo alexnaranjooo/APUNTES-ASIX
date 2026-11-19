@@ -10,7 +10,7 @@ description: >-
 **Práctica sustituida por pfSense.** El contenedor de esta práctica (`ct-prueba`) era temporal y ya se eliminó. En la red definitiva las reglas y la IP de la WAN las gestiona **pfSense** (ver [Red real del proyecto](../3.-despliegue-real/red-real-del-proyecto.md)). Esta página se conserva para explicar el mecanismo, por eso no lleva capturas.
 {% endhint %}
 
-## **Introducción**
+## <mark style="color:$warning;">**Introducción**</mark>
 
 Continuación de [Reenvío de puertos con iptables](reenvio-de-puertos-con-iptables.md). Las reglas funcionan, pero viven en memoria: al reiniciar el contenedor se pierden. Además, la IP externa la reparte el DHCP del centro y puede cambiar. Aquí se resuelven las dos cosas.
 
@@ -35,8 +35,6 @@ Al instalarlo pregunta si guardar las reglas actuales (IPv4 e IPv6): se responde
 Hacen falta las dos para que la web siga funcionando tras reiniciar.
 
 **Comprobación:** se apaga el contenedor del todo (**Shutdown**), se vuelve a encender y se miran `sysctl net.ipv4.ip_forward` (debe dar `1`), `iptables -t nat -L -n`, `iptables -L FORWARD -n` y `ip -br a`. Después se abre la web.
-
-
 
 Si no se cargan solas, se comprueba el servicio con `systemctl status netfilter-persistent` y se activa con `systemctl enable netfilter-persistent`.
 
@@ -73,6 +71,6 @@ Una IP fija puede chocar con la que el DHCP dé a otro equipo, y los dos fallar�
 | Tras reiniciar no hay reglas               | Faltaba `netfilter-persistent save` o el servicio no está activo                                  |
 | Sin ruta por defecto con IP fija           | No se hizo _Shutdown_ y _Start_ del todo                                                          |
 
-## Relación con el proyecto
+## <mark style="color:$warning;">**Relación con el proyecto**</mark>
 
 En la Fase 2 esto lo hace **pfSense**: una regla de reenvío de puertos desde la WAN hacia `ct-web` (`10.0.60.10`) y reglas de firewall que solo dejan pasar el 80 y el 443. Aquí se hizo a mano con `iptables` para entender el mecanismo. La práctica ya está sustituida por la red real.

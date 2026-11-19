@@ -10,11 +10,11 @@ description: >-
 **Práctica previa a la red real.** Aquí se ensayó con máquinas de prueba cómo funcionan el bridge `vmbr1` y las etiquetas de VLAN. En la red definitiva el enrutado entre VLANs, el firewall y la publicación de la web los hace **pfSense** (ver [Red real del proyecto](../3.-despliegue-real/red-real-del-proyecto.md)); aquí no había router, por eso las VLANs aíslan del todo.
 {% endhint %}
 
-## Objetivo
+## <mark style="color:$warning;">**Objetivo**</mark>
 
 Crear dentro de Proxmox una **red interna aislada**, sin salida a la red del centro, y conectar a ella una VM y un contenedor en la **VLAN 60** (la de la web). Sirve para practicar las VLANs del proyecto sin tocar la red real.
 
-## Conceptos
+## <mark style="color:$warning;">**Conceptos**</mark>
 
 * **`vmbr0`** es el bridge principal: está unido a la tarjeta física, tiene la IP de gestión del nodo y da salida a la red del centro. **No se modifica**, porque un error cortaría el acceso a Proxmox.
 * **`vmbr1`** es un bridge **sin tarjeta física**: un switch virtual cerrado. Las máquinas conectadas a él solo se ven entre sí.
@@ -38,7 +38,7 @@ flowchart LR
 
 ***
 
-## 1. Crear el bridge `vmbr1`
+## **1.&#x20;**<mark style="color:$warning;">**Crear el bridge**</mark><mark style="color:$warning;">**&#x20;**</mark><mark style="color:$warning;">**`vmbr1`**</mark>
 
 En **honeynet → System → Network → Create → Linux Bridge**:
 
@@ -59,7 +59,7 @@ Comprobación en la Shell del nodo: `ip -br link show vmbr1` muestra el bridge, 
 CAPTURA PENDIENTE: _System → Network_ con `vmbr1` creado.
 {% endhint %}
 
-## 2. Conectar la VM a la VLAN 60
+## **2.&#x20;**<mark style="color:$warning;">**Conectar la VM a la VLAN 60**</mark>
 
 En **vm-nginx → Hardware → Add → Network Device**:
 
@@ -84,7 +84,7 @@ Y se activa con `ifup ens19`. La IP se mantiene tras reiniciar.
 CAPTURA PENDIENTE: la tarjeta de red nueva en _Hardware_ y el `ip -br a` de la VM.
 {% endhint %}
 
-## 3. Conectar el contenedor a la VLAN 60
+## **3.&#x20;**<mark style="color:$warning;">**Conectar el contenedor a la VLAN 60**</mark>
 
 En **ct-prueba → Network → Add**:
 
@@ -102,9 +102,9 @@ Los cambios de red de un contenedor se aplican **al arrancar**, así que hay que
 CAPTURA PENDIENTE: la red del contenedor con `eth1` y su `ip -br a`.
 {% endhint %}
 
-## 4. Pruebas
+## **4.&#x20;**<mark style="color:$warning;">**Pruebas**</mark>
 
-### 4.1 Conexión dentro de la VLAN 60
+### **4.1&#x20;**<mark style="color:$warning;">**Conexión dentro de la VLAN 60**</mark>
 
 Desde el contenedor:
 
@@ -119,7 +119,7 @@ Resultado obtenido: el `ping` responde con 3 paquetes recibidos, 0 % de pérdida
 CAPTURA PENDIENTE: el `ping` y el `curl` desde el contenedor.
 {% endhint %}
 
-### 4.2 Las VLANs aíslan
+### **4.2&#x20;**<mark style="color:$warning;">**Las VLANs aíslan**</mark>
 
 Se cambia la etiqueta de `eth1` del contenedor a `20` y su IP a `10.0.20.251/24`, con _Shutdown_ y _Start_. El `ping` a `10.0.60.250` **ya no responde**: están en VLANs distintas y no hay router entre ellas. Después se devuelve a la VLAN 60.
 
@@ -127,7 +127,7 @@ Se cambia la etiqueta de `eth1` del contenedor a `20` y su IP a `10.0.20.251/24`
 CAPTURA PENDIENTE: el `ping` que falla con el contenedor en la VLAN 20.
 {% endhint %}
 
-### 4.3 El bridge une las dos máquinas
+### **4.3&#x20;**<mark style="color:$warning;">**El bridge une las dos máquinas**</mark>
 
 En la Shell del nodo:
 
@@ -141,13 +141,13 @@ Aparecen dos interfaces unidas a `vmbr1`: `tap100i1` (la tarjeta de la VM) y `ve
 CAPTURA PENDIENTE: la salida de `bridge link | grep vmbr1`.
 {% endhint %}
 
-## 5. Dejar la VM solo en la red interna
+## **5.&#x20;**<mark style="color:$warning;">**Dejar la VM solo en la red interna**</mark>
 
 Con la VM apagada, en **Hardware** se elimina la tarjeta del bridge `vmbr0` (la externa) y se deja solo la de `vmbr1`. Desde ese momento la VM no tiene salida a internet y solo se llega a ella por la red interna. El contenedor mantiene sus dos tarjetas para hacer de puente (ver [Reenvío de puertos con iptables](reenvio-de-puertos-con-iptables.md)).
 
 ***
 
-## Problemas encontrados
+## <mark style="color:$warning;">**Problemas encontrados**</mark>
 
 | Síntoma                                                   | Causa                                                                                         | Solución                                                                          |
 | --------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
@@ -155,6 +155,6 @@ Con la VM apagada, en **Hardware** se elimina la tarjeta del bridge `vmbr0` (la 
 | No se abre la web con la IP externa de la VM              | La IP externa la reparte el DHCP del centro y había cambiado de `.53` a `.55`                 | Mirar la IP actual con `ip -br a` antes de abrir la web                           |
 | El contenedor no tiene `eth1` tras añadirla               | No se había apagado del todo                                                                  | Usar _Shutdown_ y _Start_, no solo un reinicio                                    |
 
-## Relación con el proyecto
+## <mark style="color:$warning;">**Relación con el proyecto**</mark>
 
 Es una versión pequeña de lo que se hará en la Fase 2: las VLANs del proyecto (10, 20, 30, 40, 50 y 60) viajarán etiquetadas por el bridge principal y pfSense las enrutará. Las etiquetas y las direcciones `10.0.X.0/24` serán las mismas que se han usado aquí.

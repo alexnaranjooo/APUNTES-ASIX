@@ -6,7 +6,7 @@ description: >-
 
 # Plantillas y configuración en Proxmox
 
-## Introducción
+## <mark style="color:$warning;">**Introducción**</mark>
 
 Antes de montar los servidores del laboratorio conviene dejar preparadas unas **plantillas**: copias limpias de un sistema ya instalado y actualizado, desde las que se crean máquinas nuevas en segundos. Esta página explica los conceptos, cómo se prepara Proxmox y qué hay que descargar. Después se crean la plantilla de VM y el contenedor en las dos páginas siguientes.
 
@@ -14,9 +14,9 @@ Todo se hace desde la interfaz web de Proxmox (`https://IP-DEL-NODO:8006`). En e
 
 ***
 
-## 1. Conceptos previos
+## **1.&#x20;**<mark style="color:$warning;">**Conceptos previos**</mark>
 
-### 1.1 Máquina virtual y contenedor
+### **1.1&#x20;**<mark style="color:$warning;">**Máquina virtual y contenedor**</mark>
 
 |                        | Máquina virtual (VM)                                            | Contenedor LXC                        |
 | ---------------------- | --------------------------------------------------------------- | ------------------------------------- |
@@ -27,7 +27,7 @@ Todo se hace desde la interfaz web de Proxmox (`https://IP-DEL-NODO:8006`). En e
 | Herramienta de consola | `qm`                                                            | `pct`                                 |
 | Cuándo usarla          | Sistemas que no son Linux o cuando se quiere aislamiento fuerte | Servicios Linux ligeros               |
 
-### 1.2 Tipos de recursos que se guardan en Proxmox
+### **1.2&#x20;**<mark style="color:$warning;">**Tipos de recursos que se guardan en Proxmox**</mark>
 
 | Recurso                     | Qué es                                                             | Dónde se guarda                       | Para qué sirve                           |
 | --------------------------- | ------------------------------------------------------------------ | ------------------------------------- | ---------------------------------------- |
@@ -35,7 +35,7 @@ Todo se hace desde la interfaz web de Proxmox (`https://IP-DEL-NODO:8006`). En e
 | **Plantilla de contenedor** | Sistema Linux ya preparado, en un archivo comprimido (`.tar.zst`)  | `local` → CT Templates                | Crear contenedores LXC                   |
 | **Plantilla de VM**         | VM ya instalada que se marca como plantilla y no se puede encender | Árbol de Proxmox, con un icono propio | Clonar VMs nuevas                        |
 
-### 1.3 Dónde se guarda cada cosa
+### **1.3&#x20;**<mark style="color:$warning;">**Dónde se guarda cada cosa**</mark>
 
 * **`local`**: una carpeta del sistema. Guarda las ISOs, las plantillas de contenedor y las copias de seguridad.
 * **`local-lvm`**: un volumen LVM-thin. Guarda los **discos** de las VMs y de los contenedores.
@@ -46,13 +46,13 @@ En el PC 1 quedan unos **54 GB** en `local-lvm` para todas las máquinas. Por es
 
 ***
 
-## 2. Preparar Proxmox
+## **2.&#x20;**<mark style="color:$warning;">**Preparar Proxmox**</mark>
 
-### 2.1 Entrar en la interfaz
+### **2.1&#x20;**<mark style="color:$warning;">**Entrar en la interfaz**</mark>
 
 Al entrar con `root` aparece el aviso **«No valid subscription»**: es normal, Proxmox es gratuito y solo la versión con soporte es de pago. Se pulsa **OK**. El navegador también marca «No es seguro» porque Proxmox usa un certificado propio.
 
-### 2.2 Repositorios y actualización
+### **2.2&#x20;**<mark style="color:$warning;">**Repositorios y actualización**</mark>
 
 **Concepto:** Proxmox viene configurado con el repositorio de pago (_enterprise_). Sin suscripción da error al actualizar. Hay que desactivarlo y activar el gratuito (_no-subscription_); los paquetes son los mismos.
 
@@ -72,7 +72,7 @@ pveversion
 
 <figure><img src="../../../.gitbook/assets/image (39).png" alt=""><figcaption></figcaption></figure>
 
-### 2.3 Usuario administrador propio
+### **2.3&#x20;**<mark style="color:$warning;">**Usuario administrador propio**</mark>
 
 `root` lo puede todo y es el usuario que más se ataca, así que se trabaja con un usuario propio:
 
@@ -82,26 +82,24 @@ pveversion
 
 ***
 
-## 3. Descargar lo necesario
+## **3.&#x20;**<mark style="color:$warning;">**Descargar lo necesario**</mark>
 
-### 3.1 ISO de Debian 13
+### **3.1&#x20;**<mark style="color:$warning;">**ISO de Debian 13**</mark>
 
 1. En debian.org, copiar el enlace de la imagen **netinst** de 64 bits (amd64).
 2. **honeynet → local → ISO Images → Download from URL**, pegar el enlace, pulsar **Query URL** y después **Download**.
 
-### 3.2 Plantilla de contenedor Debian 13
+### **3.2&#x20;**<mark style="color:$warning;">**Plantilla de contenedor Debian 13**</mark>
 
 **honeynet → local → CT Templates → Templates**, buscar `debian-13` y descargar la **standard**.
 
-### 3.3 ISO de pfSense (para más adelante)
+### **3.3&#x20;**<mark style="color:$warning;">**ISO de pfSense (para más adelante)**</mark>
 
 Se descarga en el portátil desde pfsense.org en formato **ISO (DVD)**, se descomprime, se comprueba el hash con `certutil -hashfile fichero.iso SHA256` y se sube con **Upload**. No se usa en la práctica, pero se deja preparada para la Fase 2.
 
-
-
 ***
 
-## Siguiente
+## <mark style="color:$warning;">**Siguiente**</mark>
 
 * [Plantilla de VM Debian 13](plantilla-de-vm-debian-13.md): crear, instalar, preparar y limpiar la VM.
 * [Clones y contenedor LXC](clones-y-contenedor-lxc.md): convertirla en plantilla, clonarla y crear un contenedor.

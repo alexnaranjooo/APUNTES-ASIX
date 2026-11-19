@@ -8,7 +8,7 @@ La WAN va por `vmbr0` y recibe su IP por DHCP del centro. Las seis VLANs interna
 
 <figure><img src="../../../../.gitbook/assets/02-wan-pfsense.png" alt=""><figcaption></figcaption></figure>
 
-## Interfaces
+## <mark style="color:$warning;">**Interfaces**</mark>
 
 | Interfaz | Descripción     | IP             |
 | -------- | --------------- | -------------- |
@@ -20,7 +20,7 @@ La WAN va por `vmbr0` y recibe su IP por DHCP del centro. Las seis VLANs interna
 | OPT4     | ATK (VLAN 50)   | `10.0.50.1/24` |
 | OPT5     | WEB (VLAN 60)   | `10.0.60.1/24` |
 
-## Reglas del firewall
+## <mark style="color:$warning;">**Reglas del firewall**</mark>
 
 pfSense bloquea por defecto todo lo que no esté permitido, y las reglas se evalúan de arriba abajo. En cada VLAN se permite el ping a la puerta de enlace y el DNS de pfSense, se bloquea el acceso a la administración de pfSense y se permite la salida a internet (todo lo que no sea la red interna, con el alias `RED_INTERNA` invertido). La VLAN 40 puede abrir la web y la VLAN 60 puede consultar la base de datos. La WAN, la DMZ y la VLAN del atacante no llevan reglas, así que lo bloquean todo.
 

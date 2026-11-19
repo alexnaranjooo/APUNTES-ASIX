@@ -1,12 +1,12 @@
 # 📡 Infraestructura física
 
-## Introducción
+## <mark style="color:$warning;">**Introducción**</mark>
 
 Esta página describe el **hardware real** del laboratorio de HoneyNet: qué equipos se usan, cómo se conectan y qué decisiones se han tomado. Complementa al [Diagrama de red](diagrama-de-red.md), que muestra la arquitectura lógica (VLANs y reglas de tráfico).
 
 ***
 
-## Inventario de hardware
+## <mark style="color:$warning;">**Inventario de hardware**</mark>
 
 | Equipo                                | Papel en el proyecto                                                                                                                                                                             | Estado                                                              |
 | ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- |
@@ -25,7 +25,7 @@ Cada PC tiene **8 GB de RAM** y el centro no puede ampliarlos. En disco, el PC 1
 
 ***
 
-## Topología física
+## <mark style="color:$warning;">**Topología física**</mark>
 
 ```mermaid
 flowchart LR
@@ -47,7 +47,7 @@ flowchart LR
 
 ***
 
-## Cómo funciona con una sola tarjeta de red
+## <mark style="color:$warning;">**Cómo funciona con una sola tarjeta de red**</mark>
 
 Cada PC tiene **una sola NIC**, y un firewall normalmente necesita al menos dos (una para WAN y otra para LAN). La solución es usar **VLANs sobre un único cable**:
 
@@ -79,7 +79,7 @@ flowchart LR
 Hasta que el switch esté configurado, la WAN de pfSense va por el bridge `vmbr0` (la red del centro, sin VLAN) y las VLANs internas por `vmbr1`, una red interna del propio nodo. Cuando llegue el switch, todo pasa al trunk.
 {% endhint %}
 
-### Recorrido de un ataque
+### <mark style="color:$warning;">**Recorrido de un ataque**</mark>
 
 Aunque el honeypot y pfSense estén en el mismo PC, el tráfico entre VLANs siempre tiene que pasar por pfSense:
 
@@ -99,7 +99,7 @@ sequenceDiagram
 
 ***
 
-## Reparto de recursos
+## <mark style="color:$warning;">**Reparto de recursos**</mark>
 
 **PC 1** (unos 7,6 GB de RAM y 54 GB para máquinas)
 
@@ -126,7 +126,7 @@ Quedan más de 1 GB de margen de RAM en el PC 1. Si hiciera falta, la VM cliente
 
 ***
 
-## Decisiones tomadas
+## <mark style="color:$warning;">**Decisiones tomadas**</mark>
 
 * **Dos Proxmox independientes**, uno por PC, sin clúster. Cada uno gestiona sus máquinas.
 * **pfSense + Suricata va en una VM** del PC 1. Antes iba en hardware real, pero el PC dedicado casi no usaba su memoria y la RAM total era insuficiente.
@@ -145,7 +145,7 @@ Si la VM de pfSense se apaga, cae el enrutado entre VLANs (y también el DNS y e
 
 ***
 
-## Acceso remoto con NetBird
+## <mark style="color:$warning;">**Acceso remoto con NetBird**</mark>
 
 Se puede trabajar en el laboratorio **desde casa** mediante **NetBird**, una VPN. Como los equipos están siempre encendidos, el laboratorio está disponible en cualquier momento.
 

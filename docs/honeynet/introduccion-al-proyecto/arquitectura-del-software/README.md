@@ -1,12 +1,12 @@
 # 💽 Arquitectura del software
 
-## Objetivo de esta sección
+## <mark style="color:$warning;">**Objetivo de esta sección**</mark>
 
 Recoge la planificación y el diseño de la arquitectura de HoneyNet: una calendarización detallada con los objetivos, los resultados a alcanzar y los requisitos técnicos, tanto de hardware como de software.
 
 ***
 
-## El porqué del diseño y la arquitectura
+## <mark style="color:$warning;">**El porqué del diseño y la arquitectura**</mark>
 
 Antes de instalar nada, conviene tener un plano de lo que se va a construir. En HoneyNet esto es especialmente importante porque el proyecto reúne virtualización, red segmentada, servicios, seguridad y una aplicación web que depende de todo lo anterior.
 
@@ -17,7 +17,7 @@ Antes de instalar nada, conviene tener un plano de lo que se va a construir. En 
 
 ***
 
-## Resumen de la arquitectura
+## <mark style="color:$warning;">**Resumen de la arquitectura**</mark>
 
 La arquitectura es **cliente-servidor**. Un cliente en la VLAN de Usuarios obtiene su IP por DHCP y resuelve el dominio con el DNS, ambos de pfSense, y accede por navegador a la web, que consulta la base de datos. El administrador ve en la misma web los paneles de Grafana, a través de un proxy. Todo el tráfico entre VLANs pasa por pfSense.
 
@@ -41,7 +41,7 @@ flowchart LR
 
 ***
 
-## Índice
+## <mark style="color:$warning;">**Índice**</mark>
 
 1. [Planificación y funcionalidades](1.-planificacion-y-funcionalidades.md)
 2. [Arquitectura del sistema](2.-arquitectura-del-sistema.md)

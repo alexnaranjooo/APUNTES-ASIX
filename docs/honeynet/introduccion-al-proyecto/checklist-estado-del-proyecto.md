@@ -1,12 +1,12 @@
 # ✔️ Checklist / estado del proyecto
 
-## Introducción
+## <mark style="color:$warning;">**Introducción**</mark>
 
 Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se avanza: marca cada casilla cuando esté hecha y cambia el estado de la fase en la tabla resumen.
 
 > Las subtareas de cada fase son una propuesta de trabajo basada en el stack del proyecto; ajústalas según vayas descubriendo qué hace falta de verdad en cada paso.
 
-## Resumen de estado
+## <mark style="color:$warning;">**Resumen de estado**</mark>
 
 | Fase   | Contenido                                                           | Estado      |
 | ------ | ------------------------------------------------------------------- | ----------- |
@@ -20,7 +20,7 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 | **F7** | Exposición controlada a internet (VPS)                              | ⚪ Pendiente |
 | **F8** | Memoria y presentación                                              | ⚪ Pendiente |
 
-### Fase 0 — Profundización
+### <mark style="color:$warning;">**Fase 0 — Profundización**</mark>
 
 * [x] Bloque 1 — Proxmox (node, VM, LXC, storage, bridge, snapshot, template)
 * [x] Bloque 2 — Docker (imagen, contenedor, volumen, Compose, red Docker)
@@ -28,7 +28,7 @@ Seguimiento del estado de **HoneyNet** fase a fase. Se actualiza a medida que se
 * [x] Bloque 4 — Cada servicio del stack (qué hace y por qué está ahí)
 * [x] Páginas de la Fase 0 y diagrama de red publicados en el GitBook
 
-### Fase 1 — Inventario y Proxmox en los dos PCs
+### <mark style="color:$warning;">**Fase 1 — Inventario y Proxmox en los dos PCs**</mark>
 
 Lo que se va haciendo se documenta en [Implementación en Proxmox](../implementacion-en-proxmox/).
 
@@ -56,7 +56,7 @@ Lo que se va haciendo se documenta en [Implementación en Proxmox](../implementa
 * [x] Instalar Proxmox en el PC 2
 * [x] Repositorios gratuitos, actualización y usuario administrador del PC 2
 
-### Fase 2 — VLANs, switch y pfSense
+### <mark style="color:$warning;">**Fase 2 — VLANs, switch y pfSense**</mark>
 
 Lo hecho está documentado en [Red real del proyecto](../implementacion-en-proxmox/3.-despliegue-real/red-real-del-proyecto.md).
 
@@ -71,7 +71,7 @@ Lo hecho está documentado en [Red real del proyecto](../implementacion-en-proxm
 * [x] Instalar y activar Suricata con reglas ET Open, en la VLAN Web (la DMZ se añade en la Fase 4) ([Suricata](../implementacion-en-proxmox/3.-despliegue-real/red-con-pfsense/suricata-ids.md))
 * [x] Probar el aislamiento entre VLANs (desde la VLAN de Usuarios)
 
-### Fase 3 — Servicios internos y web
+### <mark style="color:$warning;">**Fase 3 — Servicios internos y web**</mark>
 
 * [x] `ct-db`: MariaDB con el esquema `honeypot_web` y los usuarios `web_app` y `web_admin` con permisos mínimos
 * [x] `ct-web`: nginx + PHP-FPM conectado a la base de datos
@@ -80,14 +80,14 @@ Lo hecho está documentado en [Red real del proyecto](../implementacion-en-proxm
 * [x] `ct-backup`: copias automáticas con rsync + cron ([Copias de seguridad con ct-backup](../implementacion-en-proxmox/3.-despliegue-real/contenedores/copias-de-seguridad-con-ct-backup.md))
 * [x] Borrar el contenedor `ct-dns-dhcp`, que ya no se usa
 
-### Fase 4 — Honeypots
+### <mark style="color:$warning;">**Fase 4 — Honeypots**</mark>
 
 * [ ] Instalar Docker en la VM de la DMZ
 * [ ] Escribir el archivo de Docker Compose con Cowrie, Dionaea y DVWA
 * [ ] Configurar volúmenes para logs y muestras de malware
 * [ ] Atacar los honeypots desde Kali para comprobar que registran
 
-### Fase 5 — Wazuh completo (SIEM)
+### <mark style="color:$warning;">**Fase 5 — Wazuh completo (SIEM)**</mark>
 
 * [ ] Desplegar Wazuh completo en la VLAN de Gestión (PC 2), con las contraseñas por defecto cambiadas
 * [ ] Conectar los logs de Cowrie, Dionaea, Suricata y la web
@@ -95,7 +95,7 @@ Lo hecho está documentado en [Red real del proyecto](../implementacion-en-proxm
 * [ ] Fijar una retención corta de datos
 * [ ] Verificar que las alertas aparecen al atacar desde Kali
 
-### Fase 6 — Grafana, alertas y paneles en la web
+### <mark style="color:$warning;">**Fase 6 — Grafana, alertas y paneles en la web**</mark>
 
 * [ ] Desplegar Grafana y conectarlo a Wazuh
 * [ ] Crear dashboards, tabla de logs y mapa de atacantes
@@ -104,21 +104,21 @@ Lo hecho está documentado en [Red real del proyecto](../implementacion-en-proxm
 * [ ] Probar el login de administrador y que `/admin` solo responde desde la red interna
 * [ ] _Extra opcional:_ bloqueo automático de IPs en pfSense _(puede no llegar en la primera versión)_
 
-### Fase 7 — Exposición a internet
+### <mark style="color:$warning;">**Fase 7 — Exposición a internet**</mark>
 
 * [ ] Revisar y endurecer las reglas antes de exponer nada
 * [ ] Desplegar los honeypots en la VPS y abrir el túnel VPN desde pfSense
 * [ ] Monitorizar los primeros ataques reales
 * [ ] Verificar que ningún atacante alcanza las VLANs internas
 
-### Fase 8 — Memoria y presentación
+### <mark style="color:$warning;">**Fase 8 — Memoria y presentación**</mark>
 
 * [ ] Redactar la memoria del proyecto
 * [ ] Recopilar capturas, datos y estadísticas de ataques reales
 * [ ] Preparar la presentación
 * [ ] Ensayar la defensa
 
-### Parte web
+### <mark style="color:$warning;">**Parte web**</mark>
 
 Detalle en [Parte web](parte-web/) y en [Arquitectura del software](arquitectura-del-software/).
 

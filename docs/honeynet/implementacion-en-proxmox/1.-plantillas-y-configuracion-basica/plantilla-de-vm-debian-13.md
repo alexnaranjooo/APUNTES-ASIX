@@ -6,7 +6,7 @@ description: >-
 
 # Plantilla de VM Debian 13
 
-## Introducción
+## <mark style="color:$warning;">**Introducción**</mark>
 
 Continuación de [Plantillas y configuración en Proxmox](plantillas-y-configuracion-en-proxmox.md): una vez preparado Proxmox y descargada la ISO de Debian 13, aquí se crea la **plantilla de VM** `debian13-base`, explicando qué significa cada ajuste.
 
@@ -14,7 +14,7 @@ Continuación de [Plantillas y configuración en Proxmox](plantillas-y-configura
 
 <figure><img src="../../../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
 
-## 1. Crear la VM
+## **1.&#x20;**<mark style="color:$warning;">**Crear la VM**</mark>
 
 Se pulsa **Create VM** y se rellenan las pestañas:
 
@@ -32,7 +32,7 @@ Se desmarca _Start after created_ antes de terminar.
 
 <figure><img src="../../../.gitbook/assets/image (42).png" alt=""><figcaption></figcaption></figure>
 
-## 2. Instalar Debian
+## **2.&#x20;**<mark style="color:$warning;">**Instalar Debian**</mark>
 
 La VM se enciende y se abre la **Console**. Se usa el instalador normal con idioma, país y teclado en español, el nombre de equipo `debian13-base`, una contraseña de root y un usuario normal. El particionado es _Guiado: usar todo el disco_ con todos los ficheros en una partición.
 
@@ -40,7 +40,7 @@ En la **selección de software**, se desmarcan _Debian desktop environment_ y _G
 
 Al terminar, en **Hardware → CD/DVD Drive** se elige _Do not use any media_, para que la VM no vuelva a arrancar el instalador.
 
-## 3. Preparar el sistema
+## **3.&#x20;**<mark style="color:$warning;">**Preparar el sistema**</mark>
 
 Como `root`, dentro de la VM:
 
@@ -51,7 +51,7 @@ apt install qemu-guest-agent sudo curl vim -y
 
 El paquete `qemu-guest-agent` es la parte de la VM que se comunica con Proxmox.
 
-## 4. Limpiar la VM antes de convertirla
+## **4.&#x20;**<mark style="color:$warning;">**Limpiar la VM antes de convertirla**</mark>
 
 **Concepto:** si no se limpia, todos los clones compartirían el mismo identificador de equipo y las mismas claves SSH, y se comportarían como una sola máquina.
 

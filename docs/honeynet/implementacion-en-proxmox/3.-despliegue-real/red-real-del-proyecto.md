@@ -6,7 +6,7 @@ description: >-
 
 # Red real del proyecto
 
-## Objetivo
+## <mark style="color:$warning;">**Objetivo**</mark>
 
 Montar la red que se dibujó en la pizarra y que será la red del proyecto: la red del centro entra por `vmbr0` a **pfSense**, que hace el reenvío de puertos, las VLANs y el DHCP por MAC, y por `vmbr1` cuelgan los servicios (NGINX, base de datos y copias). El **DNS lo hace el propio pfSense**, así que no hace falta un contenedor para él.
 
@@ -28,7 +28,7 @@ flowchart TB
     PF -- "vmbr1" --> CL
 ```
 
-## Estado
+## <mark style="color:$warning;">**Estado**</mark>
 
 | Elemento                                       | Resultado                        |
 | ---------------------------------------------- | -------------------------------- |
@@ -40,7 +40,7 @@ flowchart TB
 | Reenvío de puertos hacia NGINX                 | Hecho                            |
 | `ct-backup`                                    | Hecho                            |
 
-## Cómo se organiza esta parte
+## <mark style="color:$warning;">**Cómo se organiza esta parte**</mark>
 
 1. [Red con pfSense](red-con-pfsense/): las VLANs y el firewall, el DHCP por MAC y el DNS, y el reenvío de puertos que publica la web.
 2. [Contenedores](contenedores/): los servidores `ct-db` y `ct-web`, la base de datos y las copias de seguridad con `ct-backup`.

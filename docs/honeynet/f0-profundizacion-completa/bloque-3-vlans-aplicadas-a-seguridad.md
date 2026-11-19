@@ -6,11 +6,11 @@ description: >-
 
 # Bloque 3 — VLANs aplicadas a seguridad
 
-## **VLANs aplicadas a seguridad**
+## <mark style="color:$warning;">**VLANs aplicadas a seguridad**</mark>
 
 La parte técnica (crear VLANs, etiquetado 802.1Q) ya se conoce de primer curso. Lo nuevo aquí es el **razonamiento de seguridad** detrás de cada VLAN y los ataques que hay que prevenir al segmentar.
 
-### Por qué segmentamos
+### <mark style="color:$warning;">**Por qué segmentamos**</mark>
 
 En una red plana, un atacante que comprometa el honeypot (que está ahí precisamente para ser atacado) tendría visibilidad directa sobre los servidores reales, el SIEM y todo lo demás. **Segmentar significa que comprometer una pieza no da acceso a las demás.**
 
@@ -18,7 +18,7 @@ En una red plana, un atacante que comprometa el honeypot (que está ahí precisa
 Una VLAN separa el tráfico a nivel 2, pero **no filtra nada por sí sola**. Lo que impide que dos VLANs hablen entre sí es el firewall (pfSense) que las enruta. VLAN = separación; reglas del firewall = seguridad.
 {% endhint %}
 
-### Cada VLAN, con su lógica
+### <mark style="color:$warning;">**Cada VLAN, con su lógica**</mark>
 
 {% tabs %}
 {% tab title="VLAN 99 · WAN" %}
@@ -78,7 +78,7 @@ Una VLAN separa el tráfico a nivel 2, pero **no filtra nada por sí sola**. Lo 
 {% endtab %}
 {% endtabs %}
 
-### Mapa de los flujos permitidos
+### <mark style="color:$warning;">**Mapa de los flujos permitidos**</mark>
 
 ```mermaid
 flowchart LR
@@ -104,7 +104,7 @@ flowchart LR
 
 Todo lo que no aparece en el mapa está **bloqueado**: el firewall deniega por defecto y solo se abre lo que tiene una razón. La tabla completa de reglas está en el [Diagrama de red](../introduccion-al-proyecto/diagrama-de-red.md).
 
-### El concepto que lo resume todo: defensa en profundidad
+### <mark style="color:$warning;">**El concepto que lo resume todo: defensa en profundidad**</mark>
 
 No se depende de una sola barrera. Aunque pfSense tuviera un fallo, o un honeypot se comprometiera de verdad, las demás capas siguen en pie:
 
@@ -116,7 +116,7 @@ No se depende de una sola barrera. Aunque pfSense tuviera un fallo, o un honeypo
 
 Es el razonamiento que más valora un tribunal, porque demuestra que las VLANs no se montaron «porque sí», sino con una razón de seguridad detrás de cada una.
 
-### Cómo se ataca una VLAN: VLAN hopping
+### <mark style="color:$warning;">**Cómo se ataca una VLAN: VLAN hopping**</mark>
 
 Segmentar no es suficiente si el propio switch está mal configurado. El **VLAN hopping** es el conjunto de técnicas con las que un atacante salta de su VLAN a otra sin pasar por el firewall.
 
@@ -156,7 +156,7 @@ Se reducen limitando quién tiene acceso físico a los puertos, apagando los que
 {% endtab %}
 {% endtabs %}
 
-### Qué se aplicará en el switch
+### <mark style="color:$warning;">**Qué se aplicará en el switch**</mark>
 
 | Riesgo                   | Medida en el HP 1810-24                                                                        |
 | ------------------------ | ---------------------------------------------------------------------------------------------- |
@@ -170,18 +170,18 @@ Se reducen limitando quién tiene acceso físico a los puertos, apagando los que
 La negociación automática de trunks (DTP) es un protocolo propio de Cisco, y en un switch HP cada puerto se configura a mano. Aun así, la regla es la misma: ningún puerto debe quedar en un modo que acepte un trunk sin que lo hayas configurado tú. Se comprobará en la interfaz del switch durante la Fase 2.
 {% endhint %}
 
-### Qué NO protege una VLAN
+### <mark style="color:$warning;">**Qué NO protege una VLAN**</mark>
 
 * **No cifra el tráfico**: dentro de una VLAN, quien tenga acceso puede capturarlo.
 * **No sustituye al firewall**: sin reglas entre VLANs, el router las comunica sin restricción.
 * **No frena el acceso físico**: un cable conectado a un puerto mal configurado salta cualquier segmentación.
 
-### Para ampliar
+### <mark style="color:$warning;">**Para ampliar**</mark>
 
 * [VLAN hopping — TechTarget](https://www.techtarget.com/cybersecurity/definition/virtual-local-area-network-hopping-VLAN-hopping)
 * [VLAN hopping 101 — ManageEngine](https://www.manageengine.com/network-monitoring/vlan-hopping.html)
 * [VLAN hopping y mitigación — LevelBlue](https://levelblue.com/blogs/levelblue-blog/vlan-hopping-and-mitigation)
 
-### Próximos pasos
+### <mark style="color:$warning;">**Próximos pasos**</mark>
 
 Seguir con el [Bloque 4 — Stack de servicios completo](bloque-4-stack-de-servicios-completo.md). La configuración real del switch y de las reglas de pfSense se hará en la Fase 2.

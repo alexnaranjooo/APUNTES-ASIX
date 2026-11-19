@@ -6,11 +6,11 @@ description: >-
 
 # Bloque 4 — Stack de servicios completo
 
-## **Stack de servicios**
+## <mark style="color:$warning;">**Stack de servicios**</mark>
 
 No hace falta saber instalar cada servicio todavía (eso es de cada fase), pero sí entender **qué hace, por qué está ahí y dónde vive**, para que al llegar a su fase no se empiece de cero.
 
-### Vista general
+### <mark style="color:$warning;">**Vista general**</mark>
 
 | Capa               | Servicio                       | Dónde vive                        | Fase           |
 | ------------------ | ------------------------------ | --------------------------------- | -------------- |
@@ -25,7 +25,7 @@ No hace falta saber instalar cada servicio todavía (eso es de cada fase), pero 
 | Monitorización     | Grafana y alertas por Telegram | VM del SIEM en el PC 2, VLAN 30   | F6             |
 | Pruebas            | Kali Linux                     | VM en el PC 2, VLAN 50            | F2 en adelante |
 
-### Red y seguridad perimetral
+### <mark style="color:$warning;">**Red y seguridad perimetral**</mark>
 
 {% tabs %}
 {% tab title="pfSense" %}
@@ -55,7 +55,7 @@ No hace falta saber instalar cada servicio todavía (eso es de cada fase), pero 
 {% endtab %}
 {% endtabs %}
 
-### Servicios internos
+### <mark style="color:$warning;">**Servicios internos**</mark>
 
 {% tabs %}
 {% tab title="MariaDB" %}
@@ -87,7 +87,7 @@ No hace falta saber instalar cada servicio todavía (eso es de cada fase), pero 
 {% endtab %}
 {% endtabs %}
 
-### Honeypots
+### <mark style="color:$warning;">**Honeypots**</mark>
 
 {% tabs %}
 {% tab title="Cowrie" %}
@@ -115,7 +115,7 @@ No hace falta saber instalar cada servicio todavía (eso es de cada fase), pero 
 {% endtab %}
 {% endtabs %}
 
-### Monitorización y respuesta
+### <mark style="color:$warning;">**Monitorización y respuesta**</mark>
 
 {% tabs %}
 {% tab title="Wazuh" %}
@@ -158,7 +158,7 @@ No hace falta saber instalar cada servicio todavía (eso es de cada fase), pero 
 {% endtab %}
 {% endtabs %}
 
-### Cómo viaja un ataque por el stack
+### <mark style="color:$warning;">**Cómo viaja un ataque por el stack**</mark>
 
 ```mermaid
 sequenceDiagram
@@ -181,7 +181,7 @@ sequenceDiagram
 
 Las alertas de Suricata también deben llegar a Wazuh; Wazuh puede recibir logs de firewalls por syslog, y cómo se conectará se decide en la Fase 5.
 
-### Dónde se guarda cada cosa
+### <mark style="color:$warning;">**Dónde se guarda cada cosa**</mark>
 
 | Dato                                                 | Dónde se guarda                           |
 | ---------------------------------------------------- | ----------------------------------------- |
@@ -197,7 +197,7 @@ Las alertas de Suricata también deben llegar a Wazuh; Wazuh puede recibir logs 
 Wazuh en una sola máquina recomienda, para hasta 25 agentes, 4 vCPU, 8 GB de RAM y 50 GB de disco. La VM del SIEM está prevista con 4 GB de RAM, la mitad de lo recomendado, y el indexer es la pieza que más memoria consume. El disco es menos problema, porque el PC 2 tiene un SSD de 256 GB, pero la RAM sí lo es: habrá que ajustar la memoria del indexer y reducir los días de retención.
 {% endhint %}
 
-### Para ampliar
+### <mark style="color:$warning;">**Para ampliar**</mark>
 
 * [Arquitectura de Wazuh](https://documentation.wazuh.com/current/getting-started/architecture.html)
 * [Requisitos de Wazuh (quickstart)](https://documentation.wazuh.com/current/quickstart.html)
@@ -206,6 +206,6 @@ Wazuh en una sola máquina recomienda, para hasta 25 agentes, 4 vCPU, 8 GB de RA
 * [Dionaea: de Conficker a WannaCry — The Honeynet Project](https://honeynet.org/2017/05/30/dionaea-honeypot-from-conficker-to-wannacry-sambacry-cve-2017-7494/)
 * [Documentación de pfSense — Netgate](https://docs.netgate.com/pfsense/en/latest/)
 
-### Próximos pasos
+### <mark style="color:$warning;">**Próximos pasos**</mark>
 
 Con los cuatro bloques de la Fase 0 completos, se puede pasar a la Fase 1. Los servicios se irán instalando fase a fase.

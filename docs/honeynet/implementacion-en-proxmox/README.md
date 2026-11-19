@@ -6,7 +6,7 @@ description: >-
 
 # Implementación en Proxmox
 
-## Introducción
+## <mark style="color:$warning;">**Introducción**</mark>
 
 Esta sección recoge **lo que se hace de verdad en Proxmox**, paso a paso, con las configuraciones explicadas. Está separada de la _Introducción al proyecto_ porque aquí no se describe el diseño, sino la **implementación**: lo que se ha montado, cómo y por qué se ha configurado así.
 

@@ -9,7 +9,7 @@ description: >-
 
 ***
 
-## Presentación del grupo
+## <mark style="color:$warning;">**Presentación del grupo**</mark>
 
 <details>
 
@@ -33,9 +33,9 @@ description: >-
 
 ***
 
-## Justificación de la formación del equipo
+## <mark style="color:$warning;">**Justificación de la formación del equipo**</mark>
 
-* Yo, **Alex** planteé el proyecto pensando en trabajarlo en solitario, pero la ciberseguridad es un ámbito que se trabaja en equipo, por lo tanto me abrí a propuestas.
+* Yo, **Alex** planteé el proyecto pensando en trabajarlo en solitario, pero la ciberseguridad es un ámbito que se trabaja en equipo, por lo tanto me abrí a propuestas.
 * **David** se suma por interés genuino: el tema conecta directamente con lo que está haciendo ahora mismo en sus prácticas de empresa.
 * Hemos estado trabajando juntos durante todo el primer curso: conocemos nuestra forma de trabajar y sabemos que cada uno cumple con su parte.
 * Compartimos una manera de trabajar perfeccionista y un carácter similar: **observadores antes que habladores**.
@@ -45,7 +45,7 @@ description: >-
 
 ***
 
-## Mapa de competencias del equipo
+## <mark style="color:$warning;">**Mapa de competencias del equipo**</mark>
 
 | Área técnica                     | Cubierta por             |
 | -------------------------------- | ------------------------ |
@@ -54,26 +54,26 @@ description: >-
 | Bases de datos (PHP/MySQL)       | Alex y David             |
 | Virtualización, Docker, SIEM     | Por aprender — ambos     |
 
-### Soft skills colectivas
+### <mark style="color:$warning;">**Soft skills colectivas**</mark>
 
 {% hint style="info" %}
 <p align="center"><strong>Perfeccionismo</strong> · observación y análisis · fiabilidad mutua</p>
 {% endhint %}
 
-### Fortalezas
+### <mark style="color:$warning;">**Fortalezas**</mark>
 
 * Base sólida y compartida en redes (VLANs, OSPF, NAT/PAT).
 * Historial de trabajo conjunto fiable.
 * Exigencia alta y compartida por ambos.
 
-### Riesgos y cómo los cubrimos
+### <mark style="color:$warning;">**Riesgos y cómo los cubrimos**</mark>
 
 * **Sin experiencia** previa en **Proxmox**, **Docker** o **herramientas SIEM** → aprendizaje progresivo, documentado en este mismo GitBook.
 * **Equipo pequeño**, por lo tanto más carga de trabajo.
 
 ***
 
-### Fases del proyecto y quién las cubre
+### <mark style="color:$warning;">**Fases del proyecto y quién las cubre**</mark>
 
 | Fase              | Responsable                    |
 | ----------------- | ------------------------------ |
@@ -85,7 +85,7 @@ description: >-
 
 ***
 
-### Compromisos de funcionamiento del equipo
+### <mark style="color:$warning;">**Compromisos de funcionamiento del equipo**</mark>
 
 1. **Comunicación**: contacto directo y presencial.
 2. **Reuniones de seguimiento**: alineadas con el avance de cada fase del proyecto.
@@ -94,6 +94,6 @@ description: >-
 
 ***
 
-### Conclusión
+### <mark style="color:$warning;">**Conclusión**</mark>
 
 Un equipo compacto y ya probado: base técnica sólida en redes, un método de trabajo perfeccionista compartido y un año entero de trabajo conjunto respaldan la viabilidad del proyecto **HoneyNet**.
