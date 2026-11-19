@@ -57,6 +57,10 @@ Server: nginx
 ...
 ```
 
+{% hint style="info" %}
+📷 **CAPTURA 1 AQUÍ** — la del `curl -I` repetido + `systemctl reload nginx` (la de las 15:29)
+{% endhint %}
+
 > **Nota — dependencia de `rsyslog`**: `aa-genprof` necesita leer `/var/log/syslog`. En Kali, por defecto solo está activo `journald` y ese archivo no existe. Se resuelve instalando y habilitando `rsyslog`:
 >
 > ```bash
@@ -128,6 +132,10 @@ apparmor="STATUS" operation="profile_replace" profile="unconfined" name="/usr/sb
 
 Estos eventos `ALLOWED` con `info="failed af match"` indican que el tráfico se permitió (porque el perfil estaba en complain), pero que la regla de red del perfil no cubría explícitamente ese tipo de conexión (IPv6). Es precisamente la utilidad del modo complain: observar qué pide realmente la aplicación antes de pasar a bloquear en modo enforce.
 
+{% hint style="info" %}
+📷 **CAPTURA 2 AQUÍ** — la de los logs largos `apparmor="ALLOWED"` con el intento fallido de `cat` sin sudo (la de las 15:33, la primera)
+{% endhint %}
+
 ***
 
 ## 4. Perfil final en modo enforce
@@ -152,6 +160,10 @@ sudo aa-status
 0 processes are in complain mode.
 ```
 
+{% hint style="info" %}
+📷 **CAPTURA 3 AQUÍ** — la del `aa-status` con "3 processes are in enforce mode" (la de las 15:31)
+{% endhint %}
+
 Contenido final del perfil (`/etc/apparmor.d/usr.sbin.nginx`):
 
 ```
@@ -175,6 +187,10 @@ include <tunables/global>
 }
 ```
 
+{% hint style="info" %}
+📷 **CAPTURA 4 AQUÍ** — la del `sudo cat /etc/apparmor.d/usr.sbin.nginx` con el perfil completo (la de las 15:33, la segunda)
+{% endhint %}
+
 > **Observación**: las reglas `/var/** mrwk` y `owner /{,var/}run/** mrwk` son más amplias de lo estrictamente necesario — `aa-genprof` generalizó en vez de limitarse a `/var/log/nginx/access.log` y `/run/nginx.pid`, que eran los accesos concretos detectados durante el aprendizaje. En un entorno de producción convendría ajustar manualmente estas rutas a los archivos exactos que usa Nginx.
 
 ***
@@ -197,6 +213,14 @@ Content-Type: text/html
 Content-Length: 10703
 ...
 ```
+
+{% hint style="info" %}
+📷 **CAPTURA 5 AQUÍ** — la del `curl -I` con 200 OK ya en enforce (la de las 15:35, la primera)
+{% endhint %}
+
+{% hint style="info" %}
+📷 **CAPTURA 6 AQUÍ** — la del `curl` con el HTML completo (la de las 15:35, la segunda)
+{% endhint %}
 
 Nginx sigue respondiendo con normalidad (**200 OK**, página por defecto servida correctamente), confirmando que el perfil AppArmor en modo enforce no bloquea ninguna operación necesaria para el funcionamiento del servicio.
 
