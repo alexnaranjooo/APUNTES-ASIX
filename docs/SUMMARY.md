@@ -12,6 +12,7 @@
     * [Copias de seguridad](apuntes-asix/seguridad-y-alta-disponibilidad/copias-de-seguridad/README.md)
       * [rsync + tar.gz](apuntes-asix/seguridad-y-alta-disponibilidad/copias-de-seguridad/rsync-+-tar.gz.md)
     * [Simulación de DHCP Starvation y Mitigación mediante Rate Limiting en iptables & Kea DHCP](apuntes-asix/seguridad-y-alta-disponibilidad/simulacion-de-dhcp-starvation-y-mitigacion-mediante-rate-limiting-en-iptables-and-kea-dhcp.md)
+    * [Sniffing FTP y Auditoría de Credenciales SSH con Hydra](apuntes-asix/seguridad-y-alta-disponibilidad/sniffing-ftp-y-auditoria-de-credenciales-ssh-con-hydra.md)
   * [💿 Administración de Sistemas Operativos](apuntes-asix/administracion-de-sistemas-operativos/README.md)
     * [FusionDirectory + NFS sobre OpenLDAP](apuntes-asix/administracion-de-sistemas-operativos/fusiondirectory-+-nfs-sobre-openldap.md)
     * [Control de Acceso Obligatorio: confinamiento Nginx con AppArmor](apuntes-asix/administracion-de-sistemas-operativos/control-de-acceso-obligatorio-confinamiento-nginx-con-apparmor.md)
