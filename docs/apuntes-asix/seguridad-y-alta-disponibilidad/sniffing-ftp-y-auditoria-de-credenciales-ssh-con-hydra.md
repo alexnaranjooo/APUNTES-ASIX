@@ -10,11 +10,27 @@ La máquina objetivo del ejercicio es `192.168.111.55`.
 
 Se inicia una captura general de tráfico en Wireshark sobre la interfaz de red correspondiente, observando el conjunto de paquetes que circulan por la red de prácticas.
 
+{% hint style="info" %}
+📷 **CAPTURA AQUÍ:** vista general de Wireshark con el pcap cargado, sin filtrar.
+{% endhint %}
+
 Para aislar únicamente el tráfico del protocolo FTP, se aplica el filtro de visualización `ftp` en la barra de filtros de Wireshark.
+
+{% hint style="info" %}
+📷 **CAPTURA AQUÍ:** Wireshark con el filtro `ftp` aplicado, mostrando los comandos USER/PASS/STOR/etc.
+{% endhint %}
 
 Con el filtro aplicado se observa cómo un cliente FTP se conecta al servidor y, en un momento dado, ejecuta un comando `STOR` para subir un fichero al servidor. Entre los ficheros transferidos se identifican `password.txt` y `usuarios.txt`, ambos viajando en texto claro dentro del propio tráfico FTP.
 
+{% hint style="info" %}
+📷 **CAPTURA AQUÍ:** paquete con el comando `STOR password.txt`.
+{% endhint %}
+
 Además del envío de los ficheros, también se puede observar en la captura un inicio de sesión FTP completado con éxito, con el usuario y la contraseña visibles en claro en los paquetes correspondientes.
+
+{% hint style="info" %}
+📷 **CAPTURA AQUÍ:** respuesta `230 Login successful` del servidor FTP.
+{% endhint %}
 
 ## 2. Extracción del contenido mediante "Follow TCP Stream"
 
@@ -22,7 +38,15 @@ Wireshark permite reconstruir el flujo completo de una conexión TCP mediante la
 
 De esta forma se recupera el contenido completo del fichero de contraseñas:
 
+{% hint style="info" %}
+📷 **CAPTURA AQUÍ:** "Seguir secuencia TCP" mostrando el contenido de `password.txt`.
+{% endhint %}
+
 Y de igual manera se recupera el contenido completo del fichero de usuarios:
+
+{% hint style="info" %}
+📷 **CAPTURA AQUÍ:** "Seguir secuencia TCP" mostrando el contenido de `usuarios.txt`.
+{% endhint %}
 
 Con ambos ficheros reconstruidos, se dispone de dos listas (`usuarios.txt` y `password.txt`) que servirán como diccionarios para el siguiente paso del ejercicio: un ataque de fuerza bruta contra el servicio SSH de la máquina objetivo.
 
@@ -40,12 +64,20 @@ Este primer intento falla, mostrando el siguiente error:
 [ERROR] all children were disabled due too many connection errors
 ```
 
+{% hint style="info" %}
+📷 **CAPTURA AQUÍ:** terminal con el primer intento de Hydra y el error de conexión.
+{% endhint %}
+
 Este tipo de error suele indicar que el servidor SSH está limitando o rechazando conexiones simultáneas, por lo que antes de seguir insistiendo con Hydra se procede a comprobar manualmente el estado del servicio en el puerto 22, usando `nc` y `nmap`:
 
 ```
 nc -zv 192.168.111.55 22
 nmap -p 22 192.168.111.55
 ```
+
+{% hint style="info" %}
+📷 **CAPTURA AQUÍ:** resultado de `nc` y `nmap` confirmando el puerto 22 abierto.
+{% endhint %}
 
 Ambas comprobaciones confirman que el puerto 22 está abierto y el servicio SSH responde con normalidad, por lo que el error anterior se debe al exceso de conexiones simultáneas lanzadas por Hydra y no a que el servicio esté caído o filtrado.
 
@@ -55,11 +87,19 @@ Con esta información, se reduce la concurrencia del ataque para evitar saturar 
 sudo hydra -L usuarios.txt -P password.txt -t 2 -W 3 192.168.111.55 ssh
 ```
 
+{% hint style="info" %}
+📷 **CAPTURA AQUÍ:** terminal con el intento ajustado (`-t 2 -W 3`) en ejecución.
+{% endhint %}
+
 Tras este ajuste, se repite el ataque con una concurrencia algo mayor (`-t 4`), obteniendo esta vez resultados:
 
 ```
 sudo hydra -L usuarios.txt -P password.txt -t 4 192.168.111.55 ssh
 ```
+
+{% hint style="info" %}
+📷 **CAPTURA AQUÍ:** terminal con el segundo intento (`-t 4`) ya sin error de conexión.
+{% endhint %}
 
 Como resultado del proceso (ya sea directamente a través del ataque de Hydra o gracias a las credenciales ya observadas durante el sniffing FTP), se obtienen unas credenciales válidas para el servicio SSH:
 
@@ -76,6 +116,10 @@ ssh aladar@192.168.111.55
 
 La conexión se establece correctamente, confirmando que el usuario `aladar` con contraseña `mezga` tiene acceso al sistema.
 
+{% hint style="info" %}
+📷 **CAPTURA AQUÍ:** login SSH exitoso como `aladar@192.168.111.55`.
+{% endhint %}
+
 Una vez dentro del sistema, se exploran brevemente el directorio de trabajo y el sistema de ficheros con los comandos:
 
 ```
@@ -88,6 +132,10 @@ Navegando hasta el directorio `Documents/SEGiAD` se pueden observar ficheros dej
 ```
 touch alexnaranjo2
 ```
+
+{% hint style="info" %}
+📷 **CAPTURA AQUÍ:** `pwd`, `ls` y `touch alexnaranjo2` dentro de `~/Documents/SEGiAD`, con los ficheros de los compañeros.
+{% endhint %}
 
 ## Conclusión
 
