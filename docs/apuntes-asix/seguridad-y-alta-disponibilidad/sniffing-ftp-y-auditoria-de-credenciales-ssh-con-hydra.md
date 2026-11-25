@@ -1,36 +1,22 @@
 # Sniffing FTP y Auditoría de Credenciales SSH con Hydra
 
-## Introducción
-
-Esta guía documenta un ejercicio práctico de pentesting realizado en clase por el alumno Alex. El objetivo del ejercicio es doble: por un lado, demostrar mediante **Wireshark** los riesgos de usar protocolos de transferencia de ficheros en texto claro como **FTP**, capturando credenciales y ficheros sensibles que circulan por la red sin cifrar; por otro lado, realizar una auditoría de seguridad de un servicio **SSH** mediante un ataque de fuerza bruta con **Hydra**, usando como diccionarios los propios ficheros de usuarios y contraseñas obtenidos durante la captura.
-
-La máquina objetivo del ejercicio es `192.168.111.55`.
-
 ## 1. Captura de tráfico FTP con Wireshark
 
 Se inicia una captura general de tráfico en Wireshark sobre la interfaz de red correspondiente, observando el conjunto de paquetes que circulan por la red de prácticas.
 
-{% hint style="info" %}
-📷 **CAPTURA AQUÍ:** vista general de Wireshark con el pcap cargado, sin filtrar.
-{% endhint %}
+<figure><img src="../../.gitbook/assets/Captura de pantalla 2026-11-24 184812.png" alt=""><figcaption></figcaption></figure>
+
+
 
 Para aislar únicamente el tráfico del protocolo FTP, se aplica el filtro de visualización `ftp` en la barra de filtros de Wireshark.
 
-{% hint style="info" %}
-📷 **CAPTURA AQUÍ:** Wireshark con el filtro `ftp` aplicado, mostrando los comandos USER/PASS/STOR/etc.
-{% endhint %}
+<figure><img src="../../.gitbook/assets/Captura de pantalla 2026-11-24 184732.png" alt=""><figcaption></figcaption></figure>
+
+
 
 Con el filtro aplicado se observa cómo un cliente FTP se conecta al servidor y, en un momento dado, ejecuta un comando `STOR` para subir un fichero al servidor. Entre los ficheros transferidos se identifican `password.txt` y `usuarios.txt`, ambos viajando en texto claro dentro del propio tráfico FTP.
 
-{% hint style="info" %}
-📷 **CAPTURA AQUÍ:** paquete con el comando `STOR password.txt`.
-{% endhint %}
-
-Además del envío de los ficheros, también se puede observar en la captura un inicio de sesión FTP completado con éxito, con el usuario y la contraseña visibles en claro en los paquetes correspondientes.
-
-{% hint style="info" %}
-📷 **CAPTURA AQUÍ:** respuesta `230 Login successful` del servidor FTP.
-{% endhint %}
+<figure><img src="../../.gitbook/assets/wireshark con el filtrado ftp (1).png" alt=""><figcaption></figcaption></figure>
 
 ## 2. Extracción del contenido mediante "Follow TCP Stream"
 
@@ -38,17 +24,17 @@ Wireshark permite reconstruir el flujo completo de una conexión TCP mediante la
 
 De esta forma se recupera el contenido completo del fichero de contraseñas:
 
-{% hint style="info" %}
-📷 **CAPTURA AQUÍ:** "Seguir secuencia TCP" mostrando el contenido de `password.txt`.
-{% endhint %}
+<figure><img src="../../.gitbook/assets/paquete con las contraseñas (1).png" alt=""><figcaption></figcaption></figure>
+
+
 
 Y de igual manera se recupera el contenido completo del fichero de usuarios:
 
-{% hint style="info" %}
-📷 **CAPTURA AQUÍ:** "Seguir secuencia TCP" mostrando el contenido de `usuarios.txt`.
-{% endhint %}
+<figure><img src="../../.gitbook/assets/paquete con los usuarios.png" alt=""><figcaption></figcaption></figure>
 
-Con ambos ficheros reconstruidos, se dispone de dos listas (`usuarios.txt` y `password.txt`) que servirán como diccionarios para el siguiente paso del ejercicio: un ataque de fuerza bruta contra el servicio SSH de la máquina objetivo.
+
+
+Con ambos ficheros reconstruidos, se dispone de dos listas (`usuarios.txt` y `password.txt`) que servirán como diccionarios para el siguiente paso del ejercicio.
 
 ## 3. Fuerza bruta contra SSH con Hydra
 
@@ -60,13 +46,7 @@ sudo hydra -L usuarios.txt -P password.txt -t 4 192.168.111.55 ssh
 
 Este primer intento falla, mostrando el siguiente error:
 
-```
-[ERROR] all children were disabled due too many connection errors
-```
-
-{% hint style="info" %}
-📷 **CAPTURA AQUÍ:** terminal con el primer intento de Hydra y el error de conexión.
-{% endhint %}
+<figure><img src="../../.gitbook/assets/Captura de pantalla 2026-11-24 185236.png" alt=""><figcaption></figcaption></figure>
 
 Este tipo de error suele indicar que el servidor SSH está limitando o rechazando conexiones simultáneas, por lo que antes de seguir insistiendo con Hydra se procede a comprobar manualmente el estado del servicio en el puerto 22, usando `nc` y `nmap`:
 
@@ -75,21 +55,12 @@ nc -zv 192.168.111.55 22
 nmap -p 22 192.168.111.55
 ```
 
-{% hint style="info" %}
-📷 **CAPTURA AQUÍ:** resultado de `nc` y `nmap` confirmando el puerto 22 abierto.
-{% endhint %}
+<figure><img src="../../.gitbook/assets/Captura de pantalla 2026-11-24 185509.png" alt=""><figcaption></figcaption></figure>
 
-Ambas comprobaciones confirman que el puerto 22 está abierto y el servicio SSH responde con normalidad, por lo que el error anterior se debe al exceso de conexiones simultáneas lanzadas por Hydra y no a que el servicio esté caído o filtrado.
+\
+Ambas comprobaciones confirman que el puerto 22 está abierto y el servicio SSH también.
 
 Con esta información, se reduce la concurrencia del ataque para evitar saturar el servicio, añadiendo también un tiempo de espera entre reintentos:
-
-```
-sudo hydra -L usuarios.txt -P password.txt -t 2 -W 3 192.168.111.55 ssh
-```
-
-{% hint style="info" %}
-📷 **CAPTURA AQUÍ:** terminal con el intento ajustado (`-t 2 -W 3`) en ejecución.
-{% endhint %}
 
 Tras este ajuste, se repite el ataque con una concurrencia algo mayor (`-t 4`), obteniendo esta vez resultados:
 
@@ -97,9 +68,9 @@ Tras este ajuste, se repite el ataque con una concurrencia algo mayor (`-t 4`), 
 sudo hydra -L usuarios.txt -P password.txt -t 4 192.168.111.55 ssh
 ```
 
-{% hint style="info" %}
-📷 **CAPTURA AQUÍ:** terminal con el segundo intento (`-t 4`) ya sin error de conexión.
-{% endhint %}
+<figure><img src="../../.gitbook/assets/Captura de pantalla 2026-11-24 192101.png" alt=""><figcaption></figcaption></figure>
+
+
 
 Como resultado del proceso (ya sea directamente a través del ataque de Hydra o gracias a las credenciales ya observadas durante el sniffing FTP), se obtienen unas credenciales válidas para el servicio SSH:
 
@@ -116,9 +87,11 @@ ssh aladar@192.168.111.55
 
 La conexión se establece correctamente, confirmando que el usuario `aladar` con contraseña `mezga` tiene acceso al sistema.
 
-{% hint style="info" %}
-📷 **CAPTURA AQUÍ:** login SSH exitoso como `aladar@192.168.111.55`.
-{% endhint %}
+<figure><img src="../../.gitbook/assets/Captura de pantalla 2026-11-24 192211.png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/Captura de pantalla 2026-11-24 192217.png" alt=""><figcaption></figcaption></figure>
+
+
 
 Una vez dentro del sistema, se exploran brevemente el directorio de trabajo y el sistema de ficheros con los comandos:
 
@@ -127,24 +100,11 @@ pwd
 ls
 ```
 
-Navegando hasta el directorio `Documents/SEGiAD` se pueden observar ficheros dejados por otros compañeros de clase como prueba de haber completado el mismo ejercicio. Como prueba propia de la realización del ejercicio, se crea un fichero vacío con el nombre del alumno:
+Como prueba propia de la realización del ejercicio, se crea un fichero vacío con el mi nombre.
 
 ```
 touch alexnaranjo2
 ```
 
-{% hint style="info" %}
-📷 **CAPTURA AQUÍ:** `pwd`, `ls` y `touch alexnaranjo2` dentro de `~/Documents/SEGiAD`, con los ficheros de los compañeros.
-{% endhint %}
+<figure><img src="../../.gitbook/assets/Captura de pantalla 2026-11-24 192308 (1).png" alt=""><figcaption></figcaption></figure>
 
-## Conclusión
-
-Este ejercicio ilustra de forma práctica dos problemas de seguridad habituales:
-
-* **Uso de FTP en texto claro.** Al no cifrar ni las credenciales ni los datos transferidos, cualquier atacante con capacidad de capturar tráfico en la red (sniffing) puede obtener usuarios, contraseñas y el contenido íntegro de los ficheros transferidos, como se ha demostrado con Wireshark y la opción Follow TCP Stream. La recomendación es sustituir FTP por alternativas cifradas como **SFTP** o **FTPS**.
-* **Servicio SSH sin protección frente a fuerza bruta.** El hecho de que un ataque con Hydra, con un diccionario relativamente pequeño, consiga encontrar credenciales válidas pone de manifiesto la necesidad de reforzar la configuración del servicio SSH mediante medidas como:
-  * Uso de **fail2ban** u otras herramientas de bloqueo automático de IPs tras varios intentos fallidos.
-  * Limitación del número de intentos de autenticación por conexión (`MaxAuthTries`) y de conexiones simultáneas.
-  * Migración hacia **autenticación basada en claves públicas** en lugar de contraseñas, deshabilitando el acceso por contraseña siempre que sea posible.
-
-En conjunto, el ejercicio demuestra cómo una mala práctica en un servicio (FTP en claro) puede facilitar el compromiso de otro servicio completamente distinto (SSH), reforzando la importancia de aplicar buenas prácticas de seguridad de forma consistente en todos los servicios expuestos en una red.
