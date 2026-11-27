@@ -22,30 +22,128 @@ mariadb -t --force -u root < honeypot_web_pruebas.sql | less -S
 
 `-t` muestra los resultados en tablas, `--force` hace que siga aunque una prueba dé error a propósito y `-S` evita que se parta la línea en las tablas anchas. Se sale de `less` con `q`.
 
-### <mark style="color:$warning;">**Qué comprueba cada bloque**</mark>
+{% hint style="info" %}
+CAPTURA PENDIENTE: el comando ejecutado y el principio de la salida.
+{% endhint %}
 
-| Bloque | Qué se prueba                                           | Resultado esperado                                                                                                                                                                 |
-| ------ | ------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1      | Zona pública: `sp_listar_planes` y `sp_listar_sectores` | Salen los planes con sus características y los sectores                                                                                                                            |
-| 2      | Función `fn_precio_anual`                               | Precio anual con descuento, y vacío para el plan «a consultar»                                                                                                                     |
-| 3      | Formulario con mensajes correctos                       | Se guardan los dos mensajes y el trigger limpia los espacios del nombre                                                                                                            |
-| 4      | Formulario con datos incorrectos                        | Error por mensaje demasiado corto, teléfono no válido y plan inexistente                                                                                                           |
-| 5      | Anti-spam                                               | Los tres primeros mensajes del mismo teléfono pasan y el cuarto da error                                                                                                           |
-| 6      | Alta de administradores                                 | El admin se crea con el email normalizado. Una contraseña sin cifrar y un email falso dan error                                                                                    |
-| 7      | Bloqueo del login                                       | Con cuatro fallos el usuario aún entra. Con el quinto la cuenta se bloquea. Al desbloquearla se puede entrar y se anota el último acceso                                           |
-| 8      | Panel de administración                                 | Los mensajes cambian de estado y se anota quién y cuándo. Un mensaje que no existe da error. Salen las estadísticas                                                                |
-| 9      | Gestión de planes                                       | Se crea un plan, se le asocian características y se cambian los precios, con su historial. Borrar un plan, usar uno desactivado o cambiar el precio de uno que no existe dan error |
-| 10     | Último administrador                                    | Desactivarlo y borrarlo dan error                                                                                                                                                  |
-| 11     | Contraseñas y auditoría                                 | El cambio con un hash válido funciona y con texto plano da error. La auditoría lista los cambios                                                                                   |
-| 12     | Mantenimiento                                           | Purgar con menos de 30 días da error. Con 30 días borra el mensaje archivado antiguo                                                                                               |
-| 13     | Eventos y permisos                                      | Salen los dos eventos programados y los permisos de `web_app` y `web_admin`, que solo tienen `EXECUTE` y algún `SELECT` sobre vistas                                               |
+### <mark style="color:$warning;">**Bloque 1: zona pública**</mark>
+
+Se llama a `sp_listar_planes` y `sp_listar_sectores`. Deben salir los planes con sus características y los sectores.
 
 {% hint style="info" %}
-CAPTURA PENDIENTE: la salida de las pruebas, con alguno de los errores esperados (por ejemplo el bloqueo de la cuenta en el bloque 7).
+CAPTURA PENDIENTE: bloque 1, planes y sectores.
+{% endhint %}
+
+### <mark style="color:$warning;">**Bloque 2: función del precio anual**</mark>
+
+Se prueba `fn_precio_anual`. Devuelve el precio anual con descuento, y vacío para el plan «a consultar».
+
+{% hint style="info" %}
+CAPTURA PENDIENTE: bloque 2, resultado de la función.
+{% endhint %}
+
+### <mark style="color:$warning;">**Bloque 3: formulario con mensajes correctos**</mark>
+
+Se guardan los dos mensajes y el trigger limpia los espacios sobrantes del nombre.
+
+{% hint style="info" %}
+CAPTURA PENDIENTE: bloque 3, mensajes guardados.
+{% endhint %}
+
+### <mark style="color:$warning;">**Bloque 4: formulario con datos incorrectos**</mark>
+
+Deben dar error el mensaje demasiado corto, el teléfono no válido y el plan inexistente.
+
+{% hint style="info" %}
+CAPTURA PENDIENTE: bloque 4, los tres errores.
+{% endhint %}
+
+### <mark style="color:$warning;">**Bloque 5: anti-spam**</mark>
+
+Los tres primeros mensajes del mismo teléfono pasan y el cuarto se rechaza.
+
+{% hint style="info" %}
+CAPTURA PENDIENTE: bloque 5, el cuarto mensaje rechazado.
+{% endhint %}
+
+### <mark style="color:$warning;">**Bloque 6: alta de administradores**</mark>
+
+El admin se crea con el email normalizado. Una contraseña sin cifrar y un email falso dan error.
+
+{% hint style="info" %}
+CAPTURA PENDIENTE: bloque 6, alta correcta y los dos errores.
+{% endhint %}
+
+### <mark style="color:$warning;">**Bloque 7: bloqueo del login**</mark>
+
+Con cuatro fallos el usuario aún entra. Con el quinto la cuenta se bloquea. Al desbloquearla se puede entrar y se anota el último acceso.
+
+{% hint style="info" %}
+CAPTURA PENDIENTE: bloque 7, el bloqueo tras el quinto fallo.
 {% endhint %}
 
 {% hint style="info" %}
-CAPTURA PENDIENTE: el bloque 13 con los permisos de `web_app` y `web_admin`.
+CAPTURA PENDIENTE: bloque 7, la cuenta desbloqueada y el acceso correcto.
+{% endhint %}
+
+### <mark style="color:$warning;">**Bloque 8: panel de administración**</mark>
+
+Los mensajes cambian de estado y se anota quién y cuándo. Un mensaje que no existe da error. Salen las estadísticas.
+
+{% hint style="info" %}
+CAPTURA PENDIENTE: bloque 8, cambio de estado y estadísticas.
+{% endhint %}
+
+### <mark style="color:$warning;">**Bloque 9: gestión de planes**</mark>
+
+Se crea un plan, se le asocian características y se cambian los precios, con su historial. Borrar un plan, usar uno desactivado o cambiar el precio de uno que no existe dan error.
+
+{% hint style="info" %}
+CAPTURA PENDIENTE: bloque 9, el historial de precios.
+{% endhint %}
+
+{% hint style="info" %}
+CAPTURA PENDIENTE: bloque 9, el error al borrar un plan.
+{% endhint %}
+
+### <mark style="color:$warning;">**Bloque 10: último administrador**</mark>
+
+Desactivarlo y borrarlo dan error.
+
+{% hint style="info" %}
+CAPTURA PENDIENTE: bloque 10, los dos errores.
+{% endhint %}
+
+### <mark style="color:$warning;">**Bloque 11: contraseñas y auditoría**</mark>
+
+El cambio con un hash válido funciona y con texto plano da error. La auditoría lista los cambios.
+
+{% hint style="info" %}
+CAPTURA PENDIENTE: bloque 11, el error con texto plano.
+{% endhint %}
+
+{% hint style="info" %}
+CAPTURA PENDIENTE: bloque 11, las tablas de auditoría.
+{% endhint %}
+
+### <mark style="color:$warning;">**Bloque 12: mantenimiento**</mark>
+
+Purgar con menos de 30 días da error. Con 30 días borra el mensaje archivado antiguo.
+
+{% hint style="info" %}
+CAPTURA PENDIENTE: bloque 12, el error y la purga correcta.
+{% endhint %}
+
+### <mark style="color:$warning;">**Bloque 13: eventos y permisos**</mark>
+
+Salen los dos eventos programados y los permisos de `web_app` y `web_admin`, que solo tienen `EXECUTE` y algún `SELECT` sobre vistas.
+
+{% hint style="info" %}
+CAPTURA PENDIENTE: bloque 13, los eventos.
+{% endhint %}
+
+{% hint style="info" %}
+CAPTURA PENDIENTE: bloque 13, los permisos de `web_app` y `web_admin`.
 {% endhint %}
 
 ### <mark style="color:$warning;">**Antes y después de las pruebas**</mark>
